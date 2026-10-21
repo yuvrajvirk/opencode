@@ -1,0 +1,353 @@
+{
+  "before": "final-heldout-before",
+  "after": "final-heldout-original",
+  "fixture_sha256": "93a6d55195f0412716e62b9269b2e5457800bcd613dff27554a26947b6ac3053",
+  "caveat": "Efficiency comparisons use jointly exact scenarios only; all newly correct, newly incorrect, and jointly failing cases are listed separately. Group reports exclude failures and are not a claim that the entire band is exact.",
+  "newly_correct": [],
+  "newly_incorrect": [],
+  "jointly_failing": [],
+  "phases": {
+    "initial": {
+      "matched_scenarios": 360,
+      "wins": 230,
+      "losses": 10,
+      "ties": 120,
+      "before_bytes": 44883815,
+      "after_bytes": 42993500,
+      "unfavorable": [
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "append",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "middle",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "delete",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "append",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "middle",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "delete",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 709265,
+          "after": 709858
+        }
+      ]
+    },
+    "edit": {
+      "matched_scenarios": 360,
+      "wins": 238,
+      "losses": 2,
+      "ties": 120,
+      "before_bytes": 448876196,
+      "after_bytes": 241205489,
+      "unfavorable": [
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 7092925,
+          "after": 7098855
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 7092925,
+          "after": 7098855
+        }
+      ]
+    },
+    "undo": {
+      "matched_scenarios": 360,
+      "wins": 238,
+      "losses": 2,
+      "ties": 120,
+      "before_bytes": 44883815,
+      "after_bytes": 7181342,
+      "unfavorable": [
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 709265,
+          "after": 709858
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 709265,
+          "after": 709858
+        }
+      ]
+    }
+  },
+  "groups": [
+    {
+      "band": "small",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1114470,
+      "after_bytes": 1114470,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1121400,
+      "after_bytes": 1121400,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 11321240,
+      "after_bytes": 6301150,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 11321240,
+      "after_bytes": 10889250,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 11321240,
+      "after_bytes": 10889250,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 11307779,
+      "after_bytes": 10876041,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 11314570,
+      "after_bytes": 9898370,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 77338050,
+      "after_bytes": 7003750,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 22,
+      "losses": 2,
+      "ties": 0,
+      "before_bytes": 77338050,
+      "after_bytes": 73989410,
+      "unfavorable": [
+        {
+          "id": "045681b30f02c7c20e17c35c99308c522dff7a2a39e41d5038393756a86dce68",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 7092925,
+          "after": 7098855
+        },
+        {
+          "id": "0b0a7892902f641cb5c30569f2cc05a8896420e5f0092e8735f526dfc0146545",
+          "repo": "django/django",
+          "path": "tests/gis_tests/data/rasters/raster.numpy.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 7092925,
+          "after": 7098855
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 77338050,
+      "after_bytes": 44891266,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 77324387,
+      "after_bytes": 44877972,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 77331300,
+      "after_bytes": 15968740,
+      "unfavorable": []
+    }
+  ]
+}

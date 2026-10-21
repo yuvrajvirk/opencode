@@ -1,0 +1,78 @@
+{
+  "verified_at": "2026-10-21T18:53:10.706Z",
+  "method": "Four actual revisions fetched remotely, independent frozen dependency installs, both fixture splits independently prepared from SHA-verified cached archives; no corpus code executed",
+  "results": [
+    {
+      "name": "development-before",
+      "revision": "44513bd0b002edc79f5bd2a3f6b0d02d9d727744",
+      "scenarios": 765,
+      "exact_saves": 9180,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "0b1bfba11d75b7fd4c8244300c373b0ddd2c880aecfc702980579ff1e70a818c"
+    },
+    {
+      "name": "development-original",
+      "revision": "798b2b359a781d141808591ef53e9ac6a5cfbba4",
+      "scenarios": 765,
+      "exact_saves": 9120,
+      "errors": 5,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "ddeec03c41951b2f3819f88d2905f3dcd2d77673a3d67cfe904cd5b938684595"
+    },
+    {
+      "name": "development-latest",
+      "revision": "863ea413649484b5761cd0c5c0e54c559a5c8b52",
+      "scenarios": 765,
+      "exact_saves": 9120,
+      "errors": 5,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "aef74dedca7eaa5e8f4ed886bf03a098caa4ff1abf655b79d719036598e74146"
+    },
+    {
+      "name": "development-candidate",
+      "revision": "cc841a7e47ede3b602d20d82029c8e8cb201bc99",
+      "scenarios": 765,
+      "exact_saves": 9180,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "cde1e55dc0ffec1040563092a45ce321b8b39dc11dd947e42e6f5fa320dec603"
+    },
+    {
+      "name": "heldout-before",
+      "revision": "44513bd0b002edc79f5bd2a3f6b0d02d9d727744",
+      "scenarios": 360,
+      "exact_saves": 4320,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "ef4fa7cc0a07883f7a27b0bcce9cc2c7a371d70dc7d8fe4384a1cf91a0e60e76"
+    },
+    {
+      "name": "heldout-original",
+      "revision": "798b2b359a781d141808591ef53e9ac6a5cfbba4",
+      "scenarios": 360,
+      "exact_saves": 4320,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "05a57384a84c6fd0e20028cd42b79ab481fa2569bdab1eaefd2c90f32954972a"
+    },
+    {
+      "name": "heldout-latest",
+      "revision": "863ea413649484b5761cd0c5c0e54c559a5c8b52",
+      "scenarios": 360,
+      "exact_saves": 4320,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "b342194e86cbfabcddafd40f4506580c2e1574efa744e1d433279f2a81c39eff"
+    },
+    {
+      "name": "heldout-candidate",
+      "revision": "cc841a7e47ede3b602d20d82029c8e8cb201bc99",
+      "scenarios": 360,
+      "exact_saves": 4320,
+      "errors": 0,
+      "byte_call_retention_expected_hash_parity": true,
+      "log_sha256": "a768c27af511ba83e16cd7d4faa65c015828dc8ca9e1232212389b67221f9b0a"
+    }
+  ]
+}

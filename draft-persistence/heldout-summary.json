@@ -1,0 +1,13 @@
+{
+  "fixture_sha256": "93a6d55195f0412716e62b9269b2e5457800bcd613dff27554a26947b6ac3053",
+  "snapshots": 24,
+  "repositories": 7,
+  "files": 72,
+  "by_band": {
+    "small": 24,
+    "medium": 24,
+    "large": 24
+  },
+  "source_bytes": 8578702,
+  "absent_bands": []
+}

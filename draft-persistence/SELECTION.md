@@ -1,0 +1,15 @@
+# Development selection, before heldout access
+
+Select the seventh prototype, terminal-window newline alignment with weighted LRU. The first six alternatives, their unfavorable cases and three complete cost campaigns remain in the evidence. This is not a claim of universal speed or byte improvement.
+
+Why this candidate: it removes the special EOF branch, keeps a bounded 32 Ki-character search window and existing persistence schema, and reduces large-band edit submissions from 289,021,308 to 112,446,595 bytes. All 9,180 development saves restore exactly. The previous medium-append cost regression is resolved in every paired run in both engines: median paired ratios 0.718 Bun, 0.683 Node. Large append ratios are 0.983 Bun, 0.998 Node; small profiles have no repeated overall slowdown. Large prepend/middle/delete ratios are 0.653/0.769/0.792 Bun and 0.557/0.720/0.685 Node.
+
+Tradeoffs retained: Node large same-width replacement is slower in every pair (ratios 1.101, 1.157, 1.054, 1.044, 1.110; median 1.101). Median elapsed sums are 135.38→149.25 ms across 300 edit saves, about 46 microseconds per save. Bun large replacement ratio is 1.006. This is a real repeated cost, not noise to suppress. That profile does not shift boundaries and already reuses fixed chunks well; the candidate's extra search/cache work does not pay back much there. Its storage-byte improvement is correspondingly small. The original cost veto specifically protects ordinary small text and common append work, which this candidate passes; do not move the veto or claim all profiles improve. The substantial prepend/middle storage and CPU reductions justify proceeding to independent evaluation with this tradeoff explicit.
+
+Whole-process median peak RSS: Bun 693,540→667,188 KiB, Node 517,256→476,496 KiB. These include input parsing, fresh-store recovery assertions and reporting; no renderer-residency claim. All 24 final-source runs have exact outcome/byte/call/retention parity with the standalone run.
+
+Across jointly exact development scenarios: 177 edit-byte wins, 27 losses, 556 ties. Five formerly failing scenarios are separately corrected, not counted as efficiency wins. Initial submissions grow by 3,015 bytes over 25 scenarios; all per-case costs and undo regressions remain. No assumption that synthetic edit frequencies represent real user traffic. No end-user latency claim from the in-memory driver.
+
+Final candidate is cc841a7e47ede3b602d20d82029c8e8cb201bc99, rebased on latest upstream 863ea413649484b5761cd0c5c0e54c559a5c8b52. The two new upstream commits touch only AI files: app source, lockfile and the draft runtime's dependencies are unchanged from measured cost baseline bddf5346c8e3a0c7c662d231c5f3e302ae5f0b1f. Raw cost metadata retains that actual revision; do not relabel it. Final four-version correctness/byte evaluation will use the refreshed baseline, and full checks run again after rebase.
+
+Freeze hashes before preparing any heldout draft files. No production, fixture-selection, expected-output or scoring changes after opening heldout. If heldout evidence is weak or unfavorable, defer rather than tune on it. No PR or push yet.

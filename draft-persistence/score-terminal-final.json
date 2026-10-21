@@ -1,0 +1,595 @@
+{
+  "fixture_sha256": "dcd7fa819f843241e41309ceab80e9be867aff21b34de075921c72f2e98f4fbf",
+  "files": 153,
+  "profiles": [
+    "append",
+    "prepend",
+    "middle",
+    "delete",
+    "replace"
+  ],
+  "caveat": "Single-run elapsed times are exploratory, not a latency claim. Retention is before collection in the instrumented in-memory sink, not disk size after GC.",
+  "versions": [
+    {
+      "name": "variant-terminal-final",
+      "revision": "bddf5346c8e3a0c7c662d231c5f3e302ae5f0b1f",
+      "source_sha256": "eead8ba6cafc2ea99a692c727d3668f2deb71657690f73c79278d877c359c991",
+      "lock_sha256": "b3c986e644b07c996881e1398c28b398736d1f4bb14b898fe9fc66b937a2f29a",
+      "scenarios": 765,
+      "exact_saves": 9180,
+      "errors": [],
+      "groups": [
+        {
+          "band": "small",
+          "profile": "append",
+          "cases": 64,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 3.139924000003049,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            },
+            "edit": {
+              "document_bytes": 2579320,
+              "blob_bytes": 0,
+              "document_calls": 640,
+              "blob_calls": 0,
+              "elapsed_ms": 13.628044999998707,
+              "total_bytes": 2579320,
+              "exact_observations": 640
+            },
+            "undo": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.1779380000001538,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            }
+          },
+          "retained_unique_blob_bytes": 0,
+          "retained_document_bytes": 256172
+        },
+        {
+          "band": "small",
+          "profile": "prepend",
+          "cases": 64,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.2211810000009962,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            },
+            "edit": {
+              "document_bytes": 2579320,
+              "blob_bytes": 0,
+              "document_calls": 640,
+              "blob_calls": 0,
+              "elapsed_ms": 14.24329499999618,
+              "total_bytes": 2579320,
+              "exact_observations": 640
+            },
+            "undo": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.2216630000001203,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            }
+          },
+          "retained_unique_blob_bytes": 0,
+          "retained_document_bytes": 256172
+        },
+        {
+          "band": "small",
+          "profile": "middle",
+          "cases": 64,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.1677030000020636,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            },
+            "edit": {
+              "document_bytes": 2579320,
+              "blob_bytes": 0,
+              "document_calls": 640,
+              "blob_calls": 0,
+              "elapsed_ms": 13.626080000006112,
+              "total_bytes": 2579320,
+              "exact_observations": 640
+            },
+            "undo": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.1536120000022834,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            }
+          },
+          "retained_unique_blob_bytes": 0,
+          "retained_document_bytes": 256172
+        },
+        {
+          "band": "small",
+          "profile": "delete",
+          "cases": 64,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.2442520000027741,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            },
+            "edit": {
+              "document_bytes": 2543064,
+              "blob_bytes": 0,
+              "document_calls": 640,
+              "blob_calls": 0,
+              "elapsed_ms": 13.902378000008042,
+              "total_bytes": 2543064,
+              "exact_observations": 640
+            },
+            "undo": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.3173749999972415,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            }
+          },
+          "retained_unique_blob_bytes": 0,
+          "retained_document_bytes": 256172
+        },
+        {
+          "band": "small",
+          "profile": "replace",
+          "cases": 64,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.2083810000020776,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            },
+            "edit": {
+              "document_bytes": 2561310,
+              "blob_bytes": 0,
+              "document_calls": 640,
+              "blob_calls": 0,
+              "elapsed_ms": 13.341418000000488,
+              "total_bytes": 2561310,
+              "exact_observations": 640
+            },
+            "undo": {
+              "document_bytes": 256172,
+              "blob_bytes": 0,
+              "document_calls": 64,
+              "blob_calls": 0,
+              "elapsed_ms": 1.115062999999168,
+              "total_bytes": 256172,
+              "exact_observations": 64
+            }
+          },
+          "retained_unique_blob_bytes": 0,
+          "retained_document_bytes": 256172
+        },
+        {
+          "band": "medium",
+          "profile": "append",
+          "cases": 59,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 8611,
+              "blob_bytes": 2139950,
+              "document_calls": 59,
+              "blob_calls": 66,
+              "elapsed_ms": 4.6680619999990824,
+              "total_bytes": 2148561,
+              "exact_observations": 59
+            },
+            "edit": {
+              "document_bytes": 100180,
+              "blob_bytes": 7711335,
+              "document_calls": 590,
+              "blob_calls": 590,
+              "elapsed_ms": 30.91226299999579,
+              "total_bytes": 7811515,
+              "exact_observations": 590
+            },
+            "undo": {
+              "document_bytes": 8611,
+              "blob_bytes": 0,
+              "document_calls": 59,
+              "blob_calls": 0,
+              "elapsed_ms": 1.269144999999071,
+              "total_bytes": 8611,
+              "exact_observations": 59
+            }
+          },
+          "retained_unique_blob_bytes": 9851285,
+          "retained_document_bytes": 8611
+        },
+        {
+          "band": "medium",
+          "profile": "prepend",
+          "cases": 59,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 8611,
+              "blob_bytes": 2139950,
+              "document_calls": 59,
+              "blob_calls": 66,
+              "elapsed_ms": 3.335514999996917,
+              "total_bytes": 2148561,
+              "exact_observations": 59
+            },
+            "edit": {
+              "document_bytes": 86110,
+              "blob_bytes": 20326268,
+              "document_calls": 590,
+              "blob_calls": 598,
+              "elapsed_ms": 45.710948999986044,
+              "total_bytes": 20412378,
+              "exact_observations": 590
+            },
+            "undo": {
+              "document_bytes": 8611,
+              "blob_bytes": 0,
+              "document_calls": 59,
+              "blob_calls": 0,
+              "elapsed_ms": 0.9435279999975705,
+              "total_bytes": 8611,
+              "exact_observations": 59
+            }
+          },
+          "retained_unique_blob_bytes": 22466218,
+          "retained_document_bytes": 8611
+        },
+        {
+          "band": "medium",
+          "profile": "middle",
+          "cases": 59,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 8611,
+              "blob_bytes": 2139950,
+              "document_calls": 59,
+              "blob_calls": 66,
+              "elapsed_ms": 3.4589009999973825,
+              "total_bytes": 2148561,
+              "exact_observations": 59
+            },
+            "edit": {
+              "document_bytes": 86110,
+              "blob_bytes": 20326268,
+              "document_calls": 590,
+              "blob_calls": 598,
+              "elapsed_ms": 44.5259380000017,
+              "total_bytes": 20412378,
+              "exact_observations": 590
+            },
+            "undo": {
+              "document_bytes": 8611,
+              "blob_bytes": 0,
+              "document_calls": 59,
+              "blob_calls": 0,
+              "elapsed_ms": 0.9348740000004057,
+              "total_bytes": 8611,
+              "exact_observations": 59
+            }
+          },
+          "retained_unique_blob_bytes": 22466218,
+          "retained_document_bytes": 8611
+        },
+        {
+          "band": "medium",
+          "profile": "delete",
+          "cases": 59,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 8611,
+              "blob_bytes": 2139950,
+              "document_calls": 59,
+              "blob_calls": 66,
+              "elapsed_ms": 3.46008899999822,
+              "total_bytes": 2148561,
+              "exact_observations": 59
+            },
+            "edit": {
+              "document_bytes": 86110,
+              "blob_bytes": 20228757,
+              "document_calls": 590,
+              "blob_calls": 598,
+              "elapsed_ms": 47.12746299999412,
+              "total_bytes": 20314867,
+              "exact_observations": 590
+            },
+            "undo": {
+              "document_bytes": 8611,
+              "blob_bytes": 0,
+              "document_calls": 59,
+              "blob_calls": 0,
+              "elapsed_ms": 0.8930739999987338,
+              "total_bytes": 8611,
+              "exact_observations": 59
+            }
+          },
+          "retained_unique_blob_bytes": 22368707,
+          "retained_document_bytes": 8611
+        },
+        {
+          "band": "medium",
+          "profile": "replace",
+          "cases": 59,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 8611,
+              "blob_bytes": 2139950,
+              "document_calls": 59,
+              "blob_calls": 66,
+              "elapsed_ms": 3.427625000002564,
+              "total_bytes": 2148561,
+              "exact_observations": 59
+            },
+            "edit": {
+              "document_bytes": 86110,
+              "blob_bytes": 20173790,
+              "document_calls": 590,
+              "blob_calls": 590,
+              "elapsed_ms": 45.16078599998815,
+              "total_bytes": 20259900,
+              "exact_observations": 590
+            },
+            "undo": {
+              "document_bytes": 8611,
+              "blob_bytes": 0,
+              "document_calls": 59,
+              "blob_calls": 0,
+              "elapsed_ms": 1.039916999994972,
+              "total_bytes": 8611,
+              "exact_observations": 59
+            }
+          },
+          "retained_unique_blob_bytes": 22313740,
+          "retained_document_bytes": 8611
+        },
+        {
+          "band": "large",
+          "profile": "append",
+          "cases": 30,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 15798,
+              "blob_bytes": 11815079,
+              "document_calls": 30,
+              "blob_calls": 204,
+              "elapsed_ms": 17.751271000003328,
+              "total_bytes": 11830877,
+              "exact_observations": 30
+            },
+            "edit": {
+              "document_bytes": 166020,
+              "blob_bytes": 2282480,
+              "document_calls": 300,
+              "blob_calls": 300,
+              "elapsed_ms": 138.3061089999983,
+              "total_bytes": 2448500,
+              "exact_observations": 300
+            },
+            "undo": {
+              "document_bytes": 15798,
+              "blob_bytes": 0,
+              "document_calls": 30,
+              "blob_calls": 0,
+              "elapsed_ms": 7.328476000000933,
+              "total_bytes": 15798,
+              "exact_observations": 30
+            }
+          },
+          "retained_unique_blob_bytes": 14097559,
+          "retained_document_bytes": 15798
+        },
+        {
+          "band": "large",
+          "profile": "prepend",
+          "cases": 30,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 15798,
+              "blob_bytes": 11815079,
+              "document_calls": 30,
+              "blob_calls": 204,
+              "elapsed_ms": 18.336757000003047,
+              "total_bytes": 11830877,
+              "exact_observations": 30
+            },
+            "edit": {
+              "document_bytes": 157980,
+              "blob_bytes": 33147095,
+              "document_calls": 300,
+              "blob_calls": 531,
+              "elapsed_ms": 159.4851549999995,
+              "total_bytes": 33305075,
+              "exact_observations": 300
+            },
+            "undo": {
+              "document_bytes": 15798,
+              "blob_bytes": 693633,
+              "document_calls": 30,
+              "blob_calls": 11,
+              "elapsed_ms": 8.083708999995281,
+              "total_bytes": 709431,
+              "exact_observations": 30
+            }
+          },
+          "retained_unique_blob_bytes": 44962174,
+          "retained_document_bytes": 15798
+        },
+        {
+          "band": "large",
+          "profile": "middle",
+          "cases": 30,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 15798,
+              "blob_bytes": 11815079,
+              "document_calls": 30,
+              "blob_calls": 204,
+              "elapsed_ms": 15.61234199999899,
+              "total_bytes": 11830877,
+              "exact_observations": 30
+            },
+            "edit": {
+              "document_bytes": 158181,
+              "blob_bytes": 28450975,
+              "document_calls": 300,
+              "blob_calls": 464,
+              "elapsed_ms": 153.66141400000106,
+              "total_bytes": 28609156,
+              "exact_observations": 300
+            },
+            "undo": {
+              "document_bytes": 15798,
+              "blob_bytes": 393533,
+              "document_calls": 30,
+              "blob_calls": 6,
+              "elapsed_ms": 9.338175000002252,
+              "total_bytes": 409331,
+              "exact_observations": 30
+            }
+          },
+          "retained_unique_blob_bytes": 40266054,
+          "retained_document_bytes": 15798
+        },
+        {
+          "band": "large",
+          "profile": "delete",
+          "cases": 30,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 15798,
+              "blob_bytes": 11815079,
+              "document_calls": 30,
+              "blob_calls": 204,
+              "elapsed_ms": 16.031413999997767,
+              "total_bytes": 11830877,
+              "exact_observations": 30
+            },
+            "edit": {
+              "document_bytes": 157980,
+              "blob_bytes": 28468064,
+              "document_calls": 300,
+              "blob_calls": 463,
+              "elapsed_ms": 151.68986199999517,
+              "total_bytes": 28626044,
+              "exact_observations": 300
+            },
+            "undo": {
+              "document_bytes": 15798,
+              "blob_bytes": 393533,
+              "document_calls": 30,
+              "blob_calls": 6,
+              "elapsed_ms": 7.716523999999481,
+              "total_bytes": 409331,
+              "exact_observations": 30
+            }
+          },
+          "retained_unique_blob_bytes": 40283143,
+          "retained_document_bytes": 15798
+        },
+        {
+          "band": "large",
+          "profile": "replace",
+          "cases": 30,
+          "failed": 0,
+          "valid_efficiency_comparison": true,
+          "phases": {
+            "initial": {
+              "document_bytes": 15798,
+              "blob_bytes": 11815079,
+              "document_calls": 30,
+              "blob_calls": 204,
+              "elapsed_ms": 16.533512999998152,
+              "total_bytes": 11830877,
+              "exact_observations": 30
+            },
+            "edit": {
+              "document_bytes": 157980,
+              "blob_bytes": 19299840,
+              "document_calls": 300,
+              "blob_calls": 300,
+              "elapsed_ms": 143.94972799999493,
+              "total_bytes": 19457820,
+              "exact_observations": 300
+            },
+            "undo": {
+              "document_bytes": 15798,
+              "blob_bytes": 0,
+              "document_calls": 30,
+              "blob_calls": 0,
+              "elapsed_ms": 8.98496100000034,
+              "total_bytes": 15798,
+              "exact_observations": 30
+            }
+          },
+          "retained_unique_blob_bytes": 31114919,
+          "retained_document_bytes": 15798
+        }
+      ]
+    }
+  ]
+}

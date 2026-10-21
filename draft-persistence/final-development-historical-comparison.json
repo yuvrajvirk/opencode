@@ -1,0 +1,307 @@
+{
+  "before": "final-development-before",
+  "after": "final-development-original",
+  "fixture_sha256": "dcd7fa819f843241e41309ceab80e9be867aff21b34de075921c72f2e98f4fbf",
+  "caveat": "Efficiency comparisons use jointly exact scenarios only; all newly correct, newly incorrect, and jointly failing cases are listed separately. Group reports exclude failures and are not a claim that the entire band is exact.",
+  "newly_correct": [],
+  "newly_incorrect": [
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "append"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "prepend"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "middle"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "delete"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "replace"
+    }
+  ],
+  "jointly_failing": [],
+  "phases": {
+    "initial": {
+      "matched_scenarios": 760,
+      "wins": 435,
+      "losses": 5,
+      "ties": 320,
+      "before_bytes": 73932825,
+      "after_bytes": 71073425,
+      "unfavorable": [
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "append",
+          "before": 227884,
+          "after": 228129
+        },
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "prepend",
+          "before": 227884,
+          "after": 228129
+        },
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "middle",
+          "before": 227884,
+          "after": 228129
+        },
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "delete",
+          "before": 227884,
+          "after": 228129
+        },
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "replace",
+          "before": 227884,
+          "after": 228129
+        }
+      ]
+    },
+    "edit": {
+      "matched_scenarios": 760,
+      "wins": 439,
+      "losses": 1,
+      "ties": 320,
+      "before_bytes": 739408591,
+      "after_bytes": 403147667,
+      "unfavorable": [
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "prepend",
+          "before": 2279115,
+          "after": 2281565
+        }
+      ]
+    },
+    "undo": {
+      "matched_scenarios": 760,
+      "wins": 440,
+      "losses": 0,
+      "ties": 320,
+      "before_bytes": 73932825,
+      "after_bytes": 16089442,
+      "unfavorable": []
+    }
+  },
+  "groups": [
+    {
+      "band": "small",
+      "profile": "append",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "prepend",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "middle",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "delete",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2543064,
+      "after_bytes": 2543064,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "replace",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2561310,
+      "after_bytes": 2561310,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "append",
+      "matched_scenarios": 58,
+      "wins": 58,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 22212850,
+      "after_bytes": 17365470,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "prepend",
+      "matched_scenarios": 58,
+      "wins": 58,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 22212850,
+      "after_bytes": 21297670,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "middle",
+      "matched_scenarios": 58,
+      "wins": 58,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 22212850,
+      "after_bytes": 21297670,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "delete",
+      "matched_scenarios": 58,
+      "wins": 58,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 22180084,
+      "after_bytes": 21265665,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "replace",
+      "matched_scenarios": 58,
+      "wins": 58,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 22196640,
+      "after_bytes": 20057550,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "append",
+      "matched_scenarios": 30,
+      "wins": 30,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 123115280,
+      "after_bytes": 9488840,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "prepend",
+      "matched_scenarios": 30,
+      "wins": 29,
+      "losses": 1,
+      "ties": 0,
+      "before_bytes": 123115280,
+      "after_bytes": 118311660,
+      "unfavorable": [
+        {
+          "id": "0b828995a41bac71bd1f7488034d6ee1f9ead6962597ae2c8710a466373b1bc4",
+          "repo": "sktime/sktime",
+          "path": "sktime/datasets/data/BasicMotions/BasicMotions_TRAIN.ts",
+          "band": "large",
+          "profile": "prepend",
+          "before": 2279115,
+          "after": 2281565
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "middle",
+      "matched_scenarios": 30,
+      "wins": 30,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 123115280,
+      "after_bytes": 70711689,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "delete",
+      "matched_scenarios": 30,
+      "wins": 30,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 123098283,
+      "after_bytes": 70695189,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "replace",
+      "matched_scenarios": 30,
+      "wins": 30,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 123106860,
+      "after_bytes": 19813930,
+      "unfavorable": []
+    }
+  ]
+}

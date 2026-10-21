@@ -1,0 +1,9 @@
+# Development-only cost check, before holdout
+
+Run the identical actual-runtime worker against latest and the current candidate in separate processes, under Bun 1.4.2 and Node 22.23.3 with TypeScript stripping. Node supplies a second JavaScript engine, not a claim of an actual Chromium frame measurement. The worker's Node support changes only path/runtime/revision reporting; validate byte/outcome parity against the retained v1 run.
+
+Per engine, one warmup pair followed by five measured pairs. Alternate before/after order on successive pairs. Use all 153 frozen development files and all five profiles. Preserve all runs, errors, per-save elapsed values, wall/CPU and peak RSS from GNU time. Compare elapsed values on identical scenarios that restore exactly in both versions, separately by band/profile; do not credit failed/omitted work as speed. Retain newly corrected scenarios separately. Whole-process wall/RSS includes fixture parsing, initial writes, reads, correctness verification and JSON reporting, so it is not isolated renderer residency or IPC latency.
+
+Headline evidence remains exact storage-boundary bytes, not microseconds. The cost check vetoes an implementation with a material repeated regression in ordinary small text or common append work even if it saves bytes on middle edits. Inspect distributions/absolute costs and all paired samples, not a cherry-picked best run. No acceptance cutoff is tuned after results. The driver is a real in-memory content-addressed sink, not SQLite/IndexedDB, and browser/desktop integration still needs normal tests.
+
+The current weighted-cache candidate is not frozen or selected for heldout yet. Candidate changes invalidate an in-flight cost run's source hash; do not edit production until all processes finish. Tests/docs may be prepared without changing runtime bytes. The original held-out draft files remain unopened.

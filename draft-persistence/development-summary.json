@@ -1,0 +1,257 @@
+{
+  "fixture_sha256": "dcd7fa819f843241e41309ceab80e9be867aff21b34de075921c72f2e98f4fbf",
+  "snapshots": 64,
+  "repositories": 56,
+  "files": 153,
+  "by_band": {
+    "small": 64,
+    "medium": 59,
+    "large": 30
+  },
+  "source_bytes": 14196911,
+  "absent_bands": [
+    {
+      "repo": "oasis-open/cti-taxii-server",
+      "revision": "119d8fc6c742931e1e41632cad780c1743425292",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "tobymao/sqlglot",
+      "revision": "00f3b38dd933669708105dd76bff1147e6cf9618",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "yukinarit/pyserde",
+      "revision": "508c54d86a5e1fb954eea865e32ea426ee98f1cc",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "zopefoundation/persistent",
+      "revision": "f91227e6a01a7cfcc29beba0d3ea384deecb3bc3",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "collective/zpretty",
+      "revision": "78402172b55d68f4d9ee4df341a0652891c83264",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "GenericMappingTools/pygmt",
+      "revision": "4163497b9a12bcfc35b337ced20dde9afae10ce7",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "GenericMappingTools/pygmt",
+      "revision": "89857c32c7e61c57fb1f03993cfb090c76366783",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "hidrokit/hidrokit",
+      "revision": "6f2cfd89a468405d1a6cd7e7ffe022dbc0c70951",
+      "bands": [
+        "medium",
+        "large"
+      ]
+    },
+    {
+      "repo": "tox-dev/tox",
+      "revision": "b8307e79a8e6f6e7f1440c22a63765ecf895f208",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "mplanchard/pydecor",
+      "revision": "b7554cfa64f62e5619511438a821e0fae0a51a19",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "hgrecco/pint",
+      "revision": "f1dc122abc48eae80d88bc3adeb99081e46e6f29",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "cdent/gabbi",
+      "revision": "d91d8ec9a5516615289d77a30529f9ea496b98c4",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "tianocore/edk2-pytool-library",
+      "revision": "f521d59041afee6a8a82206b3871960409aaa612",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "Sage-Bionetworks/challengeutils",
+      "revision": "0b2129349fef07c072f9dc0d42c7de8485e3cc57",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "iterative/dvc",
+      "revision": "9a298fc835e0266d919fde046d6c567e52d4f045",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "ucfopen/canvasapi",
+      "revision": "f24904ff3e8275ba1f134692b1e7cc08e6972eda",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "G-Node/python-odml",
+      "revision": "a75d1db5ddb02cf7414b17ed41ef97a80c6245fb",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "tobymao/sqlglot",
+      "revision": "18bb1a35df9e902218b8fca5be80df78ff39ae8c",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "roaldnefs/salt-lint",
+      "revision": "9253a7aab3fa082b7063dfe47fd3bfe4fad461f0",
+      "bands": [
+        "medium",
+        "large"
+      ]
+    },
+    {
+      "repo": "rayokota/jsonata-python",
+      "revision": "cda7eb6c4860dcb38a546d30bd454fd774a30210",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "scipp/plopp",
+      "revision": "ee4cac6caf12d8d9db219183bebf0057425a3e84",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "pre-commit/pre-commit-hooks",
+      "revision": "2f1e5e2abf7c3be32557ad1d70aea3be5c69c354",
+      "bands": [
+        "medium",
+        "large"
+      ]
+    },
+    {
+      "repo": "wyfo/apischema",
+      "revision": "b088ad6f7c2f03fb3fa6687cbdb157d7a2cc8648",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "falconry/falcon",
+      "revision": "06fdf2885d70149803dbc47324ae8c951b7e58b3",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "iterative/dvc",
+      "revision": "daf07451f8e8f3e76a791c696b0ea175e8ed3ac1",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "AzureAD/microsoft-authentication-library-for-python",
+      "revision": "78e9ccfab7c16154ba38c0de78c495ba2ee58849",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "googleapis/python-firestore",
+      "revision": "75d0a4821b09c3bed710353cf86082e41c28191f",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "alerta/python-alerta-client",
+      "revision": "10f200428c8e5be995b8925b2663ac22ad88080a",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "faucetsdn/chewie",
+      "revision": "652649dbd62a5bd4c1b9285c198c6b992c374a0f",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "tonioo/sievelib",
+      "revision": "df786d65f3279ee3e28d2565f4b843b0939c304e",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "hynek/structlog",
+      "revision": "14cb331a62a38c71e4de19d66f75d3a8d3389c58",
+      "bands": [
+        "large"
+      ]
+    },
+    {
+      "repo": "khornberg/octokit.py",
+      "revision": "1314f1609616f6ed69c2d3636b0c485f5342cd6e",
+      "bands": [
+        "medium",
+        "large"
+      ]
+    },
+    {
+      "repo": "FlorianLudwig/rueckenwind",
+      "revision": "a9856bf3b640562310eda0953c921054b7a050ef",
+      "bands": [
+        "medium",
+        "large"
+      ]
+    },
+    {
+      "repo": "adamchainz/apig-wsgi",
+      "revision": "85860cfb148b9fcda6dfa21f8ead0ebb0e33fea8",
+      "bands": [
+        "large"
+      ]
+    }
+  ]
+}

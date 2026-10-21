@@ -1,0 +1,1099 @@
+{
+  "before": "final-development-latest",
+  "after": "final-development-candidate",
+  "fixture_sha256": "dcd7fa819f843241e41309ceab80e9be867aff21b34de075921c72f2e98f4fbf",
+  "caveat": "Efficiency comparisons use jointly exact scenarios only; all newly correct, newly incorrect, and jointly failing cases are listed separately. Group reports exclude failures and are not a claim that the entire band is exact.",
+  "newly_correct": [
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "append"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "prepend"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "middle"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "delete"
+    },
+    {
+      "id": "30cd1fe65dc4bb22088f9a7139422b2b9cbff096a48b9ecf4b9d26ea06005b16",
+      "repo": "rayokota/jsonata-python",
+      "path": "src/jsonata/signature.py",
+      "band": "medium",
+      "profile": "replace"
+    }
+  ],
+  "newly_incorrect": [],
+  "jointly_failing": [],
+  "phases": {
+    "initial": {
+      "matched_scenarios": 760,
+      "wins": 0,
+      "losses": 25,
+      "ties": 735,
+      "before_bytes": 71073425,
+      "after_bytes": 71076440,
+      "unfavorable": [
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 1296657,
+          "after": 1296925
+        },
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "prepend",
+          "before": 1296657,
+          "after": 1296925
+        },
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "middle",
+          "before": 1296657,
+          "after": 1296925
+        },
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "delete",
+          "before": 1296657,
+          "after": 1296925
+        },
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 1296657,
+          "after": 1296925
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "append",
+          "before": 837019,
+          "after": 837153
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "prepend",
+          "before": 837019,
+          "after": 837153
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "middle",
+          "before": 837019,
+          "after": 837153
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "delete",
+          "before": 837019,
+          "after": 837153
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 837019,
+          "after": 837153
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 583900,
+          "after": 583967
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "prepend",
+          "before": 583900,
+          "after": 583967
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "middle",
+          "before": 583900,
+          "after": 583967
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "delete",
+          "before": 583900,
+          "after": 583967
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 583900,
+          "after": 583967
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "append",
+          "before": 1090840,
+          "after": 1090907
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "prepend",
+          "before": 1090840,
+          "after": 1090907
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "middle",
+          "before": 1090840,
+          "after": 1090907
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "delete",
+          "before": 1090840,
+          "after": 1090907
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "replace",
+          "before": 1090840,
+          "after": 1090907
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "append",
+          "before": 52342,
+          "after": 52409
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "prepend",
+          "before": 52342,
+          "after": 52409
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "middle",
+          "before": 52342,
+          "after": 52409
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "delete",
+          "before": 52342,
+          "after": 52409
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "replace",
+          "before": 52342,
+          "after": 52409
+        }
+      ]
+    },
+    "edit": {
+      "matched_scenarios": 760,
+      "wins": 177,
+      "losses": 27,
+      "ties": 556,
+      "before_bytes": 403147667,
+      "after_bytes": 213483317,
+      "unfavorable": [
+        {
+          "id": "98ad661bdf6519c5850c172792be25c762002b685b9b0d896a409c8824a515ea",
+          "repo": "qiboteam/qibo",
+          "path": "examples/qPDF/qPDF.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 62695,
+          "after": 221545
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "middle",
+          "before": 3217185,
+          "after": 3298995
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "delete",
+          "before": 3216635,
+          "after": 3298445
+        },
+        {
+          "id": "0c87c32c62d8ca7ddc0daddcfd1929d015924512257ba3cdd25cc7864393cb20",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "doc/_static/qaoa_layers.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 102025,
+          "after": 115095
+        },
+        {
+          "id": "96e415e9b6382dda57a3f77c3fc8c622e1762fa10c07d9fbeed483fcc3c0906a",
+          "repo": "Materials-Consortia/optimade-python-tools",
+          "path": "openapi/openapi.json",
+          "band": "large",
+          "profile": "append",
+          "before": 6175,
+          "after": 8995
+        },
+        {
+          "id": "257c412c9ddb6fb9525111d22521864912b998cdb07860f8ab4718c1e9ae3235",
+          "repo": "pydicom/pydicom",
+          "path": "pydicom/sr/_cid_dict.py",
+          "band": "large",
+          "profile": "append",
+          "before": 31555,
+          "after": 34155
+        },
+        {
+          "id": "8950d58b8b947b0bf3f14fafd5d65d53e18a3b69e8454736e58de1321842dbec",
+          "repo": "wemake-services/wemake-python-styleguide",
+          "path": "poetry.lock",
+          "band": "large",
+          "profile": "append",
+          "before": 130015,
+          "after": 132005
+        },
+        {
+          "id": "baa32c25ab2baa6842bfe9f62d23ff9e3d1ad7568d74b2a90140e6cf6c096665",
+          "repo": "XKNX/xknx",
+          "path": "docs/config-converter/lib/codemirror/codemirror.js",
+          "band": "large",
+          "profile": "append",
+          "before": 55925,
+          "after": 57585
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 664880,
+          "after": 666240
+        },
+        {
+          "id": "86b59dc6186046391e7b408b2561fe111362d0bd6e9deb2c34d11b1db578b9be",
+          "repo": "stfc/fparser",
+          "path": "src/fparser/two/Fortran2003.py",
+          "band": "large",
+          "profile": "append",
+          "before": 57345,
+          "after": 58365
+        },
+        {
+          "id": "1bd1e57ecd97f2fa1b65c4a26674a66035a14ad03bcb86dc70cabc4a596e759c",
+          "repo": "frictionlessdata/frictionless-py",
+          "path": "frictionless/assets/profiles/package/fiscal.json",
+          "band": "large",
+          "profile": "append",
+          "before": 307215,
+          "after": 307915
+        },
+        {
+          "id": "16e187c05856de3ac0b666ca3f2b3ac4039d93307cd751a7c600fc32c869de27",
+          "repo": "aesara-devs/aesara",
+          "path": "tests/tensor/test_basic.py",
+          "band": "large",
+          "profile": "append",
+          "before": 265425,
+          "after": 266105
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 662100,
+          "after": 662770
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "replace",
+          "before": 667460,
+          "after": 668130
+        },
+        {
+          "id": "9746e5c5958d59fb9e9bbbe1cb9e14e10a7d3f90df0d4ad4f996f40218496d5f",
+          "repo": "mit-ll-responsible-ai/hydra-zen",
+          "path": "src/hydra_zen/structured_configs/_implementations.py",
+          "band": "large",
+          "profile": "append",
+          "before": 134035,
+          "after": 134695
+        },
+        {
+          "id": "00119ebc7d2fb6b09a64fbcd3c15715af4633f7043f3a72d4aa36baad5631c68",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "doc/_static/simple_hybrid_graph.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 238995,
+          "after": 239625
+        },
+        {
+          "id": "2bde5581810f20a5cfa75e883b53ec67b88ceb5cf67554619e28731aa67e2eb8",
+          "repo": "wemake-services/wemake-python-styleguide",
+          "path": "poetry.lock",
+          "band": "large",
+          "profile": "append",
+          "before": 155845,
+          "after": 156405
+        },
+        {
+          "id": "0e94adfb8c91ec57a9edb3d7c26986ca56caea04a414bdf82a270684c136520a",
+          "repo": "bridgecrewio/checkov",
+          "path": "docs/web/css/theme.css",
+          "band": "large",
+          "profile": "append",
+          "before": 139765,
+          "after": 140295
+        },
+        {
+          "id": "1e7055a667a3f42e2793d5dec7af7da9c8aa2800f43e06084906ef1948be9600",
+          "repo": "zopefoundation/persistent",
+          "path": "persistent/tests/test_persistence.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 82275,
+          "after": 82765
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "prepend",
+          "before": 523695,
+          "after": 524175
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "middle",
+          "before": 523695,
+          "after": 524175
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "delete",
+          "before": 523145,
+          "after": 523625
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "replace",
+          "before": 523420,
+          "after": 523900
+        },
+        {
+          "id": "1661857cfc525ca84762238af13f68b5e961cc39ed8334f3fc33b6aca54b2ec6",
+          "repo": "networkx/networkx",
+          "path": "networkx/classes/tests/timingclasses.py",
+          "band": "large",
+          "profile": "append",
+          "before": 210765,
+          "after": 211115
+        },
+        {
+          "id": "00856d3bad8dccc6fa922778f3dbe71b5777d775a116a8961f0000aa7fe12777",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "tests/returntypes/test_parameter_shift_hessian_new.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 52695,
+          "after": 53035
+        },
+        {
+          "id": "0fc3872833e89d4129fbdf06f476d4e4a926acab3306caa5cd089c0da0812e5f",
+          "repo": "ipython/ipython",
+          "path": "examples/IPython Kernel/Custom Display Logic.ipynb",
+          "band": "medium",
+          "profile": "append",
+          "before": 186945,
+          "after": 187265
+        },
+        {
+          "id": "4e378b5f1cf23f3002155cfb6483d58351a494bedc552a3db976489eb0b8e959",
+          "repo": "Materials-Consortia/optimade-python-tools",
+          "path": "tests/adapters/structures/raw_test_structures.json",
+          "band": "medium",
+          "profile": "append",
+          "before": 78575,
+          "after": 78665
+        }
+      ]
+    },
+    "undo": {
+      "matched_scenarios": 760,
+      "wins": 23,
+      "losses": 15,
+      "ties": 722,
+      "before_bytes": 16089442,
+      "after_bytes": 2882914,
+      "unfavorable": [
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 1411,
+          "after": 1679
+        },
+        {
+          "id": "0902760b808972f1075d47ac8cdaae053f47e07a2b108b12205c7dd2c0d84e59",
+          "repo": "pytorch/ignite",
+          "path": "examples/notebooks/VAE.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 1411,
+          "after": 1679
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "append",
+          "before": 942,
+          "after": 1076
+        },
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 942,
+          "after": 1076
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 674,
+          "after": 741
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "middle",
+          "before": 674,
+          "after": 741
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "delete",
+          "before": 674,
+          "after": 741
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 674,
+          "after": 741
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "append",
+          "before": 1210,
+          "after": 1277
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "replace",
+          "before": 1210,
+          "after": 1277
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "append",
+          "before": 138,
+          "after": 205
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "prepend",
+          "before": 138,
+          "after": 205
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "middle",
+          "before": 138,
+          "after": 205
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "delete",
+          "before": 138,
+          "after": 205
+        },
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "replace",
+          "before": 138,
+          "after": 205
+        }
+      ]
+    }
+  },
+  "groups": [
+    {
+      "band": "small",
+      "profile": "append",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "prepend",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "middle",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2579320,
+      "after_bytes": 2579320,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "delete",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2543064,
+      "after_bytes": 2543064,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "replace",
+      "matched_scenarios": 64,
+      "wins": 0,
+      "losses": 0,
+      "ties": 64,
+      "before_bytes": 2561310,
+      "after_bytes": 2561310,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "append",
+      "matched_scenarios": 58,
+      "wins": 22,
+      "losses": 4,
+      "ties": 32,
+      "before_bytes": 17365470,
+      "after_bytes": 7608020,
+      "unfavorable": [
+        {
+          "id": "1e7055a667a3f42e2793d5dec7af7da9c8aa2800f43e06084906ef1948be9600",
+          "repo": "zopefoundation/persistent",
+          "path": "persistent/tests/test_persistence.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 82275,
+          "after": 82765
+        },
+        {
+          "id": "00856d3bad8dccc6fa922778f3dbe71b5777d775a116a8961f0000aa7fe12777",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "tests/returntypes/test_parameter_shift_hessian_new.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 52695,
+          "after": 53035
+        },
+        {
+          "id": "0fc3872833e89d4129fbdf06f476d4e4a926acab3306caa5cd089c0da0812e5f",
+          "repo": "ipython/ipython",
+          "path": "examples/IPython Kernel/Custom Display Logic.ipynb",
+          "band": "medium",
+          "profile": "append",
+          "before": 186945,
+          "after": 187265
+        },
+        {
+          "id": "4e378b5f1cf23f3002155cfb6483d58351a494bedc552a3db976489eb0b8e959",
+          "repo": "Materials-Consortia/optimade-python-tools",
+          "path": "tests/adapters/structures/raw_test_structures.json",
+          "band": "medium",
+          "profile": "append",
+          "before": 78575,
+          "after": 78665
+        }
+      ]
+    },
+    {
+      "band": "medium",
+      "profile": "prepend",
+      "matched_scenarios": 58,
+      "wins": 6,
+      "losses": 1,
+      "ties": 51,
+      "before_bytes": 21297670,
+      "after_bytes": 20208883,
+      "unfavorable": [
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "prepend",
+          "before": 523695,
+          "after": 524175
+        }
+      ]
+    },
+    {
+      "band": "medium",
+      "profile": "middle",
+      "matched_scenarios": 58,
+      "wins": 6,
+      "losses": 1,
+      "ties": 51,
+      "before_bytes": 21297670,
+      "after_bytes": 20208883,
+      "unfavorable": [
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "middle",
+          "before": 523695,
+          "after": 524175
+        }
+      ]
+    },
+    {
+      "band": "medium",
+      "profile": "delete",
+      "matched_scenarios": 58,
+      "wins": 6,
+      "losses": 1,
+      "ties": 51,
+      "before_bytes": 21265665,
+      "after_bytes": 20111922,
+      "unfavorable": [
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "delete",
+          "before": 523145,
+          "after": 523625
+        }
+      ]
+    },
+    {
+      "band": "medium",
+      "profile": "replace",
+      "matched_scenarios": 58,
+      "wins": 6,
+      "losses": 1,
+      "ties": 51,
+      "before_bytes": 20057550,
+      "after_bytes": 20056680,
+      "unfavorable": [
+        {
+          "id": "2ea04980bf02c84953ac3890d3e0eeadbc888c2c60e6efb6c109aa287452047f",
+          "repo": "AzureAD/microsoft-authentication-library-for-python",
+          "path": "tests/archan.us.mex.xml",
+          "band": "medium",
+          "profile": "replace",
+          "before": 523420,
+          "after": 523900
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "append",
+      "matched_scenarios": 30,
+      "wins": 16,
+      "losses": 14,
+      "ties": 0,
+      "before_bytes": 9488840,
+      "after_bytes": 2448500,
+      "unfavorable": [
+        {
+          "id": "98ad661bdf6519c5850c172792be25c762002b685b9b0d896a409c8824a515ea",
+          "repo": "qiboteam/qibo",
+          "path": "examples/qPDF/qPDF.ipynb",
+          "band": "large",
+          "profile": "append",
+          "before": 62695,
+          "after": 221545
+        },
+        {
+          "id": "0c87c32c62d8ca7ddc0daddcfd1929d015924512257ba3cdd25cc7864393cb20",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "doc/_static/qaoa_layers.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 102025,
+          "after": 115095
+        },
+        {
+          "id": "96e415e9b6382dda57a3f77c3fc8c622e1762fa10c07d9fbeed483fcc3c0906a",
+          "repo": "Materials-Consortia/optimade-python-tools",
+          "path": "openapi/openapi.json",
+          "band": "large",
+          "profile": "append",
+          "before": 6175,
+          "after": 8995
+        },
+        {
+          "id": "257c412c9ddb6fb9525111d22521864912b998cdb07860f8ab4718c1e9ae3235",
+          "repo": "pydicom/pydicom",
+          "path": "pydicom/sr/_cid_dict.py",
+          "band": "large",
+          "profile": "append",
+          "before": 31555,
+          "after": 34155
+        },
+        {
+          "id": "8950d58b8b947b0bf3f14fafd5d65d53e18a3b69e8454736e58de1321842dbec",
+          "repo": "wemake-services/wemake-python-styleguide",
+          "path": "poetry.lock",
+          "band": "large",
+          "profile": "append",
+          "before": 130015,
+          "after": 132005
+        },
+        {
+          "id": "baa32c25ab2baa6842bfe9f62d23ff9e3d1ad7568d74b2a90140e6cf6c096665",
+          "repo": "XKNX/xknx",
+          "path": "docs/config-converter/lib/codemirror/codemirror.js",
+          "band": "large",
+          "profile": "append",
+          "before": 55925,
+          "after": 57585
+        },
+        {
+          "id": "86b59dc6186046391e7b408b2561fe111362d0bd6e9deb2c34d11b1db578b9be",
+          "repo": "stfc/fparser",
+          "path": "src/fparser/two/Fortran2003.py",
+          "band": "large",
+          "profile": "append",
+          "before": 57345,
+          "after": 58365
+        },
+        {
+          "id": "1bd1e57ecd97f2fa1b65c4a26674a66035a14ad03bcb86dc70cabc4a596e759c",
+          "repo": "frictionlessdata/frictionless-py",
+          "path": "frictionless/assets/profiles/package/fiscal.json",
+          "band": "large",
+          "profile": "append",
+          "before": 307215,
+          "after": 307915
+        },
+        {
+          "id": "16e187c05856de3ac0b666ca3f2b3ac4039d93307cd751a7c600fc32c869de27",
+          "repo": "aesara-devs/aesara",
+          "path": "tests/tensor/test_basic.py",
+          "band": "large",
+          "profile": "append",
+          "before": 265425,
+          "after": 266105
+        },
+        {
+          "id": "9746e5c5958d59fb9e9bbbe1cb9e14e10a7d3f90df0d4ad4f996f40218496d5f",
+          "repo": "mit-ll-responsible-ai/hydra-zen",
+          "path": "src/hydra_zen/structured_configs/_implementations.py",
+          "band": "large",
+          "profile": "append",
+          "before": 134035,
+          "after": 134695
+        },
+        {
+          "id": "00119ebc7d2fb6b09a64fbcd3c15715af4633f7043f3a72d4aa36baad5631c68",
+          "repo": "PennyLaneAI/pennylane",
+          "path": "doc/_static/simple_hybrid_graph.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 238995,
+          "after": 239625
+        },
+        {
+          "id": "2bde5581810f20a5cfa75e883b53ec67b88ceb5cf67554619e28731aa67e2eb8",
+          "repo": "wemake-services/wemake-python-styleguide",
+          "path": "poetry.lock",
+          "band": "large",
+          "profile": "append",
+          "before": 155845,
+          "after": 156405
+        },
+        {
+          "id": "0e94adfb8c91ec57a9edb3d7c26986ca56caea04a414bdf82a270684c136520a",
+          "repo": "bridgecrewio/checkov",
+          "path": "docs/web/css/theme.css",
+          "band": "large",
+          "profile": "append",
+          "before": 139765,
+          "after": 140295
+        },
+        {
+          "id": "1661857cfc525ca84762238af13f68b5e961cc39ed8334f3fc33b6aca54b2ec6",
+          "repo": "networkx/networkx",
+          "path": "networkx/classes/tests/timingclasses.py",
+          "band": "large",
+          "profile": "append",
+          "before": 210765,
+          "after": 211115
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "prepend",
+      "matched_scenarios": 30,
+      "wins": 30,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 118311660,
+      "after_bytes": 33305075,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "middle",
+      "matched_scenarios": 30,
+      "wins": 29,
+      "losses": 1,
+      "ties": 0,
+      "before_bytes": 70711689,
+      "after_bytes": 28609156,
+      "unfavorable": [
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "middle",
+          "before": 3217185,
+          "after": 3298995
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "delete",
+      "matched_scenarios": 30,
+      "wins": 29,
+      "losses": 1,
+      "ties": 0,
+      "before_bytes": 70695189,
+      "after_bytes": 28626044,
+      "unfavorable": [
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "delete",
+          "before": 3216635,
+          "after": 3298445
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "replace",
+      "matched_scenarios": 30,
+      "wins": 27,
+      "losses": 3,
+      "ties": 0,
+      "before_bytes": 19813930,
+      "after_bytes": 19457820,
+      "unfavorable": [
+        {
+          "id": "210a860cead3ea62f84142a5daff22ea656f319d64dfeb74fb4f38390b3cdd27",
+          "repo": "beetbox/beets",
+          "path": "test/rsrc/lyrics/geniuscom/Wutangclancreamlyrics.txt",
+          "band": "large",
+          "profile": "replace",
+          "before": 664880,
+          "after": 666240
+        },
+        {
+          "id": "0b049cc592d27db5f89c6438380bb461d3d4e357e05addf80c8700218ebad5c2",
+          "repo": "Ouranosinc/xclim",
+          "path": "docs/notebooks/xclim_training/intro_xarray.ipynb",
+          "band": "large",
+          "profile": "replace",
+          "before": 662100,
+          "after": 662770
+        },
+        {
+          "id": "2347def3e8fc3b126f3e47aba6e3114db1632cd0bd442d0d110ad30069405a2e",
+          "repo": "cityofaustin/knackpy",
+          "path": "docs/mermaid.min.js",
+          "band": "large",
+          "profile": "replace",
+          "before": 667460,
+          "after": 668130
+        }
+      ]
+    }
+  ]
+}

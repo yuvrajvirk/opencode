@@ -1,0 +1,48 @@
+diff --git a/packages/app/src/runtime/persistence/drafts.ts b/packages/app/src/runtime/persistence/drafts.ts
+index 727a5b3fcc..394b8e88e4 100644
+--- a/packages/app/src/runtime/persistence/drafts.ts
++++ b/packages/app/src/runtime/persistence/drafts.ts
+@@ -213,7 +213,7 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+     return remember(chunkIds, chunk, id)
+   }
+ 
+-  const externalize = (text: string) => Promise.all(split(text).map((chunk) => chunkIds.get(chunk) ?? upload(chunk)))
++  const externalize = (pieces: string[]) => Promise.all(pieces.map((chunk) => chunkIds.get(chunk) ?? upload(chunk)))
+ 
+   const loadChunk = async (id: string) => {
+     const cached = chunks.get(id)
+@@ -222,7 +222,7 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+     const blob = await driver.getBlob(id)
+ 
+     // A missing chunk loses that text but keeps the rest of the document decodable.
+-    return remember(chunks, id, blob ? await blob.text() : "")
++    return remember(chunks, id, blob ? new TextDecoder("utf-8", { ignoreBOM: true }).decode(await blob.arrayBuffer()) : "")
+   }
+ 
+   // `sources` collects, for every blob id the encoded document references, a way to produce its
+@@ -232,7 +232,7 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+   const encode = async (value: unknown, sources: Sources): Promise<unknown> => {
+     if (typeof value === "string" && value.length >= draftTextThreshold) {
+       const pieces = split(value)
+-      const ids = await externalize(value)
++      const ids = await externalize(pieces)
+       ids.forEach((id, index) =>
+         sources.set(id, { blob: async () => new Blob([pieces[index]!]), chunk: pieces[index] }),
+       )
+@@ -423,13 +423,13 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+   }
+ }
+ 
+-// Fixed-size pieces, except that a piece never ends between the two halves of a surrogate pair:
+-// each piece becomes its own Blob, and an unpaired surrogate would be encoded as U+FFFD.
+ function split(text: string) {
+   const pieces: string[] = []
+ 
+   for (let start = 0; start < text.length; ) {
+-    const end = Math.min(start + draftTextChunk, text.length)
++    const limit = Math.min(start + draftTextChunk, text.length)
++    const newline = limit < text.length ? text.lastIndexOf("\n", limit - 1) + 1 : limit
++    const end = newline >= start + draftTextChunk / 2 ? newline : limit
+     const code = text.charCodeAt(end - 1)
+     const stop = end < text.length && code >= 0xd800 && code <= 0xdbff ? end + 1 : end
+     pieces.push(text.slice(start, stop))

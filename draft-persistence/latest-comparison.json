@@ -1,0 +1,1 @@
+{"files":["packages/ai/src/generation.ts","packages/ai/src/protocols/bedrock-converse.ts","packages/ai/src/protocols/bedrock-event-stream.ts","packages/ai/src/schema/errors.ts","packages/ai/src/schema/messages.ts","packages/ai/test/generation.test.ts","packages/ai/test/provider/bedrock-converse.test.ts","packages/ai/test/schema.test.ts"],"status":"ahead","total_commits":2}

@@ -1,0 +1,568 @@
+{
+  "before": "final-heldout-latest",
+  "after": "final-heldout-candidate",
+  "fixture_sha256": "93a6d55195f0412716e62b9269b2e5457800bcd613dff27554a26947b6ac3053",
+  "caveat": "Efficiency comparisons use jointly exact scenarios only; all newly correct, newly incorrect, and jointly failing cases are listed separately. Group reports exclude failures and are not a claim that the entire band is exact.",
+  "newly_correct": [],
+  "newly_incorrect": [],
+  "jointly_failing": [],
+  "phases": {
+    "initial": {
+      "matched_scenarios": 360,
+      "wins": 0,
+      "losses": 0,
+      "ties": 360,
+      "before_bytes": 42993500,
+      "after_bytes": 42993500,
+      "unfavorable": []
+    },
+    "edit": {
+      "matched_scenarios": 360,
+      "wins": 140,
+      "losses": 20,
+      "ties": 200,
+      "before_bytes": 241205489,
+      "after_bytes": 121300235,
+      "unfavorable": [
+        {
+          "id": "048ad0beaff27ab7ecf72ec1ba06bea2bb18380ee20577dbda63ec58f5c949a3",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_axes/pcolormesh.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 29335,
+          "after": 44605
+        },
+        {
+          "id": "37e270713e0c8e4d4d4a79a403325d4a8e634f96419056324f5b56cd8b307ae0",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/themes/basic/static/jquery-3.5.1.js",
+          "band": "large",
+          "profile": "append",
+          "before": 259195,
+          "after": 260555
+        },
+        {
+          "id": "08588115ea8e27205f027e4fd73cc6e47a3c84e33e25a436c9598e4bd488ea45",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/themes/basic/static/jquery-3.5.1.js",
+          "band": "large",
+          "profile": "append",
+          "before": 259195,
+          "after": 260555
+        },
+        {
+          "id": "0253b19c199df62d97310149964ec18a8d4f08d22ee7b6411d7e2e675441f1cf",
+          "repo": "sympy/sympy",
+          "path": "sympy/tensor/tensor.py",
+          "band": "large",
+          "profile": "append",
+          "before": 209175,
+          "after": 210395
+        },
+        {
+          "id": "0698dbb060c29e7fe30f92b2201c8292cc3e027156adb77315654598dc707177",
+          "repo": "matplotlib/matplotlib",
+          "path": "doc/users/prev_whats_new/changelog.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 125165,
+          "after": 126365
+        },
+        {
+          "id": "9761e819c7aed0c707e9c3d930bac02f458533fc9cb6bc34633e6c67a3c97b87",
+          "repo": "pytest-dev/pytest",
+          "path": "CHANGELOG.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 166185,
+          "after": 167115
+        },
+        {
+          "id": "04cf67cb873f8d6c6917487bc971ae3f3217a062eae8a5d8b38d685e8e726b8a",
+          "repo": "pytest-dev/pytest",
+          "path": "testing/python/fixtures.py",
+          "band": "large",
+          "profile": "append",
+          "before": 62565,
+          "after": 63225
+        },
+        {
+          "id": "09b7cff453c05881bc79fa6f8c836e4d47e218b1eeb4d6cca74aab0677e575ca",
+          "repo": "sympy/sympy",
+          "path": "sympy/core/tests/test_args.py",
+          "band": "large",
+          "profile": "append",
+          "before": 274205,
+          "after": 274795
+        },
+        {
+          "id": "0c392be70c22fbde75ceea7df9278820d652e5bf242ee3dca84183b98fce8067",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/patches.py",
+          "band": "large",
+          "profile": "append",
+          "before": 277455,
+          "after": 277885
+        },
+        {
+          "id": "f862ab93cb42c843c1c8f08ce7dd677be6003e4592684e0b01314dea76bcafdc",
+          "repo": "pytest-dev/pytest",
+          "path": "CHANGELOG.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 51325,
+          "after": 51695
+        },
+        {
+          "id": "5b053a9ecd6fc8959ecce12dad7d5f9f9d1e93e90e191b746a7436ecc22bfe8b",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "doc/themes/scikit-learn/static/css/bootstrap.css",
+          "band": "large",
+          "profile": "append",
+          "before": 163025,
+          "after": 163295
+        },
+        {
+          "id": "014db16229db9bee72de2cdca865a1585b598cb115c01508f7c463374ae19d3c",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_polar/polar_theta_wedge.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 79955,
+          "after": 80195
+        },
+        {
+          "id": "360909e6984c1b76c41cf6074810be2c777ac82cb2090639273b15f0de1e445b",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "doc/themes/scikit-learn/static/css/bootstrap.css",
+          "band": "large",
+          "profile": "append",
+          "before": 164095,
+          "after": 164325
+        },
+        {
+          "id": "01357ca9776394e5fbe8c0254fd02a4699c0be4444ae60847b4b45adbea2c85b",
+          "repo": "matplotlib/matplotlib",
+          "path": "src/tri/_tri.cpp",
+          "band": "medium",
+          "profile": "append",
+          "before": 62935,
+          "after": 63075
+        },
+        {
+          "id": "0518e1308d91aa5eb40065f1f805f73fa0fdb83fe8aff4c7e2c8fd30f37d5e55",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "sklearn/preprocessing/tests/test_data.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 292335,
+          "after": 292385
+        },
+        {
+          "id": "00780e5248db6b5053f723735a74c5e0701868d0764964dd25008d46c504699c",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/mpl-data/fonts/pdfcorefonts/Times-Italic.afm",
+          "band": "medium",
+          "profile": "append",
+          "before": 10245,
+          "after": 10295
+        },
+        {
+          "id": "000d734ff32945fc0363ce1e289678501f07fc561ac849f31e7d8fcb3b0df535",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/locale/sphinx.pot",
+          "band": "medium",
+          "profile": "append",
+          "before": 137465,
+          "after": 137505
+        },
+        {
+          "id": "02f5a6baba685cee686da23a43df6dd2248bcb38cb8a28713589615ee95ed6ba",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "sklearn/utils/estimator_checks.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 292045,
+          "after": 292075
+        },
+        {
+          "id": "00c8b0ee1d346591b9ec12e3d372f933e0bf94f81e0b1c299a9148046f4c8b3d",
+          "repo": "sympy/sympy",
+          "path": "sympy/simplify/hyperexpand.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 192055,
+          "after": 192075
+        },
+        {
+          "id": "01f9eeec58684e491316326e6f4ddf495113af88219b10eceffd0efebc0a881e",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_constrainedlayout/constrained_layout4.svg",
+          "band": "medium",
+          "profile": "append",
+          "before": 13465,
+          "after": 13475
+        }
+      ]
+    },
+    "undo": {
+      "matched_scenarios": 360,
+      "wins": 9,
+      "losses": 0,
+      "ties": 351,
+      "before_bytes": 7181342,
+      "after_bytes": 630405,
+      "unfavorable": []
+    }
+  },
+  "groups": [
+    {
+      "band": "small",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1128140,
+      "after_bytes": 1128140,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1114470,
+      "after_bytes": 1114470,
+      "unfavorable": []
+    },
+    {
+      "band": "small",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 0,
+      "losses": 0,
+      "ties": 24,
+      "before_bytes": 1121400,
+      "after_bytes": 1121400,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 5,
+      "losses": 7,
+      "ties": 12,
+      "before_bytes": 6301150,
+      "after_bytes": 3837670,
+      "unfavorable": [
+        {
+          "id": "01357ca9776394e5fbe8c0254fd02a4699c0be4444ae60847b4b45adbea2c85b",
+          "repo": "matplotlib/matplotlib",
+          "path": "src/tri/_tri.cpp",
+          "band": "medium",
+          "profile": "append",
+          "before": 62935,
+          "after": 63075
+        },
+        {
+          "id": "0518e1308d91aa5eb40065f1f805f73fa0fdb83fe8aff4c7e2c8fd30f37d5e55",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "sklearn/preprocessing/tests/test_data.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 292335,
+          "after": 292385
+        },
+        {
+          "id": "00780e5248db6b5053f723735a74c5e0701868d0764964dd25008d46c504699c",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/mpl-data/fonts/pdfcorefonts/Times-Italic.afm",
+          "band": "medium",
+          "profile": "append",
+          "before": 10245,
+          "after": 10295
+        },
+        {
+          "id": "000d734ff32945fc0363ce1e289678501f07fc561ac849f31e7d8fcb3b0df535",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/locale/sphinx.pot",
+          "band": "medium",
+          "profile": "append",
+          "before": 137465,
+          "after": 137505
+        },
+        {
+          "id": "02f5a6baba685cee686da23a43df6dd2248bcb38cb8a28713589615ee95ed6ba",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "sklearn/utils/estimator_checks.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 292045,
+          "after": 292075
+        },
+        {
+          "id": "00c8b0ee1d346591b9ec12e3d372f933e0bf94f81e0b1c299a9148046f4c8b3d",
+          "repo": "sympy/sympy",
+          "path": "sympy/simplify/hyperexpand.py",
+          "band": "medium",
+          "profile": "append",
+          "before": 192055,
+          "after": 192075
+        },
+        {
+          "id": "01f9eeec58684e491316326e6f4ddf495113af88219b10eceffd0efebc0a881e",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_constrainedlayout/constrained_layout4.svg",
+          "band": "medium",
+          "profile": "append",
+          "before": 13465,
+          "after": 13475
+        }
+      ]
+    },
+    {
+      "band": "medium",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 7,
+      "losses": 0,
+      "ties": 17,
+      "before_bytes": 10889250,
+      "after_bytes": 10043266,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 7,
+      "losses": 0,
+      "ties": 17,
+      "before_bytes": 10889250,
+      "after_bytes": 10043266,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 7,
+      "losses": 0,
+      "ties": 17,
+      "before_bytes": 10876041,
+      "after_bytes": 9978722,
+      "unfavorable": []
+    },
+    {
+      "band": "medium",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 7,
+      "losses": 0,
+      "ties": 17,
+      "before_bytes": 9898370,
+      "after_bytes": 9898030,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "append",
+      "matched_scenarios": 24,
+      "wins": 11,
+      "losses": 13,
+      "ties": 0,
+      "before_bytes": 7003750,
+      "after_bytes": 2198050,
+      "unfavorable": [
+        {
+          "id": "048ad0beaff27ab7ecf72ec1ba06bea2bb18380ee20577dbda63ec58f5c949a3",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_axes/pcolormesh.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 29335,
+          "after": 44605
+        },
+        {
+          "id": "37e270713e0c8e4d4d4a79a403325d4a8e634f96419056324f5b56cd8b307ae0",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/themes/basic/static/jquery-3.5.1.js",
+          "band": "large",
+          "profile": "append",
+          "before": 259195,
+          "after": 260555
+        },
+        {
+          "id": "08588115ea8e27205f027e4fd73cc6e47a3c84e33e25a436c9598e4bd488ea45",
+          "repo": "sphinx-doc/sphinx",
+          "path": "sphinx/themes/basic/static/jquery-3.5.1.js",
+          "band": "large",
+          "profile": "append",
+          "before": 259195,
+          "after": 260555
+        },
+        {
+          "id": "0253b19c199df62d97310149964ec18a8d4f08d22ee7b6411d7e2e675441f1cf",
+          "repo": "sympy/sympy",
+          "path": "sympy/tensor/tensor.py",
+          "band": "large",
+          "profile": "append",
+          "before": 209175,
+          "after": 210395
+        },
+        {
+          "id": "0698dbb060c29e7fe30f92b2201c8292cc3e027156adb77315654598dc707177",
+          "repo": "matplotlib/matplotlib",
+          "path": "doc/users/prev_whats_new/changelog.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 125165,
+          "after": 126365
+        },
+        {
+          "id": "9761e819c7aed0c707e9c3d930bac02f458533fc9cb6bc34633e6c67a3c97b87",
+          "repo": "pytest-dev/pytest",
+          "path": "CHANGELOG.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 166185,
+          "after": 167115
+        },
+        {
+          "id": "04cf67cb873f8d6c6917487bc971ae3f3217a062eae8a5d8b38d685e8e726b8a",
+          "repo": "pytest-dev/pytest",
+          "path": "testing/python/fixtures.py",
+          "band": "large",
+          "profile": "append",
+          "before": 62565,
+          "after": 63225
+        },
+        {
+          "id": "09b7cff453c05881bc79fa6f8c836e4d47e218b1eeb4d6cca74aab0677e575ca",
+          "repo": "sympy/sympy",
+          "path": "sympy/core/tests/test_args.py",
+          "band": "large",
+          "profile": "append",
+          "before": 274205,
+          "after": 274795
+        },
+        {
+          "id": "0c392be70c22fbde75ceea7df9278820d652e5bf242ee3dca84183b98fce8067",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/patches.py",
+          "band": "large",
+          "profile": "append",
+          "before": 277455,
+          "after": 277885
+        },
+        {
+          "id": "f862ab93cb42c843c1c8f08ce7dd677be6003e4592684e0b01314dea76bcafdc",
+          "repo": "pytest-dev/pytest",
+          "path": "CHANGELOG.rst",
+          "band": "large",
+          "profile": "append",
+          "before": 51325,
+          "after": 51695
+        },
+        {
+          "id": "5b053a9ecd6fc8959ecce12dad7d5f9f9d1e93e90e191b746a7436ecc22bfe8b",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "doc/themes/scikit-learn/static/css/bootstrap.css",
+          "band": "large",
+          "profile": "append",
+          "before": 163025,
+          "after": 163295
+        },
+        {
+          "id": "014db16229db9bee72de2cdca865a1585b598cb115c01508f7c463374ae19d3c",
+          "repo": "matplotlib/matplotlib",
+          "path": "lib/matplotlib/tests/baseline_images/test_polar/polar_theta_wedge.svg",
+          "band": "large",
+          "profile": "append",
+          "before": 79955,
+          "after": 80195
+        },
+        {
+          "id": "360909e6984c1b76c41cf6074810be2c777ac82cb2090639273b15f0de1e445b",
+          "repo": "scikit-learn/scikit-learn",
+          "path": "doc/themes/scikit-learn/static/css/bootstrap.css",
+          "band": "large",
+          "profile": "append",
+          "before": 164095,
+          "after": 164325
+        }
+      ]
+    },
+    {
+      "band": "large",
+      "profile": "prepend",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 73989410,
+      "after_bytes": 19028315,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "middle",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 44891266,
+      "after_bytes": 17223864,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "delete",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 44877972,
+      "after_bytes": 17477282,
+      "unfavorable": []
+    },
+    {
+      "band": "large",
+      "profile": "replace",
+      "matched_scenarios": 24,
+      "wins": 24,
+      "losses": 0,
+      "ties": 0,
+      "before_bytes": 15968740,
+      "after_bytes": 15951480,
+      "unfavorable": []
+    }
+  ]
+}

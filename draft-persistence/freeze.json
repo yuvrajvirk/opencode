@@ -1,0 +1,32 @@
+{
+  "frozen_at": "2026-10-21T18:48:56.217Z",
+  "candidate": "cc841a7e47ede3b602d20d82029c8e8cb201bc99",
+  "baseline": "863ea413649484b5761cd0c5c0e54c559a5c8b52",
+  "cost_baseline": "bddf5346c8e3a0c7c662d231c5f3e302ae5f0b1f",
+  "feature": "798b2b359a781d141808591ef53e9ac6a5cfbba4",
+  "parent": "44513bd0b002edc79f5bd2a3f6b0d02d9d727744",
+  "research": {
+    "protocol.md": "4c1184511eddd38f1d1f9bdf400312d4aec7c8e17cd6f3769a9f89b47f70aede",
+    "prepare.py": "b2b4f77898c632314869fcda3d17c1f377b054085bf24c0fb3b2b0a687431422",
+    "worker.ts": "ca8290749b74d38cfa4acda793b6ca54d328b78777f37dcd144e131c2cd3e25d",
+    "score.mjs": "a54cdcad30b8c3a8f8859210d2ef5720770ac30d02b1e12740fd3ad4fccf0425",
+    "compare.mjs": "a7078717a63c158625502d6d17c527de11c92d8641869a4536a37b606fc0c8a6",
+    "reproduce.py": "ca88f570a114ebe2bf55355df26e28054fb621d8faccc1420962da2497233d8d",
+    "cost-protocol.md": "e04330b997741d21a0c7eefec5cf2bd51ba78ae9e64862477d13e50c699febf1",
+    "cost.mjs": "ded47d9606eca77dfa307e86ca9bb69541cde913de3e47920b91fe6094d29977",
+    "score-cost.mjs": "750615af164e38eaad6f5a79f2da4d35785781c23a600ac82f24a2b10190958a",
+    "SELECTION.md": "3ed0c8300b7c560259f5329f88afc2353b443db402171983425e5cbae86f9469",
+    "development-fixtures.json": "dcd7fa819f843241e41309ceab80e9be867aff21b34de075921c72f2e98f4fbf",
+    "cost-terminal-final-summary.json": "fe3adec8d37d9bbd084a1f9268cd3c2bfeac73e4b42afa6efb19f84dd284040c"
+  },
+  "product": {
+    "bun.lock": "b3c986e644b07c996881e1398c28b398736d1f4bb14b898fe9fc66b937a2f29a",
+    "package.json": "5fb85e0016d4a89ee44650c195e32c862c96059d178b9a6c9da1d229af4fb414",
+    "packages/app/package.json": "9fb676775ff9e40f5da6e9d9a4b0c58695dd8db438fba7bcb7f8cd9750dcc33e",
+    "packages/app/src/runtime/persistence/drafts.ts": "eead8ba6cafc2ea99a692c727d3668f2deb71657690f73c79278d877c359c991",
+    "packages/app/src/runtime/persistence/drafts.test.ts": "3cac082767853687be120213e4a49572da62e51895d7ddba1a015262bece335a",
+    "packages/app/src/runtime/persistence/README.md": "04c320ed9cd99323f08a04c65030e3b77f23d419bd6e1baff7c77bd2c5b7893a"
+  },
+  "heldout_prepared": false,
+  "no_tuning_after_holdout": true
+}
