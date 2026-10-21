@@ -237,7 +237,7 @@ describe("OpenAPI.fromSpec", () => {
       {
         method: "PUT",
         path: "/files/{path}",
-        reason: "request body has no JSON content (declared: application/octet-stream)",
+        reason: "request body has no supported content (declared: application/octet-stream)",
       },
       {
         method: "GET",

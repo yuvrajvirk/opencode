@@ -119,7 +119,13 @@ const runtime = CodeMode.make({ tools: { opencode: api.tools } })
 ```
 
 The synchronous result is `{ tools, skipped }`. Operations with unsupported parameter encodings, request bodies
-without JSON content, WebSocket or SSE semantics, or binary responses are reported in `skipped`.
+without supported JSON or URL-encoded form content, WebSocket or SSE semantics, or binary responses are reported in `skipped`.
+
+URL-encoded bodies require an object schema and support strings, finite numbers, booleans, and arrays of those values.
+Arrays use repeated field names by default; `encoding` entries may select `style: "form"` and `explode: false` for
+comma-separated values. Nested objects, null values, custom per-field content types, and other encoding styles are
+not supported. Invalid form values fail before credential resolution or transport. JSON remains preferred when an
+operation offers both media types.
 
 Authentication is resolved by the host and never shown to the model. Generated tools require `HttpClient.HttpClient`.
 Request signatures omit `readOnly` properties; response signatures omit `writeOnly` properties. These JSON Schemas
