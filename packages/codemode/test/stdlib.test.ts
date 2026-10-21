@@ -1209,8 +1209,10 @@ describe("TextEncoder and TextDecoder", () => {
     ])
   })
 
-  test("only UTF-8 is supported; fatal decoding rejects malformed input", async () => {
-    expect((await error(`new TextDecoder("latin1")`)).message).toContain('The "latin1" encoding is not supported')
+  test("unsupported labels and malformed fatal input remain catchable", async () => {
+    expect((await error(`new TextDecoder("not-an-encoding")`)).message).toContain(
+      'The "not-an-encoding" encoding is not supported',
+    )
     expect((await error(`new TextDecoder("utf-8", { fatal: true }).decode(new Uint8Array([0xff]))`)).message).toContain(
       "not valid utf-8",
     )
@@ -1218,6 +1220,125 @@ describe("TextEncoder and TextDecoder", () => {
       "expects a Uint8Array, received a string",
     )
     expect((await error(`TextDecoder()`)).message).toContain("requires 'new'")
+  })
+
+  test("decodes legacy encodings and canonicalizes their labels", async () => {
+    expect(
+      await value(`
+        return [
+          [" latin1\\t", [0x80, 0xe9]],
+          ["SHIFT_JIS", [0x93, 0xfa]],
+          ["utf-16le", [0xff, 0xfe, 0x41, 0x00]],
+          ["utf-16be", [0xfe, 0xff, 0x00, 0x41]],
+        ].map(([label, bytes]) => {
+          const decoder = new TextDecoder(label)
+          return [decoder.encoding, decoder.decode(new Uint8Array(bytes))]
+        })
+      `),
+    ).toEqual([
+      ["windows-1252", "€é"],
+      ["shift_jis", "日"],
+      ["utf-16le", "A"],
+      ["utf-16be", "A"],
+    ])
+  })
+
+  test("rejects non-ASCII label whitespace and replacement encodings", async () => {
+    expect(
+      await value(`
+        return ["\\u00a0utf-8", "utf-8\\u2028", "replacement", "iso-2022-cn"].map(label => {
+          try { new TextDecoder(label); return false }
+          catch (error) { return error instanceof RangeError }
+        })
+      `),
+    ).toEqual([true, true, true, true])
+  })
+
+  test("streams split UTF-8 code points and flushes incomplete input", async () => {
+    expect(
+      await value(`
+        const decoder = new TextDecoder()
+        return [
+          decoder.decode(new Uint8Array([0xf0, 0x9f]), { stream: true }),
+          decoder.decode(undefined, { stream: true }),
+          decoder.decode(new Uint8Array([0x98, 0x80]), { stream: true }),
+          decoder.decode(new Uint8Array([0xe2]), { stream: true }),
+          decoder.decode(),
+          decoder.decode(new Uint8Array([0x41])),
+        ]
+      `),
+    ).toEqual(["", "", "😀", "", "�", "A"])
+  })
+
+  test("keeps pending input separate from later mutations and other instances", async () => {
+    expect(
+      await value(`
+        const decoder = new TextDecoder()
+        const other = new TextDecoder()
+        const bytes = new Uint8Array([0x00, 0xe2, 0x82, 0x00])
+        const pending = decoder.decode(bytes.subarray(1, 3), { stream: true })
+        bytes.fill(0x41)
+        return [pending, other.decode(new Uint8Array([0xac])), decoder.decode(new Uint8Array([0xac]))]
+      `),
+    ).toEqual(["", "�", "€"])
+  })
+
+  test("recognizes a split BOM only at the start of a stream", async () => {
+    expect(
+      await value(`
+        const decoder = new TextDecoder()
+        const bom = new Uint8Array([0xef, 0xbb, 0xbf])
+        return [
+          decoder.decode(bom.subarray(0, 2), { stream: true }),
+          decoder.decode(bom.subarray(2), { stream: true }),
+          decoder.decode(bom, { stream: true }),
+          decoder.decode(),
+          decoder.decode(bom),
+          new TextDecoder("utf-16le", { ignoreBOM: true }).decode(new Uint8Array([0xff, 0xfe, 0x41, 0x00])),
+        ]
+      `),
+    ).toEqual(["", "", "\ufeff", "", "", "\ufeffA"])
+  })
+
+  test("fatal decoding waits for continuation bytes and resets after a failed flush", async () => {
+    expect(
+      await value(`
+        const decoder = new TextDecoder("utf-8", { fatal: true })
+        const pending = decoder.decode(new Uint8Array([0xc3]), { stream: true })
+        let rejected = false
+        try { decoder.decode() }
+        catch (error) { rejected = error instanceof TypeError }
+        return [pending, rejected, decoder.decode(new Uint8Array([0x41]))]
+      `),
+    ).toEqual(["", true, "A"])
+  })
+
+  test("preserves UTF-16 surrogate pairs across byte boundaries", async () => {
+    expect(
+      await value(`
+        return [
+          ["utf-16le", [0x3d, 0xd8, 0x00, 0xde]],
+          ["utf-16be", [0xd8, 0x3d, 0xde, 0x00]],
+        ].map(([encoding, bytes]) => {
+          const decoder = new TextDecoder(encoding)
+          return bytes.map(byte => decoder.decode(new Uint8Array([byte]), { stream: true })).join("") + decoder.decode()
+        })
+      `),
+    ).toEqual(["😀", "😀"])
+  })
+
+  test("retains stateful legacy encoding designations until the stream ends", async () => {
+    expect(
+      await value(`
+        const decoder = new TextDecoder("iso-2022-jp")
+        return [
+          decoder.decode(new Uint8Array([0x1b, 0x24]), { stream: true }),
+          decoder.decode(new Uint8Array([0x42, 0x46, 0x7c]), { stream: true }),
+          decoder.decode(new Uint8Array([0x4b, 0x5c])),
+          decoder.decode(new Uint8Array([0x41])),
+        ]
+      `),
+    ).toEqual(["", "日", "本", "A"])
   })
 
   test("crypto.getRandomValues fills the given bytes in place", async () => {

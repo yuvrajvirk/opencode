@@ -236,9 +236,6 @@ export class TextDecoderObj extends Obj {
   }
 }
 
-// The WHATWG labels for UTF-8, the only encoding CodeMode decodes.
-const utf8Labels = new Set(["unicode-1-1-utf-8", "unicode11utf8", "unicode20utf8", "utf-8", "utf8", "x-unicode20utf8"])
-
 export const textDecoderGlobal = <R>(ctx: Interpreter<R>) => {
   const builtins = ctx.builtins
   const proto = builtins.TextDecoder
@@ -252,12 +249,12 @@ export const textDecoderGlobal = <R>(ctx: Interpreter<R>) => {
       0,
       (thisValue, args) => {
         const decoder = self(thisValue, "decode").decoder
-        if (args[0] === undefined) return ""
-        if (!(args[0] instanceof Bytes)) {
+        if (args[0] !== undefined && !(args[0] instanceof Bytes)) {
           throw typeError(`TextDecoder.decode expects a Uint8Array, received ${describeValue(args[0])}.`)
         }
+        const options = { stream: args[1] instanceof Obj && Boolean(get(args[1], "stream")) }
         try {
-          return decoder.decode(args[0].bytes)
+          return decoder.decode(args[0]?.bytes, options)
         } catch {
           throw typeError(`TextDecoder.decode: the input is not valid ${decoder.encoding}.`)
         }
@@ -269,14 +266,18 @@ export const textDecoderGlobal = <R>(ctx: Interpreter<R>) => {
     call: requiresNew("TextDecoder"),
     construct: (args, newTarget) =>
       Effect.sync(() => {
-        const label = args[0] === undefined ? "utf-8" : coerceToString(args[0]).trim().toLowerCase()
-        if (!utf8Labels.has(label)) throw rangeError(`The "${label}" encoding is not supported; only UTF-8 is.`)
+        const label = args[0] === undefined ? "utf-8" : coerceToString(args[0])
         const options = args[1] instanceof Obj ? args[1] : undefined
         const flag = (name: string) => options !== undefined && Boolean(get(options, name))
-        return new TextDecoderObj(
-          prototypeFrom(newTarget, proto),
-          new TextDecoder("utf-8", { fatal: flag("fatal"), ignoreBOM: flag("ignoreBOM") }),
-        )
+        const flags = { fatal: flag("fatal"), ignoreBOM: flag("ignoreBOM") }
+        try {
+          return new TextDecoderObj(
+            prototypeFrom(newTarget, proto),
+            new TextDecoder(label as ConstructorParameters<typeof TextDecoder>[0], flags),
+          )
+        } catch {
+          throw rangeError(`The "${label}" encoding is not supported.`)
+        }
       }),
   })
 }

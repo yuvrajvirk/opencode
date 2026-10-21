@@ -586,15 +586,17 @@ with a hint to encode as text first (`TextDecoder`, `toBase64`, `toHex`).
       fields drop). Shared references stay shared in the copy, and the copy is extensible even when the source was
       frozen. Functions, symbols, promises, iterators, URL, Headers, and tool references cannot be cloned; without a
       `DOMException`, the failure is a `TypeError` whose message starts with `DataCloneError:`.
-- [x] `TextEncoder` and `TextDecoder` for UTF-8 only: any other label is a `RangeError`. `TextDecoder` accepts the
-      `fatal` and `ignoreBOM` options; `decode` takes a Uint8Array or nothing.
+- [x] `TextEncoder` for UTF-8 and `TextDecoder` for the host's supported WHATWG encodings, including UTF-16 and
+      legacy encodings. Unknown and replacement labels throw a `RangeError`. `TextDecoder` accepts `fatal` and
+      `ignoreBOM`; `decode` takes a Uint8Array or nothing, and `{ stream: true }` retains decoding state across calls.
+      A final call without streaming flushes pending input and ends the stream.
 - [x] `new Headers()` from records, synchronous iterables of pairs, and Headers, wrapping the host's `Headers`: names
       fold to lowercase, values are normalized and combined, and invalid names or values throw a `TypeError`.
 - [x] Headers `append`, `delete`, `get`, `getSetCookie`, `has`, `set`, `forEach`, `keys`, `values`, `entries`, and
       `[Symbol.iterator]`; iteration is live and sorted by name, with `set-cookie` values kept apart.
 - [x] Headers serialize to a `{ name: value }` object in JSON, in results, and in tool arguments.
 - [ ] `Request`, `Response`, and `Blob`.
-- [ ] `crypto.subtle` and `TextDecoder` streaming or non-UTF-8 encodings.
+- [ ] `crypto.subtle`.
 
 ## Extensions
 
