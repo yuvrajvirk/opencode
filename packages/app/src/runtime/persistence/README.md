@@ -114,12 +114,21 @@ not raw ID-only blob documents.
 ## Large draft content
 
 Draft documents never carry large text inline. Any string of `draftTextThreshold`
-characters or more is split into `draftTextChunk`-sized content-addressed blobs and
+characters or more is split into bounded content-addressed blobs and
 stored as `{ blob: { kind: "text", ids: [...] } }`; reads join the chunks again. A
 content-keyed cache means unchanged chunks are not hashed or sent on later saves, so
-typing after a large paste uploads one chunk per save rather than the paste. Chunk
-boundaries never split a surrogate pair, and a failed upload is evicted so the next save
-retries it.
+typing after a large paste normally uploads only its final chunk rather than the paste.
+A chunk prefers the last newline between half and all of
+`draftTextChunk` characters; text without a newline in that window keeps the full-sized
+boundary. This lets multiline text reuse later chunks after an insertion or deletion,
+without scanning arbitrarily long lines. It does not guarantee reuse for every edit,
+and choosing a different boundary can increase the final chunk's size.
+
+Chunk boundaries never split a surrogate pair. Reads preserve leading U+FEFF as text,
+including when it starts an internal chunk. The upload-ID and decoded-text caches each
+hold at most `64 * draftTextChunk` UTF-16 characters and 128 entries; drafts larger than
+the cache budget may re-upload unchanged text. A failed upload is evicted so the next
+save retries it. Existing fixed-boundary documents remain readable without migration.
 
 Blob collection is made safe by validation on write, not by timing. A strict document write
 is refused while it references blob ids the store does not hold, so the previous document
