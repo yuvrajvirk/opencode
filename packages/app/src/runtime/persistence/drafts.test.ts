@@ -5,11 +5,13 @@ function memoryDriver() {
   const documents = new Map<string, string>()
   const blobs = new Map<string, Blob>()
   let puts = 0
+  let bytes = 0
 
   return {
     documents,
     blobs,
     puts: () => puts,
+    bytes: () => bytes,
     driver: {
       get: async (key: string) => documents.get(key) ?? null,
       // Like the real stores: report referenced blobs that are not held; a strict write with any
@@ -32,7 +34,8 @@ function memoryDriver() {
       remove: async (key: string) => void documents.delete(key),
       putBlob: async (blob: Blob) => {
         puts++
-        const id = `blob-${await blob.text().then((text) => Bun.hash(text).toString(16))}`
+        bytes += blob.size
+        const id = `blob-${Bun.hash(await blob.arrayBuffer()).toString(16)}`
         blobs.set(id, blob)
 
         return id
@@ -45,6 +48,17 @@ function memoryDriver() {
 const large = "x".repeat(draftTextThreshold)
 
 const paste = Array.from({ length: 3 * draftTextChunk }, (_, i) => String.fromCharCode(97 + (i % 26))).join("")
+
+function multiline(size: number) {
+  const lines: string[] = []
+  let length = 0
+  for (let index = 0; length < size; index++) {
+    const line = `${index.toString().padStart(8, "0")}: ${"content".repeat(4 + (index % 17))}\n`
+    lines.push(line)
+    length += line.length
+  }
+  return lines.join("").slice(0, size)
+}
 
 describe("draft store text externalization", () => {
   test("large strings become chunk lists and small ones stay inline", async () => {
@@ -90,6 +104,53 @@ describe("draft store text externalization", () => {
     expect(JSON.parse((await fresh.getItem("doc"))!)).toEqual({ prompt: [{ type: "text", content: paste }] })
     memory.blobs.clear()
     expect(JSON.parse((await fresh.getItem("doc"))!)).toEqual({ prompt: [{ type: "text", content: paste }] })
+  })
+
+  test("reuses unaffected multiline text after a middle edit", async () => {
+    const memory = memoryDriver()
+    const store = createDraftStore(memory.driver)
+    const text = multiline(8 * draftTextChunk)
+    await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
+    const before = memory.bytes()
+    const edited = `${text.slice(0, text.length / 2)}inserted${text.slice(text.length / 2)}`
+    await store.setDocument("doc", { prompt: [{ type: "text", content: edited }] })
+    expect(memory.bytes() - before).toBeLessThan(text.length / 2)
+    const fresh = createDraftStore(memory.driver)
+    expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(edited)
+  })
+
+  test("retains active chunks while repeatedly replacing a large draft's tail", async () => {
+    const memory = memoryDriver()
+    const store = createDraftStore(memory.driver)
+    const text = multiline(64 * draftTextChunk - 1024)
+    await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
+    const before = memory.bytes()
+    for (let step = 1; step <= 10; step++)
+      await store.setDocument("doc", { prompt: [{ type: "text", content: `${text}edit-${step}` }] })
+    expect(memory.bytes() - before).toBeLessThan(text.length)
+    const fresh = createDraftStore(memory.driver)
+    expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(`${text}edit-10`)
+  })
+
+  test("preserves U+FEFF as text at chunk boundaries", async () => {
+    const { Blob } = await import("node:buffer")
+    for (const text of [
+      `\uFEFF${paste}`,
+      `${paste.slice(0, draftTextChunk)}\uFEFF${paste.slice(draftTextChunk)}`,
+      `\uFEFF${"x".repeat(draftTextChunk - 1)}\uFEFF😀`,
+    ]) {
+      const memory = memoryDriver()
+      const store = createDraftStore(memory.driver)
+      await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
+      const fresh = createDraftStore({
+        ...memory.driver,
+        getBlob: async (id) => {
+          const blob = await memory.driver.getBlob(id)
+          return blob ? new Blob([await blob.arrayBuffer()]) : null
+        },
+      })
+      expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(text)
+    }
   })
 
   test("a missing chunk decodes to empty text instead of failing the document", async () => {
