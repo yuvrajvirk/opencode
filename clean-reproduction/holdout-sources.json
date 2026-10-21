@@ -1,0 +1,65 @@
+{
+  "revision": "615796ca0d6cbba67cc6576e8adf343700f8ab49",
+  "sources": [
+    {
+      "page": "create",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/create/index.md",
+      "sha256": "bbba22917084fbf291f069a824227ea7e14d5484d2a5c8b6e173691c1eb87ee0"
+    },
+    {
+      "page": "defineproperty",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/defineproperty/index.md",
+      "sha256": "c0b09233a51b136c53fda01bec836d63808de71813375fe77482b632983c1cd0"
+    },
+    {
+      "page": "defineproperties",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/defineproperties/index.md",
+      "sha256": "9f8e419ec1682ff448274345d165afda528a1015d996e4f75423bc336db1f107"
+    },
+    {
+      "page": "getownpropertydescriptor",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/getownpropertydescriptor/index.md",
+      "sha256": "c21e2496b827b33ae1d1d9e05d744e6e272994ec68e2318e53667caa92aef5cf"
+    },
+    {
+      "page": "getownpropertydescriptors",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/getownpropertydescriptors/index.md",
+      "sha256": "4c25ac0bdd5dd8d08ac1b57aeea1e68a19a5106d2b9ba5f85e7de778c576fe53"
+    },
+    {
+      "page": "getownpropertynames",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/getownpropertynames/index.md",
+      "sha256": "14c6b2975932a9750e41e862cacd41a7c04426e8016a824bdfabc3f6f25d3428"
+    },
+    {
+      "page": "freeze",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/freeze/index.md",
+      "sha256": "ba43e85b8e2ca54aba148bc20c33d5027d7e40c932f13761ba860bddb442066c"
+    },
+    {
+      "page": "seal",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/seal/index.md",
+      "sha256": "0c0ce0330ea56f267ef3f32f9a74df2422748893e66291e9fb7a666c634c5d84"
+    },
+    {
+      "page": "preventextensions",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/preventextensions/index.md",
+      "sha256": "c68813d3c5e348c749f7b7db913d18ebc4f3ad119d77e8df02cf603eebbb779c"
+    },
+    {
+      "page": "isfrozen",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/isfrozen/index.md",
+      "sha256": "62e29af051fd8bf446bb59b1b7db04096f4a7c324851b3a1a257d8fc470edf57"
+    },
+    {
+      "page": "issealed",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/issealed/index.md",
+      "sha256": "f8a3e0bace31db3fbdd180dc06e4194091f0bcbf0269432b2cca60b5d197276f"
+    },
+    {
+      "page": "isextensible",
+      "url": "https://raw.githubusercontent.com/mdn/content/615796ca0d6cbba67cc6576e8adf343700f8ab49/files/en-us/web/javascript/reference/global_objects/object/isextensible/index.md",
+      "sha256": "80b651267bc1524ffce964965c5ee1a60323676a5aae48898ac33cafcdf82ec6"
+    }
+  ]
+}

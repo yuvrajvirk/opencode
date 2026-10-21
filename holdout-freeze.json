@@ -1,0 +1,20 @@
+{
+  "frozen_at": "2026-10-21T17:10:49.017Z",
+  "checkout": "/home/yvirk2/opencode-worktrees/object-properties",
+  "base": "9c8e9e4bca433339e06aba8caf4c57b38f636ec9",
+  "primary": "Native-parsed fences with at least one console observation and no uncaught ReferenceError; exact observations and caught exception name must match. All other cases retained separately.",
+  "observation": "JSON snapshots at logging time, tagging undefined/functions/nonfinite numbers/symbols; standard well-known symbols normalized by identity. JSON limitations include negative zero and symbol-keyed properties. Does not assert unseen state.",
+  "selftest": "Six hand-authored controls matched baseline and candidate before fetching MDN. Initial control used unsupported Symbol(); revised to existing Symbol.iterator, revealing internal symbol names, normalized by symbol identity before corpus access.",
+  "hashes": {
+    "packages/codemode/src/interpreter/objects.ts": "e1a87da9db5753c811e4949ea1cfa3a52ae932ba79804ddf1872f89344c40d8b",
+    "packages/codemode/src/stdlib/property.ts": "6a67d1a348afa74bc0914454b5c000c23ec479ed667c3ba51f0e17331bb23123",
+    "packages/codemode/src/stdlib/object.ts": "99fb5119c75c1497362a71fde0daa0320f2d61db487bebb7d3b13a9c874938b8",
+    "packages/codemode/src/stdlib/array.ts": "aff1350d5f5aecc952aebfea1401e0d2e2e9c80ad64873f1ad62552b92c2ff72",
+    "packages/codemode/test/object-properties.test.ts": "584abc2dead98b8498d48db09af2f234a52aab11d74690e06da370347ea74609",
+    "holdout-wrapper.mjs": "2dde2736f61bef6d53454dfdc1a912e90cf59f180a0588286d8973a6f9889b60",
+    "holdout-native.mjs": "1a9ba2583c46d1256f41011b43a700eb583605b67d12c1e365b55949146a5bab",
+    "holdout-score.ts": "a78087a1b0be6ae17304567f0cc208b32fec7b4f58c6e6f544498ad1d7ce8d79",
+    "holdout-prepare.ts": "7f79054121200944a008920caab7376d23e8e5a24f580731cb1cf7b571b428d0",
+    "holdout-protocol.json": "96681f18df399b8c78ca9eb9d1dbc1dede4f22c1b0549e1d60fd9205d2beb592"
+  }
+}

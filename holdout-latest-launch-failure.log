@@ -1,0 +1,13 @@
+3 | import { createHash } from "node:crypto"
+4 | import { wrap } from "./holdout-wrapper.mjs"
+5 | 
+6 | const [checkout, label] = process.argv.slice(2)
+7 | if (!checkout || !label) throw new Error("Usage: bun holdout-score.ts checkout label")
+8 | const require = createRequire(path.join(checkout, "packages/codemode/package.json"))
+                    ^
+TypeError: The argument 'filename' must be a file URL object, file URL string, or absolute path string. Received 'checkouts/latest/packages/codemode/package.json'
+ code: "ERR_INVALID_ARG_VALUE"
+
+      at /home/yvirk2/opencode-research/object-properties/holdout-score.ts:8:17
+
+Bun v1.4.2 (Linux x64)

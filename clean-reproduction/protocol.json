@@ -1,0 +1,18 @@
+{
+  "intent": "Use standard JavaScript object construction, inspection and integrity operations inside confined Code Mode without exposing host objects or relaxing confinement",
+  "inspiration": "https://github.com/anomalyco/opencode/pull/50834",
+  "before": "bee5014f89cef6233ee42d3e9b16f0b9473df05a",
+  "original": "318a8c1aba8a2b1ff8348b2de459ff924e8d84b3",
+  "latest": "9c8e9e4bca433339e06aba8caf4c57b38f636ec9",
+  "source": "https://github.com/tc39/test262",
+  "source_revision": "250f204f23a9249ff204be2baec29600faae7b75",
+  "source_license": "BSD-3-Clause",
+  "directories": ["built-ins/Object/"],
+  "selection": "All files in the directory, with the current project manifest's existing flags/features/harness/boundary rules except removal of the property-descriptors API boundary and admission of verbatim propertyHelper.js. No selection by runtime pass/fail. Keep accessor-descriptor cases not excluded by the existing literal-getter boundary, arrays, functions and unrelated failures. Do not claim complete ECMAScript conformance.",
+  "runner": "Use the same current production Test262 runner on each actual checkout. Its bytes already match the inspiring feature's runner. Extend only harness-include loading to prepend the unchanged pinned propertyHelper.js when requested. Never replace production functions or implement missing descriptors in the harness.",
+  "scoring": "Report non-negative tests passed/total, separate negative tests, all selection exclusions, per-Object-operation results, gains and losses. Test262 assertions are the independent oracle. Ignore skipped.txt as a selection rule. Also execute selected tests in a native engine to identify host/fixture limitations rather than silently removing cases.",
+  "quality_gate": "Run the actual inspiring commit and its actual first parent with independently installed frozen dependencies. Require improvement before production changes. Then run the refreshed current baseline. No synthetic pre-feature stub is allowed.",
+  "safety": "Do not add native eval, Function, Proxy, host-object access, arbitrary getters or broaden tool-reference access to gain passes. Any implementation must preserve existing confinement, resource limits and mutation invariants. Scope and maintenance cost can justify deferring the entire candidate.",
+  "selection_status": "Feasibility benchmark only; no implementation selected, no production edits, no claimed improvement. Freeze a separate representative held-out usage set before selecting an implementation. Existing official tests are development evidence, not a claimed blind holdout.",
+  "publication": "Only yuvrajvirk/opencode; never upstream"
+}

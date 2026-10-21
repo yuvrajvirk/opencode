@@ -1,0 +1,605 @@
+{
+  "runtime": "Bun 1.4.2",
+  "roots": [
+    "/home/yvirk2/opencode-research/object-properties/checkouts/latest",
+    "/home/yvirk2/opencode-worktrees/object-properties"
+  ],
+  "purpose": "Post-prototype synthetic regression diagnostic, not real-agent evidence or a claimed performance improvement. Five fixed existing-API programs, three warmups, nine alternating paired rounds, ten executions each, all checked against native output.",
+  "fixture_sha256": "24752ec86a77e16cded7e2126971c3b7b3ac9d5bce596b3f70f366702ea7eb60",
+  "fixtures": [
+    {
+      "name": "ordinary indexed reads and writes",
+      "code": "const values = Array.from({length: 1024}, (_, index) => index); let total = 0; for (let repeat = 0; repeat < 4; repeat++) for (let index = 0; index < values.length; index++) { values[index]++; total += values[index] } return total;"
+    },
+    {
+      "name": "array callback pipeline",
+      "code": "const values = Array.from({length: 1024}, (_, index) => index); return values.map(value => value * 2).filter(value => value % 3 === 0).reduce((total, value) => total + value, 0);"
+    },
+    {
+      "name": "sealed array writes",
+      "code": "const values = Array.from({length: 1024}, (_, index) => index); Object.seal(values); let total = 0; for (let index = 0; index < values.length; index++) { values[index]++; total += values[index] } return total;"
+    },
+    {
+      "name": "frozen array reads",
+      "code": "const values = Object.freeze(Array.from({length: 1024}, (_, index) => index)); let total = 0; for (let index = 0; index < values.length; index++) total += values[index]; return total;"
+    },
+    {
+      "name": "array mutators",
+      "code": "const values = Array.from({length: 1024}, (_, index) => 1024 - index); values.sort((left, right) => left - right); values.reverse(); values.copyWithin(0, 512); values.fill(5, 512); return values.reduce((total, value) => total + value, 0);"
+    }
+  ],
+  "summaries": [
+    {
+      "name": "ordinary indexed reads and writes",
+      "latest_ms": 45.48104059999996,
+      "candidate_ms": 49.04699339999998,
+      "median_paired_ratio": 0.9826843737607892
+    },
+    {
+      "name": "array callback pipeline",
+      "latest_ms": 15.5667832000001,
+      "candidate_ms": 13.982354100000157,
+      "median_paired_ratio": 0.9689751070187268
+    },
+    {
+      "name": "sealed array writes",
+      "latest_ms": 15.40792969999984,
+      "candidate_ms": 13.560223399999995,
+      "median_paired_ratio": 1.0329397657428998
+    },
+    {
+      "name": "frozen array reads",
+      "latest_ms": 8.257687200000145,
+      "candidate_ms": 8.598719300000084,
+      "median_paired_ratio": 1.0518435062586409
+    },
+    {
+      "name": "array mutators",
+      "latest_ms": 29.734111199999823,
+      "candidate_ms": 29.347089699999923,
+      "median_paired_ratio": 0.9757590842948496
+    }
+  ],
+  "results": [
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 0,
+      "milliseconds_per_execution": 46.02265890000001
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 0,
+      "milliseconds_per_execution": 61.742433900000016
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 1,
+      "milliseconds_per_execution": 52.894562500000006
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 1,
+      "milliseconds_per_execution": 39.98367660000004
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 2,
+      "milliseconds_per_execution": 39.640448500000005
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 2,
+      "milliseconds_per_execution": 37.512934199999975
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 3,
+      "milliseconds_per_execution": 38.90284320000001
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 3,
+      "milliseconds_per_execution": 38.62626150000001
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 4,
+      "milliseconds_per_execution": 63.7339739
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 4,
+      "milliseconds_per_execution": 53.42696930000002
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 5,
+      "milliseconds_per_execution": 50.53525120000004
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 5,
+      "milliseconds_per_execution": 54.87514030000002
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 6,
+      "milliseconds_per_execution": 54.04589590000005
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 6,
+      "milliseconds_per_execution": 49.04699339999998
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 7,
+      "milliseconds_per_execution": 44.693507899999986
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 7,
+      "milliseconds_per_execution": 45.48104059999996
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "latest",
+      "round": 8,
+      "milliseconds_per_execution": 38.93445120000015
+    },
+    {
+      "name": "ordinary indexed reads and writes",
+      "version": "candidate",
+      "round": 8,
+      "milliseconds_per_execution": 44.901960999999936
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 0,
+      "milliseconds_per_execution": 16.090385400000013
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 0,
+      "milliseconds_per_execution": 16.071696499999963
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 1,
+      "milliseconds_per_execution": 15.947018899999966
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 1,
+      "milliseconds_per_execution": 19.968143899999994
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 2,
+      "milliseconds_per_execution": 23.48285569999989
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 2,
+      "milliseconds_per_execution": 15.687941800000043
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 3,
+      "milliseconds_per_execution": 12.81313599999994
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 3,
+      "milliseconds_per_execution": 13.031221900000128
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 4,
+      "milliseconds_per_execution": 13.435771600000043
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 4,
+      "milliseconds_per_execution": 13.982354100000157
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 5,
+      "milliseconds_per_execution": 12.463139799999954
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 5,
+      "milliseconds_per_execution": 12.862187799999992
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 6,
+      "milliseconds_per_execution": 18.15488810000006
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 6,
+      "milliseconds_per_execution": 12.586315099999956
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 7,
+      "milliseconds_per_execution": 12.201624699999957
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 7,
+      "milliseconds_per_execution": 15.498677700000007
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "latest",
+      "round": 8,
+      "milliseconds_per_execution": 15.5667832000001
+    },
+    {
+      "name": "array callback pipeline",
+      "version": "candidate",
+      "round": 8,
+      "milliseconds_per_execution": 15.347135100000013
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 0,
+      "milliseconds_per_execution": 15.469363200000043
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 0,
+      "milliseconds_per_execution": 15.978920399999879
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 1,
+      "milliseconds_per_execution": 15.868589799999972
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 1,
+      "milliseconds_per_execution": 15.918765800000074
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 2,
+      "milliseconds_per_execution": 15.40792969999984
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 2,
+      "milliseconds_per_execution": 16.375010900000053
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 3,
+      "milliseconds_per_execution": 15.67384949999996
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 3,
+      "milliseconds_per_execution": 15.22869640000008
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 4,
+      "milliseconds_per_execution": 15.563679899999988
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 4,
+      "milliseconds_per_execution": 12.901825699999971
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 5,
+      "milliseconds_per_execution": 13.560223399999995
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 5,
+      "milliseconds_per_execution": 13.109356300000035
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 6,
+      "milliseconds_per_execution": 17.252423899999847
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 6,
+      "milliseconds_per_execution": 13.020871799999986
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 7,
+      "milliseconds_per_execution": 13.028753200000029
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 7,
+      "milliseconds_per_execution": 12.463973100000112
+    },
+    {
+      "name": "sealed array writes",
+      "version": "latest",
+      "round": 8,
+      "milliseconds_per_execution": 12.339830400000029
+    },
+    {
+      "name": "sealed array writes",
+      "version": "candidate",
+      "round": 8,
+      "milliseconds_per_execution": 12.815601699999934
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 0,
+      "milliseconds_per_execution": 8.257687200000145
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 0,
+      "milliseconds_per_execution": 8.6960321999999
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 1,
+      "milliseconds_per_execution": 8.587956099999975
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 1,
+      "milliseconds_per_execution": 9.108522699999957
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 2,
+      "milliseconds_per_execution": 8.430979799999841
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 2,
+      "milliseconds_per_execution": 8.794953799999893
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 3,
+      "milliseconds_per_execution": 9.162808399999994
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 3,
+      "milliseconds_per_execution": 8.232530700000098
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 4,
+      "milliseconds_per_execution": 8.58757170000008
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 4,
+      "milliseconds_per_execution": 8.760463700000036
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 5,
+      "milliseconds_per_execution": 8.453729999999997
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 5,
+      "milliseconds_per_execution": 7.99186410000002
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 6,
+      "milliseconds_per_execution": 8.16259030000001
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 6,
+      "milliseconds_per_execution": 8.598719300000084
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 7,
+      "milliseconds_per_execution": 8.573328499999842
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 7,
+      "milliseconds_per_execution": 8.150764300000082
+    },
+    {
+      "name": "frozen array reads",
+      "version": "latest",
+      "round": 8,
+      "milliseconds_per_execution": 8.47660360000009
+    },
+    {
+      "name": "frozen array reads",
+      "version": "candidate",
+      "round": 8,
+      "milliseconds_per_execution": 8.348452800000086
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 0,
+      "milliseconds_per_execution": 29.25715820000005
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 0,
+      "milliseconds_per_execution": 29.54885489999979
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 1,
+      "milliseconds_per_execution": 28.79780950000022
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 1,
+      "milliseconds_per_execution": 29.513237399999706
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 2,
+      "milliseconds_per_execution": 29.64313779999975
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 2,
+      "milliseconds_per_execution": 29.347089699999923
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 3,
+      "milliseconds_per_execution": 28.7576004999999
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 3,
+      "milliseconds_per_execution": 29.734111199999823
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 4,
+      "milliseconds_per_execution": 28.544436599999973
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 4,
+      "milliseconds_per_execution": 28.008752699999967
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 5,
+      "milliseconds_per_execution": 27.800340900000084
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 5,
+      "milliseconds_per_execution": 29.921911799999727
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 6,
+      "milliseconds_per_execution": 30.042638799999985
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 6,
+      "milliseconds_per_execution": 30.40797619999976
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 7,
+      "milliseconds_per_execution": 35.10946140000014
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 7,
+      "milliseconds_per_execution": 41.630256700000245
+    },
+    {
+      "name": "array mutators",
+      "version": "latest",
+      "round": 8,
+      "milliseconds_per_execution": 52.48535440000014
+    },
+    {
+      "name": "array mutators",
+      "version": "candidate",
+      "round": 8,
+      "milliseconds_per_execution": 51.03084210000016
+    }
+  ]
+}

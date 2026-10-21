@@ -1,0 +1,194 @@
+471 pass, 104 fail of 575
+
+   25  TypeError: Program-defined accessor descriptors are not supported.
+         built-ins/Object/create/15.2.3.5-4-231.js
+         built-ins/Object/create/15.2.3.5-4-233.js
+         built-ins/Object/create/15.2.3.5-4-244.js
+         … 22 more
+   16  TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+         built-ins/Object/create/15.2.3.5-4-102.js
+         built-ins/Object/create/15.2.3.5-4-155.js
+         built-ins/Object/create/15.2.3.5-4-156.js
+         … 13 more
+    9  TypeError: Cannot read properties of undefined (reading '…').
+         built-ins/Object/S15.2_A1.js
+         built-ins/Object/create/15.2.3.5-4-124.js
+         built-ins/Object/create/15.2.3.5-4-177.js
+         … 6 more
+    8  TypeError: Object(number) wrapper objects are not supported; use the primitive value directly.
+         built-ins/Object/S15.2.1.1_A2_T2.js
+         built-ins/Object/S15.2.1.1_A2_T5.js
+         built-ins/Object/S15.2.1.1_A2_T6.js
+         … 5 more
+    5  TypeError: Object(boolean) wrapper objects are not supported; use the primitive value directly.
+         built-ins/Object/S15.2.1.1_A2_T1.js
+         built-ins/Object/S15.2.1.1_A2_T13.js
+         built-ins/Object/S15.2.2.1_A4_T1.js
+         … 2 more
+    5  TypeError: The Function constructor is not supported; write the function inline.
+         built-ins/Object/seal/seal-arrowfunction.js
+         built-ins/Object/seal/seal-asyncarrowfunction.js
+         built-ins/Object/seal/seal-asyncfunction.js
+         … 2 more
+    4  TypeError: Object(string) wrapper objects are not supported; use the primitive value directly.
+         built-ins/Object/S15.2.1.1_A2_T3.js
+         built-ins/Object/S15.2.1.1_A2_T7.js
+         built-ins/Object/S15.2.2.1_A3_T1.js
+         … 1 more
+    4  TypeError: base cannot be constructed: user-defined constructors and classes are not supported. Call
+         built-ins/Object/create/15.2.3.5-2-1.js
+         built-ins/Object/create/15.2.3.5-3-1.js
+         built-ins/Object/create/15.2.3.5-4-1.js
+         … 1 more
+    4  Expected a DummyError but got a TypeError
+         built-ins/Object/fromEntries/iterator-closed-for-throwing-entry-key-accessor.js
+         built-ins/Object/fromEntries/iterator-closed-for-throwing-entry-key-tostring.js
+         built-ins/Object/fromEntries/iterator-closed-for-throwing-entry-value-accessor.js
+         … 1 more
+    3  Expected true but got false
+         built-ins/Object/isExtensible/15.2.3.13-2-1.js
+         built-ins/Object/isFrozen/15.2.3.12-3-1.js
+         built-ins/Object/isSealed/15.2.3.11-4-1.js
+    2  TypeError: Object.assign expects a data object or array target, received a string.
+         built-ins/Object/assign/OnlyOneArgument.js
+         built-ins/Object/assign/Target-String.js
+    2  TypeError: Func cannot be constructed: user-defined constructors and classes are not supported. Call
+         built-ins/Object/create/15.2.3.5-4-165.js
+         built-ins/Object/create/15.2.3.5-4-191.js
+    1  TypeError: MyObject cannot be constructed: user-defined constructors and classes are not supported. 
+         built-ins/Object/S9.9_A6.js
+    1  TypeError: Object.assign expects a data object or array target, received a boolean.
+         built-ins/Object/assign/Target-Boolean.js
+    1  TypeError: Object.assign expects a data object or array target, received a number.
+         built-ins/Object/assign/Target-Number.js
+    1  TypeError: Cannot delete property '…'.
+         built-ins/Object/create/15.2.3.5-4-149.js
+    1  TypeError: Cannot assign to read only property '…'.
+         built-ins/Object/create/15.2.3.5-4-228.js
+    1  Expected a TypeError to be thrown but no exception was thrown at all
+         built-ins/Object/create/15.2.3.5-4-300.js
+    1  accessed !== true
+         built-ins/Object/create/15.2.3.5-4-96.js
+    1  TypeError: Only init object properties are supported.
+         built-ins/Object/fromEntries/evaluation-order.js
+    1  TypeError: Object.getPrototypeOf cannot convert undefined to an object.
+         built-ins/Object/getPrototypeOf/15.2.3.2-2-30.js
+    1  Object.isExtensible(this) !== true
+         built-ins/Object/isExtensible/15.2.3.13-2-29.js
+    1  TypeError: FACTORY cannot be constructed: user-defined constructors and classes are not supported. C
+         built-ins/Object/prototype/hasOwnProperty/S15.2.4.5_A1_T3.js
+    1  TypeError: USER_FACTORY cannot be constructed: user-defined constructors and classes are not support
+         built-ins/Object/prototype/isPrototypeOf/this-value-is-in-prototype-chain-of-arg.js
+    1  TypeError: AVISFACTORY cannot be constructed: user-defined constructors and classes are not supporte
+         built-ins/Object/prototype/propertyIsEnumerable/S15.2.4.7_A1_T1.js
+    1  typeof Object.prototype.valueOf.call(true) Expected SameValue(«"boolean"», «"object"») to be true
+         built-ins/Object/prototype/valueOf/15.2.4.4-1.js
+    1  typeof Object.prototype.valueOf.call(false) Expected SameValue(«"boolean"», «"object"») to be true
+         built-ins/Object/prototype/valueOf/15.2.4.4-2.js
+    1  TimeoutExceeded: Execution timed out after 5000ms.
+         built-ins/Object/seal/seal-promise.js
+    1  TypeError: A Uint8Array cannot cross to the host; pass text instead, e.g. `new TextDecoder().decode(
+         built-ins/Object/seal/seal-uint8array.js
+
+101 skipped files pass now; remove them from skipped.txt:
+         built-ins/Object/create/15.2.3.5-4-112.js
+         built-ins/Object/create/15.2.3.5-4-113.js
+         built-ins/Object/create/15.2.3.5-4-117.js
+         built-ins/Object/create/15.2.3.5-4-118.js
+         built-ins/Object/create/15.2.3.5-4-119.js
+         built-ins/Object/create/15.2.3.5-4-120.js
+         built-ins/Object/create/15.2.3.5-4-121.js
+         built-ins/Object/create/15.2.3.5-4-122.js
+         built-ins/Object/create/15.2.3.5-4-127.js
+         built-ins/Object/create/15.2.3.5-4-133.js
+         built-ins/Object/create/15.2.3.5-4-134.js
+         built-ins/Object/create/15.2.3.5-4-136.js
+         built-ins/Object/create/15.2.3.5-4-137.js
+         built-ins/Object/create/15.2.3.5-4-138.js
+         built-ins/Object/create/15.2.3.5-4-142.js
+         built-ins/Object/create/15.2.3.5-4-143.js
+         built-ins/Object/create/15.2.3.5-4-144.js
+         built-ins/Object/create/15.2.3.5-4-145.js
+         built-ins/Object/create/15.2.3.5-4-146.js
+         built-ins/Object/create/15.2.3.5-4-147.js
+         built-ins/Object/create/15.2.3.5-4-150.js
+         built-ins/Object/create/15.2.3.5-4-152.js
+         built-ins/Object/create/15.2.3.5-4-153.js
+         built-ins/Object/create/15.2.3.5-4-154.js
+         built-ins/Object/create/15.2.3.5-4-16.js
+         built-ins/Object/create/15.2.3.5-4-166.js
+         built-ins/Object/create/15.2.3.5-4-170.js
+         built-ins/Object/create/15.2.3.5-4-171.js
+         built-ins/Object/create/15.2.3.5-4-172.js
+         built-ins/Object/create/15.2.3.5-4-173.js
+         built-ins/Object/create/15.2.3.5-4-174.js
+         built-ins/Object/create/15.2.3.5-4-175.js
+         built-ins/Object/create/15.2.3.5-4-178.js
+         built-ins/Object/create/15.2.3.5-4-180.js
+         built-ins/Object/create/15.2.3.5-4-192.js
+         built-ins/Object/create/15.2.3.5-4-196.js
+         built-ins/Object/create/15.2.3.5-4-197.js
+         built-ins/Object/create/15.2.3.5-4-198.js
+         built-ins/Object/create/15.2.3.5-4-199.js
+         built-ins/Object/create/15.2.3.5-4-200.js
+         built-ins/Object/create/15.2.3.5-4-201.js
+         built-ins/Object/create/15.2.3.5-4-206.js
+         built-ins/Object/create/15.2.3.5-4-212.js
+         built-ins/Object/create/15.2.3.5-4-213.js
+         built-ins/Object/create/15.2.3.5-4-215.js
+         built-ins/Object/create/15.2.3.5-4-216.js
+         built-ins/Object/create/15.2.3.5-4-217.js
+         built-ins/Object/create/15.2.3.5-4-221.js
+         built-ins/Object/create/15.2.3.5-4-222.js
+         built-ins/Object/create/15.2.3.5-4-223.js
+         built-ins/Object/create/15.2.3.5-4-224.js
+         built-ins/Object/create/15.2.3.5-4-225.js
+         built-ins/Object/create/15.2.3.5-4-226.js
+         built-ins/Object/create/15.2.3.5-4-229.js
+         built-ins/Object/create/15.2.3.5-4-232.js
+         built-ins/Object/create/15.2.3.5-4-257.js
+         built-ins/Object/create/15.2.3.5-4-28.js
+         built-ins/Object/create/15.2.3.5-4-29.js
+         built-ins/Object/create/15.2.3.5-4-305.js
+         built-ins/Object/create/15.2.3.5-4-306.js
+         built-ins/Object/create/15.2.3.5-4-308.js
+         built-ins/Object/create/15.2.3.5-4-314.js
+         built-ins/Object/create/15.2.3.5-4-33.js
+         built-ins/Object/create/15.2.3.5-4-34.js
+         built-ins/Object/create/15.2.3.5-4-35.js
+         built-ins/Object/create/15.2.3.5-4-36.js
+         built-ins/Object/create/15.2.3.5-4-38.js
+         built-ins/Object/create/15.2.3.5-4-39.js
+         built-ins/Object/create/15.2.3.5-4-46.js
+         built-ins/Object/create/15.2.3.5-4-47.js
+         built-ins/Object/create/15.2.3.5-4-48.js
+         built-ins/Object/create/15.2.3.5-4-59.js
+         built-ins/Object/create/15.2.3.5-4-60.js
+         built-ins/Object/create/15.2.3.5-4-64.js
+         built-ins/Object/create/15.2.3.5-4-65.js
+         built-ins/Object/create/15.2.3.5-4-66.js
+         built-ins/Object/create/15.2.3.5-4-67.js
+         built-ins/Object/create/15.2.3.5-4-68.js
+         built-ins/Object/create/15.2.3.5-4-69.js
+         built-ins/Object/create/15.2.3.5-4-72.js
+         built-ins/Object/create/15.2.3.5-4-73.js
+         built-ins/Object/create/15.2.3.5-4-74.js
+         built-ins/Object/create/15.2.3.5-4-75.js
+         built-ins/Object/create/15.2.3.5-4-76.js
+         built-ins/Object/create/15.2.3.5-4-77.js
+         built-ins/Object/create/15.2.3.5-4-78.js
+         built-ins/Object/create/15.2.3.5-4-79.js
+         built-ins/Object/create/15.2.3.5-4-80.js
+         built-ins/Object/create/15.2.3.5-4-81.js
+         built-ins/Object/create/15.2.3.5-4-82.js
+         built-ins/Object/create/15.2.3.5-4-83.js
+         built-ins/Object/create/15.2.3.5-4-84.js
+         built-ins/Object/create/15.2.3.5-4-85.js
+         built-ins/Object/create/15.2.3.5-4-89.js
+         built-ins/Object/create/15.2.3.5-4-90.js
+         built-ins/Object/create/15.2.3.5-4-91.js
+         built-ins/Object/create/15.2.3.5-4-92.js
+         built-ins/Object/create/15.2.3.5-4-93.js
+         built-ins/Object/create/15.2.3.5-4-94.js
+         built-ins/Object/create/15.2.3.5-4-97.js
+         built-ins/Object/create/15.2.3.5-4-99.js

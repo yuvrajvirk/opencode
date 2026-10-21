@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "name": "-0",
+      "code": "\n  const target = new Uint8Array([1, 2, 3]);\n  target[\"-0\"] = 8;\n  const assigned = [Array.from(target), Object.keys(target)];\n  let sealed = \"ok\";\n  try { Object.seal(target) } catch (error) { sealed = error.name }\n  return JSON.stringify([assigned, sealed, Object.isExtensible(target)]);\n"
+    },
+    {
+      "name": "4294967295",
+      "code": "\n  const target = new Uint8Array([1, 2, 3]);\n  target[\"4294967295\"] = 8;\n  const assigned = [Array.from(target), Object.keys(target)];\n  let sealed = \"ok\";\n  try { Object.seal(target) } catch (error) { sealed = error.name }\n  return JSON.stringify([assigned, sealed, Object.isExtensible(target)]);\n"
+    },
+    {
+      "name": "field",
+      "code": "\n  const target = new Uint8Array([1, 2, 3]);\n  target[\"field\"] = 8;\n  const assigned = [Array.from(target), Object.keys(target)];\n  let sealed = \"ok\";\n  try { Object.seal(target) } catch (error) { sealed = error.name }\n  return JSON.stringify([assigned, sealed, Object.isExtensible(target)]);\n"
+    }
+  ],
+  "results": [
+    {
+      "checkout": "/home/yvirk2/opencode-research/object-properties/checkouts/latest",
+      "name": "-0",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"-0\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\"]],\"TypeError\",false]"
+    },
+    {
+      "checkout": "/home/yvirk2/opencode-research/object-properties/checkouts/latest",
+      "name": "4294967295",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"4294967295\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\"]],\"TypeError\",false]"
+    },
+    {
+      "checkout": "/home/yvirk2/opencode-research/object-properties/checkouts/latest",
+      "name": "field",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"field\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\",\"field\"]],\"TypeError\",false]"
+    },
+    {
+      "checkout": "/home/yvirk2/opencode-worktrees/object-properties",
+      "name": "-0",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"-0\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\"]],\"TypeError\",false]"
+    },
+    {
+      "checkout": "/home/yvirk2/opencode-worktrees/object-properties",
+      "name": "4294967295",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"4294967295\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\"]],\"TypeError\",false]"
+    },
+    {
+      "checkout": "/home/yvirk2/opencode-worktrees/object-properties",
+      "name": "field",
+      "actual": "[[[1,2,3],[\"0\",\"1\",\"2\",\"field\"]],\"TypeError\",false]",
+      "native_bun": "[[[1,2,3],[\"0\",\"1\",\"2\",\"field\"]],\"TypeError\",false]"
+    }
+  ]
+}

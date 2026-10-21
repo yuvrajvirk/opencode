@@ -1,0 +1,392 @@
+diff --git a/packages/codemode/src/interpreter/objects.ts b/packages/codemode/src/interpreter/objects.ts
+index b2b8886ab1..9809c4d439 100644
+--- a/packages/codemode/src/interpreter/objects.ts
++++ b/packages/codemode/src/interpreter/objects.ts
+@@ -23,6 +23,15 @@ export type Attributes = {
+ export type Getter = (receiver: Value) => Value
+ export type Setter = (receiver: Value, value: Value) => void
+ 
++export type Descriptor = {
++  value?: Value
++  writable?: boolean
++  enumerable?: boolean
++  configurable?: boolean
++  get?: undefined
++  set?: undefined
++}
++
+ /** One own property: a data slot or a native accessor pair. */
+ export type Slot =
+   | { value: Value; writable: boolean; enumerable: boolean; configurable: boolean }
+@@ -47,6 +56,23 @@ export class Obj {
+   extensible = true
+   constructor(public proto: Obj | null) {}
+ 
++  redefine(key: string | symbol, slot: Slot): void {
++    this.props.set(key, slot)
++  }
++
++  definitionCoercion(_key: string | symbol, _descriptor: Descriptor): "number" | "length" | undefined {
++    return undefined
++  }
++
++  restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    this.extensible = false
++    if (level === "preventExtensions") return
++    for (const slot of this.props.values()) {
++      slot.configurable = false
++      if (level === "freeze" && "value" in slot) slot.writable = false
++    }
++  }
++
+   /** The class name `Object.prototype.toString` reports: `[object Map]`. */
+   readonly tag: string = "Object"
+ 
+@@ -95,14 +121,30 @@ export class Obj {
+ 
+ export class Arr extends Obj {
+   override readonly tag = "Array"
+-  /** The attributes every live element shares; `seal` and `freeze` narrow them since elements have no slots. */
+-  elements: Attributes = data
++  customAttributes = false
+   constructor(
+     proto: Obj,
+     readonly items: Array<Value> = [],
+   ) {
+     super(proto)
+   }
++  override redefine(key: string | symbol, slot: Slot): void {
++    const position = typeof key === "string" ? parseArrayIndex(key) : undefined
++    if (position === undefined && key !== "length") return super.redefine(key, slot)
++    if (!("value" in slot)) throw typeError("Array accessor descriptors are not supported.")
++    if (position !== undefined) checkArrayLength(position + 1)
++    if (key === "length") checkArrayLength(Number(slot.value))
++    this.customAttributes = true
++    Object.defineProperty(this.items, key, slot)
++  }
++  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
++    return key === "length" && "value" in descriptor ? "length" as const : undefined
++  }
++  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    super.restrict(level)
++    if (level !== "preventExtensions") this.customAttributes = true
++    Object[level](this.items)
++  }
+   override get describe() {
+     return "an array"
+   }
+@@ -440,6 +482,26 @@ export class Bytes extends Wrapper {
+   ) {
+     super(proto)
+   }
++  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
++    if (typeof key !== "string" || (key !== "-0" && String(Number(key)) !== key)) return undefined
++    const index = Number(key)
++    if (
++      !Number.isInteger(index) || index < 0 || Object.is(index, -0) || index >= this.bytes.length ||
++      "get" in descriptor || "set" in descriptor || descriptor.configurable === false ||
++      descriptor.enumerable === false || descriptor.writable === false
++    ) throw typeError(`Cannot redefine property: ${key}`)
++    return "value" in descriptor ? "number" as const : undefined
++  }
++  override redefine(key: string | symbol, slot: Slot): void {
++    if (typeof key !== "string" || String(Number(key)) !== key) return super.redefine(key, slot)
++    if (!("value" in slot)) throw typeError("Typed array accessor descriptors are not supported.")
++    Object.defineProperty(this.bytes, key, slot)
++  }
++  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    this.extensible = false
++    if (level !== "preventExtensions" && this.bytes.length > 0) throw typeError(`Cannot ${level} array buffer views with elements.`)
++    super.restrict(level)
++  }
+   override toString() {
+     return this.bytes.join(",")
+   }
+@@ -505,10 +567,23 @@ export const own = (target: Obj, key: PropertyKey): Slot | undefined => {
+     if (at !== undefined) {
+       const items = elements(target)
+       if (!(at in items)) return undefined
+-      return { value: items[at], ...(target instanceof Arr ? target.elements : data) }
++      if (!(target instanceof Arr) || !target.customAttributes)
++        return { value: items[at], ...data }
++      const descriptor = Object.getOwnPropertyDescriptor(items, at)
++      return {
++        value: items[at],
++        writable: descriptor?.writable === true,
++        enumerable: descriptor?.enumerable === true,
++        configurable: descriptor?.configurable === true,
++      }
+     }
+     if (target instanceof Arr && name === "length") {
+-      return { value: target.items.length, writable: target.elements.writable, enumerable: false, configurable: false }
++      return {
++        value: target.items.length,
++        writable: !target.customAttributes || Object.getOwnPropertyDescriptor(target.items, "length")?.writable === true,
++        enumerable: false,
++        configurable: false,
++      }
+     }
+   }
+   return target.props.get(name)
+@@ -561,8 +636,6 @@ const writeElement = (target: Indexed, name: string | symbol, value: Value): boo
+   if (!(target instanceof Arr) || name !== "length") return undefined
+   const length = typeof value === "number" ? value : Number(value)
+   if (!Number.isInteger(length) || length < 0) throw rangeError("Invalid array length")
+-  // Shrinking deletes elements, which a sealed array forbids.
+-  if (length < target.items.length && !target.elements.configurable) return false
+   checkArrayLength(length)
+   target.items.length = length
+   return true
+@@ -620,7 +693,6 @@ export const remove = (target: Obj, key: PropertyKey): boolean => {
+     const at = index(target, name)
+     if (at !== undefined) {
+       if (target instanceof Bytes) return !(at in target.bytes)
+-      if (at in target.items && !target.elements.configurable) return false
+       return delete target.items[at]
+     }
+     if (target instanceof Arr && name === "length") return false
+@@ -637,7 +709,7 @@ export const ownKeys = (target: Obj): Array<string | symbol> => {
+   const strings = [...target.props.keys()].filter((key): key is string => typeof key === "string")
+   const symbols = [...target.props.keys()].filter((key): key is symbol => typeof key === "symbol")
+   return [
+-    ...(isIndexed(target) ? Object.keys(elements(target)) : []),
++    ...(isIndexed(target) ? Object.getOwnPropertyNames(elements(target)).filter((key) => parseArrayIndex(key) !== undefined) : []),
+     ...(target instanceof Arr ? ["length"] : []),
+     ...strings.filter((key) => parseArrayIndex(key) !== undefined).sort((a, b) => Number(a) - Number(b)),
+     ...strings.filter((key) => parseArrayIndex(key) === undefined),
+diff --git a/packages/codemode/src/stdlib/array.ts b/packages/codemode/src/stdlib/array.ts
+index 64a8d253ac..1207a4b367 100644
+--- a/packages/codemode/src/stdlib/array.ts
++++ b/packages/codemode/src/stdlib/array.ts
+@@ -127,18 +127,9 @@ export const arrayGlobal = <R>(ctx: Interpreter<R>) => {
+   ])
+ 
+   const self = (thisValue: Value, name: string) => receiver(Arr, thisValue, `Array.prototype.${name}`)
+-  // A mutating method fails where its first element write, delete, or `length` write would on a frozen, sealed, or
+-  // non-extensible array. `growth` is given by the methods that always write `length`, even when it is 0; holes a
+-  // method would fill on a non-extensible array are not checked.
+   const mutable = (target: Arr, growth?: number): Arr => {
+     const length = target.items.length
+     if ((growth ?? 0) > 0) rejectAddition(target, length)
+-    if ((growth ?? 0) < 0 && length > 0 && !target.elements.configurable) {
+-      throw typeError(`Cannot delete property '${length - 1}'.`)
+-    }
+-    if (!target.elements.writable && (length > 0 || growth !== undefined)) {
+-      throw typeError(`Cannot assign to read only property '${length > 0 ? 0 : "length"}'.`)
+-    }
+     return target
+   }
+   const optNumber = (value: Value): number | undefined => (value === undefined ? undefined : coerceToInteger(value))
+diff --git a/packages/codemode/src/stdlib/object.ts b/packages/codemode/src/stdlib/object.ts
+index 5297eacb40..5948a0c486 100644
+--- a/packages/codemode/src/stdlib/object.ts
++++ b/packages/codemode/src/stdlib/object.ts
+@@ -13,7 +13,6 @@ import {
+   own,
+   ownKeys,
+   Arr,
+-  Bytes,
+   Obj,
+   PromiseObj,
+   set,
+@@ -26,6 +25,7 @@ import { invoke, preserveConsumerError } from "../interpreter/callback.js"
+ import type { Interpreter } from "../interpreter/interpreter.js"
+ import { ToolReference } from "../tool-runtime.js"
+ import { groupBy } from "./collections.js"
++import { ObjectProperty } from "./property.js"
+ 
+ // ToObject for enumeration.
+ export const enumerableSource = <R>(ctx: Interpreter<R>, label: string, value: Value, node?: AstNode): Obj => {
+@@ -102,20 +102,9 @@ const classTag = (value: Value): string => {
+ const propertyKey = (value: Value): PropertyKey =>
+   value === AsyncIteratorSymbol || value === IteratorSymbol ? value : coerceToString(value)
+ 
+-// SetIntegrityLevel: primitives pass through. A typed array's bytes cannot carry attributes, so JS throws after
+-// already making it non-extensible.
+ const restrict = (level: "freeze" | "seal" | "preventExtensions", value: Value): Value => {
+   if (!(value instanceof Obj)) return value
+-  value.extensible = false
+-  if (level === "preventExtensions") return value
+-  if (value instanceof Bytes && value.bytes.length > 0) {
+-    throw typeError(`Cannot ${level} array buffer views with elements.`)
+-  }
+-  for (const slot of value.props.values()) {
+-    slot.configurable = false
+-    if (level === "freeze" && "value" in slot) slot.writable = false
+-  }
+-  if (value instanceof Arr) value.elements = { writable: level === "seal", enumerable: true, configurable: false }
++  value.restrict(level)
+   return value
+ }
+ 
+@@ -134,6 +123,7 @@ const integrity = (value: Value, frozen: boolean): boolean => {
+ // program; `values`, `entries`, `assign`, and `fromEntries` hand back the program's own values.
+ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+   const builtins = ctx.builtins
++  const properties = ObjectProperty.make(ctx)
+   const construct = (args: Array<Value>): Value => {
+     const first = args[0]
+     if (first === null || first === undefined) return new Obj(builtins.Object)
+@@ -178,6 +168,11 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+     ],
+     ["hasOwn", 2, (_, args) => hasOwn(enumerableSource(ctx, "Object.hasOwn(...)", args[0]), propertyKey(args[1]))],
+     ["is", 2, (_, args) => Object.is(args[0], args[1])],
++    ["defineProperty", 3, (_, args) => properties.defineProperty(args[0], args[1], args[2])],
++    ["defineProperties", 2, (_, args) => properties.defineProperties(args[0], args[1])],
++    ["getOwnPropertyDescriptor", 2, (_, args) => properties.getOwnPropertyDescriptor(args[0], args[1])],
++    ["getOwnPropertyDescriptors", 1, (_, args) => properties.getOwnPropertyDescriptors(args[0])],
++    ["getOwnPropertyNames", 1, (_, args) => properties.getOwnPropertyNames(args[0])],
+     ["assign", 2, (_, args) => objectAssign(ctx, args)],
+     ["fromEntries", 1, (_, args) => objectFromEntries(ctx, args[0])],
+     ["freeze", 1, (_, args) => restrict("freeze", args[0])],
+@@ -205,12 +200,8 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+         if (args[0] !== null && !(args[0] instanceof Obj)) {
+           throw typeError("Object prototype may only be an Object or null.")
+         }
+-        if (args[1] !== undefined) {
+-          throw typeError(
+-            "Object.create property descriptors are not supported; assign the fields after creating the object.",
+-          )
+-        }
+-        return new Obj(args[0])
++        const result = new Obj(args[0])
++        return args[1] === undefined ? result : properties.defineProperties(result, args[1])
+       },
+     ],
+   ])
+diff --git a/home/yvirk2/opencode-worktrees/object-properties/packages/codemode/src/stdlib/property.ts b/home/yvirk2/opencode-worktrees/object-properties/packages/codemode/src/stdlib/property.ts
+new file mode 100644
+index 0000000000..98f2ef0e41
+--- /dev/null
++++ b/home/yvirk2/opencode-worktrees/object-properties/packages/codemode/src/stdlib/property.ts
+@@ -0,0 +1,130 @@
++export * as ObjectProperty from "./property.js"
++
++import { Effect } from "effect"
++import { typeError, invalidData, rangeError } from "../interpreter/model.js"
++import { fn } from "../interpreter/native.js"
++import { toPrimitiveString, toPrimitiveNumber } from "../interpreter/callback.js"
++import type { Interpreter } from "../interpreter/interpreter.js"
++import { Arr, Obj, PromiseObj, define, get, has, own, ownKeys, type Descriptor, type Getter, type Setter, type Value } from "../interpreter/objects.js"
++import { rejectCircularInsertion } from "../interpreter/references.js"
++import { ToolReference } from "../tool-runtime.js"
++
++const source = <R>(ctx: Interpreter<R>, value: Value): Obj => {
++  if (value === null || value === undefined) throw typeError("Cannot convert undefined or null to object.")
++  if (value instanceof ToolReference || value instanceof PromiseObj) throw invalidData("Property inspection requires an awaited data object.")
++  if (value instanceof Obj) return value
++  const result = new Obj(typeof value === "string" ? ctx.builtins.String : ctx.builtins.Object)
++  if (typeof value !== "string") return result
++  for (let index = 0; index < value.length; index++) {
++    define(result, index, value[index], { writable: false, enumerable: true, configurable: false })
++  }
++  define(result, "length", value.length, { writable: false, enumerable: false, configurable: false })
++  return result
++}
++
++const key = <R>(ctx: Interpreter<R>, value: Value) =>
++  typeof value === "symbol" ? Effect.succeed(value) : toPrimitiveString(ctx, value)
++
++const descriptor = (value: Value): Descriptor => {
++  if (!(value instanceof Obj)) throw typeError("Property description must be an object.")
++  const result: Descriptor = {}
++  if (has(value, "enumerable")) result.enumerable = Boolean(get(value, "enumerable"))
++  if (has(value, "configurable")) result.configurable = Boolean(get(value, "configurable"))
++  if (has(value, "value")) result.value = get(value, "value")
++  if (has(value, "writable")) result.writable = Boolean(get(value, "writable"))
++  for (const name of ["get", "set"] as const) {
++    if (!has(value, name)) continue
++    if (get(value, name) !== undefined) throw typeError("Program-defined accessor descriptors are not supported.")
++    result[name] = undefined
++  }
++  if (("get" in result || "set" in result) && ("value" in result || "writable" in result))
++    throw typeError("Invalid property descriptor: cannot specify both accessors and a value or writable attribute.")
++  return result
++}
++
++const apply = <R>(ctx: Interpreter<R>, target: Obj, name: string | symbol, descriptor: Descriptor) => Effect.gen(function* () {
++  const coercion = target.definitionCoercion(name, descriptor)
++  const numeric = coercion === undefined ? undefined : yield* toPrimitiveNumber(ctx, descriptor.value)
++  if (coercion === "length" && ((numeric ?? 0) >>> 0) !== (yield* toPrimitiveNumber(ctx, descriptor.value)))
++    throw rangeError("Invalid array length")
++  const changes = coercion === undefined ? descriptor : { ...descriptor, value: numeric }
++  const current = own(target, name)
++  const accessor = "get" in changes || "set" in changes
++  const data = "value" in changes || "writable" in changes
++  const incompatible = () => { throw typeError(`Cannot redefine property: ${String(name)}`) }
++  if (current === undefined && !target.extensible) incompatible()
++  if (current !== undefined && !current.configurable) {
++    if (changes.configurable || (changes.enumerable !== undefined && changes.enumerable !== current.enumerable)) incompatible()
++    if ("value" in current) {
++      if (accessor) incompatible()
++      if (!current.writable && (changes.writable || ("value" in changes && !Object.is(changes.value, current.value)))) incompatible()
++    } else {
++      if (data || ("get" in changes && current.get !== changes.get) || ("set" in changes && current.set !== changes.set)) incompatible()
++    }
++  }
++  if ("value" in changes) rejectCircularInsertion(target, changes.value, "Object property")
++  const base = current !== undefined && !(accessor && "value" in current) && !(data && !("value" in current))
++    ? current
++    : accessor
++      ? { get: undefined, set: undefined, enumerable: current?.enumerable ?? false, configurable: current?.configurable ?? false }
++      : { value: undefined, writable: false, enumerable: current?.enumerable ?? false, configurable: current?.configurable ?? false }
++  target.redefine(name, { ...base, ...changes })
++})
++
++export const make = <R>(ctx: Interpreter<R>) => {
++  const accessors = new WeakMap<Getter | Setter, Value>()
++  const read = (target: Obj, name: string | symbol): Value => {
++    const slot = own(target, name)
++    if (slot === undefined) return undefined
++    const result = new Obj(ctx.builtins.Object)
++    if ("value" in slot) {
++      define(result, "value", slot.value)
++      define(result, "writable", slot.writable)
++    } else {
++      for (const kind of ["get", "set"] as const) {
++        const accessor = slot[kind]
++        if (accessor === undefined) {
++          define(result, kind, undefined)
++          continue
++        }
++        const cached = accessors.get(accessor)
++        const callable = cached ?? fn(ctx.builtins, `${kind} ${String(name)}`, kind === "get" ? 0 : 1, (receiver, args) =>
++          kind === "get" ? slot.get?.(receiver) : (slot.set?.(receiver, args[0]), undefined),
++        )
++        accessors.set(accessor, callable)
++        define(result, kind, callable)
++      }
++    }
++    define(result, "enumerable", slot.enumerable)
++    define(result, "configurable", slot.configurable)
++    return result
++  }
++  const defineProperties = (target: Value, properties: Value) => Effect.gen(function* () {
++    if (!(target instanceof Obj)) throw typeError("Object.defineProperties called on non-object.")
++    const input = source(ctx, properties)
++    const entries = ownKeys(input).filter((name) => own(input, name)?.enumerable)
++      .map((name) => [name, descriptor(get(input, name))] as const)
++    for (const [name, value] of entries) yield* apply(ctx, target, name, value)
++    return target
++  })
++  return {
++    defineProperties,
++    defineProperty: (target: Value, property: Value, attributes: Value) => Effect.gen(function* () {
++      if (!(target instanceof Obj)) throw typeError("Object.defineProperty called on non-object.")
++      const name = yield* key(ctx, property)
++      yield* apply(ctx, target, name, descriptor(attributes))
++      return target
++    }),
++    getOwnPropertyDescriptor: (target: Value, property: Value) => Effect.gen(function* () {
++      const object = source(ctx, target)
++      return read(object, yield* key(ctx, property))
++    }),
++    getOwnPropertyDescriptors: (target: Value) => {
++      const object = source(ctx, target)
++      const result = new Obj(ctx.builtins.Object)
++      for (const name of ownKeys(object)) define(result, name, read(object, name))
++      return result
++    },
++    getOwnPropertyNames: (target: Value) => new Arr(ctx.builtins.Array, ownKeys(source(ctx, target)).filter((name) => typeof name === "string")),
++  }
++}

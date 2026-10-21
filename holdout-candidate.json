@@ -1,0 +1,878 @@
+{
+  "label": "candidate",
+  "runtime": "Bun 1.4.2",
+  "fixture_sha256": "6a026f741052edfcfd02cc17916dbe13598c946aa795b6e6079a3ce3012cd5f9",
+  "wrapper_sha256": "2dde2736f61bef6d53454dfdc1a912e90cf59f180a0588286d8973a6f9889b60",
+  "source_files": {
+    "src/stdlib/object.ts": "99fb5119c75c1497362a71fde0daa0320f2d61db487bebb7d3b13a9c874938b8",
+    "src/stdlib/property.ts": "6a67d1a348afa74bc0914454b5c000c23ec479ed667c3ba51f0e17331bb23123",
+    "src/stdlib/array.ts": "aff1350d5f5aecc952aebfea1401e0d2e2e9c80ad64873f1ad62552b92c2ff72",
+    "src/interpreter/objects.ts": "e1a87da9db5753c811e4949ea1cfa3a52ae932ba79804ddf1872f89344c40d8b"
+  },
+  "total": 58,
+  "primary": 23,
+  "primary_correct": 13,
+  "other_correct": 31,
+  "results": [
+    {
+      "id": "create/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[\"My name is Matthew. Am I human? true\"]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[\"My name is Matthew. Am I human? true\"]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "create/2",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[\"Is rect an instance of Rectangle?\",true]",
+          "[\"Is rect an instance of Shape?\",true]",
+          "[\"Shape moved.\"]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "create/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "create/4",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "create/5",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "create/6",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "create/7",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/1",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/4",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[37]"
+        ],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [
+          "[37]"
+        ],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/5",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[\"a\"]",
+          "[\"d\"]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/6",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/7",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[{\"__mdnType\":\"undefined\"}]",
+          "[1]",
+          "[2]"
+        ],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [
+          "[{\"__mdnType\":\"undefined\"}]",
+          "[1]",
+          "[2]"
+        ],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/8",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[1]"
+        ],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [
+          "[1]"
+        ],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/9",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/10",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperty/11",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[\"get!\"]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/12",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[\"I always return this string, whatever you have assigned\"]",
+          "[\"this is my name string\"]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/13",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[1]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/14",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[{\"__mdnType\":\"undefined\"}]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperty/15",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[2]",
+          "[1]"
+        ],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "defineproperties/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[42]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[42]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "defineproperties/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertydescriptor/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[true]",
+          "[42]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[true]",
+          "[42]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertydescriptor/2",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[{\"get\":{\"__mdnType\":\"function\",\"name\":\"get foo\",\"length\":0},\"set\":{\"__mdnType\":\"undefined\"},\"enumerable\":true,\"configurable\":true}]",
+          "[{\"value\":42,\"writable\":true,\"enumerable\":true,\"configurable\":true}]",
+          "[{\"value\":73,\"writable\":true,\"enumerable\":true,\"configurable\":true}]",
+          "[{\"value\":8675309,\"writable\":false,\"enumerable\":false,\"configurable\":false}]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "getownpropertydescriptor/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertydescriptors/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[true]",
+          "[42]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[true]",
+          "[42]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertydescriptors/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertydescriptors/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertynames/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[[\"a\",\"b\",\"c\"]]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[[\"a\",\"b\",\"c\"]]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertynames/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertynames/3",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[[\"0\",\"1\",\"2\",\"length\"]]",
+          "[[\"0\",\"1\",\"2\"]]",
+          "[\"0 -> a\"]",
+          "[\"1 -> b\"]",
+          "[\"2 -> c\"]",
+          "[[\"foo\",\"getFoo\"]]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[[\"0\",\"1\",\"2\",\"length\"]]",
+          "[[\"0\",\"1\",\"2\"]]",
+          "[\"0 -> a\"]",
+          "[\"1 -> b\"]",
+          "[\"2 -> c\"]",
+          "[[\"foo\",\"getFoo\"]]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "getownpropertynames/4",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[[\"prop\",\"method\"]]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "getownpropertynames/5",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/1",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/4",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/5",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/6",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "freeze/7",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "ReferenceError"
+      },
+      "correct": false
+    },
+    {
+      "id": "seal/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[33]"
+        ],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [
+          "[33]"
+        ],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "seal/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "seal/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "preventextensions/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[{}]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[{\"name\":\"TypeError\",\"message\":\"Cannot redefine property: foo\"}]"
+        ],
+        "exception": null
+      },
+      "correct": false
+    },
+    {
+      "id": "preventextensions/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "preventextensions/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": true
+    },
+    {
+      "id": "preventextensions/4",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "isfrozen/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[false]",
+          "[true]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[false]",
+          "[true]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "isfrozen/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "isfrozen/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "issealed/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[false]",
+          "[true]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[false]",
+          "[true]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "issealed/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": "TypeError"
+      },
+      "correct": false
+    },
+    {
+      "id": "issealed/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "isextensible/1",
+      "primary": true,
+      "expected": {
+        "observations": [
+          "[true]",
+          "[false]"
+        ],
+        "exception": null
+      },
+      "observation": {
+        "observations": [
+          "[true]",
+          "[false]"
+        ],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "isextensible/2",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    },
+    {
+      "id": "isextensible/3",
+      "primary": false,
+      "expected": {
+        "observations": [],
+        "exception": null
+      },
+      "observation": {
+        "observations": [],
+        "exception": null
+      },
+      "correct": true
+    }
+  ]
+}

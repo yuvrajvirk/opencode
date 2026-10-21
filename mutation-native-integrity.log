@@ -1,0 +1,1 @@
+{"label":"native-integrity","runtime":"Bun 1.4.2","node_compatibility_version":"v26.3.0","fixture_sha256":"93a1f02f8c04fbfeac6aa769a36a69d83a75154dad70b7b2ae1fcbb4208e9081","total":208,"oracle_errors":0,"correct":194}

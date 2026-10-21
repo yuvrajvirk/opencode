@@ -1,0 +1,11 @@
+{
+  "source": "https://github.com/mdn/content",
+  "revision": "615796ca0d6cbba67cc6576e8adf343700f8ab49",
+  "root": "files/en-us/web/javascript/reference/global_objects/object",
+  "pages": ["create", "defineproperty", "defineproperties", "getownpropertydescriptor", "getownpropertydescriptors", "getownpropertynames", "freeze", "seal", "preventextensions", "isfrozen", "issealed", "isextensible"],
+  "selection": "Every JavaScript/js code fence from the complete index.md of every listed page, in source order. Preserve syntax fragments, intentional errors and context-dependent examples as visible outcomes. No selection by candidate results or API success. No page content was fetched or inspected for this investigation before writing this protocol.",
+  "purpose": "Independent externally authored usage examples supplement the official conformance suite. These are instructional programs, not real agent tasks and not the full JavaScript ecosystem.",
+  "oracle": "Execute each whole fence independently using a native engine, with a common wrapper that captures console.log/info/warn/error argument observations and caught runtime exception names. The same wrapper runs through actual Code Mode. Compare exact serialized observations. Native parse errors and missing-context failures remain reported; unobserved examples cannot inflate primary successes. Preserve all fixtures and the complete source/license provenance.",
+  "timing": "Download/inspect and evaluate only after final candidate source and the wrapper/scorer are frozen. No production tuning on held-out results. If the corpus is too sparse or context-dependent, disclose that rather than replace unfavorable cases.",
+  "status": "Pre-registered, not downloaded or evaluated; candidate selection remains open. Define and review the wrapper/scorer before opening page contents."
+}

@@ -1,0 +1,7 @@
+packages/codemode/src/interpreter/objects.ts 312ms
+packages/codemode/src/stdlib/object.ts 45ms (unchanged)
+packages/codemode/src/stdlib/array.ts 135ms (unchanged)
+packages/codemode/src/stdlib/property.ts 29ms
+packages/codemode/test/object-properties.test.ts 15ms
+packages/codemode/test/parity.test.ts 147ms (unchanged)
+packages/codemode/interpreter-support.md 163ms (unchanged)

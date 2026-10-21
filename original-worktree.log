@@ -1,0 +1,2 @@
+Preparing worktree (detached HEAD 318a8c1aba)
+HEAD is now at 318a8c1aba feat(codemode): add Object.freeze/seal/create/getPrototypeOf and structuredClone (#50834)

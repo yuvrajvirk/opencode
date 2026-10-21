@@ -1,0 +1,8 @@
+ENOENT: no such file or directory, open '/home/yvirk2/opencode-research/object-properties/checkouts/latest/packages/codemode/test/test262/built-ins/Object/S15.2.1.1_A1_T1.js'
+    path: "/home/yvirk2/opencode-research/object-properties/checkouts/latest/packages/codemode/test/test262/built-ins/Object/S15.2.1.1_A1_T1.js",
+ syscall: "open",
+   errno: -2,
+    code: "ENOENT"
+
+
+Bun v1.4.2 (Linux x64)

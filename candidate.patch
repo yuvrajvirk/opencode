@@ -1,0 +1,860 @@
+diff --git a/packages/codemode/interpreter-support.md b/packages/codemode/interpreter-support.md
+index 0179ac1e2a..6e6e53b778 100644
+--- a/packages/codemode/interpreter-support.md
++++ b/packages/codemode/interpreter-support.md
+@@ -336,21 +336,28 @@ reject }` object.
+ - [x] `Object.getPrototypeOf`: the prototype of an object, or the built-in prototype for a string, number, or boolean
+       (`Object.getPrototypeOf("a") === String.prototype`); `null`, `undefined`, and the two confined symbols throw a
+       `TypeError`.
+-- [x] `Object.create(proto)` with an object or `null` prototype; any other prototype is a `TypeError`
++- [x] `Object.create(proto, properties)` with an object or `null` prototype; any other prototype is a `TypeError`
+       (`Object prototype may only be an Object or null`). Inherited reads, `in`, `hasOwnProperty`, and own-only
+-      `Object.keys` follow the chain as in JS, but `for...in` still enumerates own keys only. A second `properties`
+-      argument other than `undefined` throws a `TypeError`: property descriptors are not supported (there is no
+-      `Object.defineProperty` either).
++      `Object.keys` follow the chain as in JS, but `for...in` still enumerates own keys only. The optional second
++      argument defines properties using the same rules as `Object.defineProperties`.
++- [x] `Object.defineProperty` and `Object.defineProperties` for data properties, including inherited descriptor
++      fields, individual array-index attributes, array lengths, and confined byte values. Existing non-configurable
++      and non-writable properties cannot be loosened; circular values and oversized arrays remain rejected.
++- [x] `Object.getOwnPropertyDescriptor`, `Object.getOwnPropertyDescriptors`, and `Object.getOwnPropertyNames`.
++      String inspection exposes UTF-16 index descriptors. Native accessor inspection returns confined callable
++      wrappers, not host functions.
++- [ ] Program-defined accessor descriptors. Ordinary objects accept empty accessors with `get` and `set` both
++      absent or `undefined`; non-undefined getter/setter functions and array accessor descriptors remain unsupported.
+ - [x] `Object.freeze`, `Object.seal`, and `Object.preventExtensions`, with `isFrozen`, `isSealed`, and `isExtensible`.
+       Each returns its argument and passes primitives through (`Object.freeze(1) === 1`, `Object.isFrozen(1)`).
+       Programs run as strict code, so violations throw `TypeError`: `Cannot assign to read only property 'a'`,
+       `Cannot add property b, object is not extensible`, and `Cannot delete property 'a'`. Arrays enforce the same
+       rules for index writes, `length`, and the mutating methods (`Object.freeze([1]).push(2)` throws; a sealed array's
+-      `pop()` throws; a non-extensible array's `pop()`, `sort()`, and `splice(0, 1, x)` work). The mutating methods are
+-      checked once up front, so a `fill` or `sort` that would land on a hole of a non-extensible array succeeds here
+-      where JS throws. Maps, Sets, and Dates freeze their properties only, not their contents, as in JS.
+-      `Object.freeze(new Uint8Array(1))` and `seal` throw `TypeError` like JS (`preventExtensions` and empty typed
+-      arrays are fine). Functions are objects and freeze like any other value.
++      `pop()` throws; a non-extensible array's `pop()`, `sort()`, and `splice(0, 1, x)` work). Native array storage
++      enforces indexed attributes and deletion during mutations, including partially completed operations;
++      TypeError messages from those operations depend on the host engine. Maps, Sets, and Dates freeze their
++      properties only, not their contents. The existing Bun-compatible restriction rejects `freeze` and `seal` on
++      nonempty typed arrays; `preventExtensions` and empty typed arrays are supported. Functions freeze their properties.
+ - [x] Circular references are rejected when created (`o.self = o`, `array.push(array)`), not at serialization as in JS.
+ - [x] `Object.is` for supported data values.
+ - [x] `Object.groupBy` over finite collections and custom synchronous iterators/generators, with string-key coercion
+diff --git a/packages/codemode/src/interpreter/objects.ts b/packages/codemode/src/interpreter/objects.ts
+index b2b8886ab1..dd109c2f91 100644
+--- a/packages/codemode/src/interpreter/objects.ts
++++ b/packages/codemode/src/interpreter/objects.ts
+@@ -23,6 +23,15 @@ export type Attributes = {
+ export type Getter = (receiver: Value) => Value
+ export type Setter = (receiver: Value, value: Value) => void
+ 
++export type Descriptor = {
++  value?: Value
++  writable?: boolean
++  enumerable?: boolean
++  configurable?: boolean
++  get?: undefined
++  set?: undefined
++}
++
+ /** One own property: a data slot or a native accessor pair. */
+ export type Slot =
+   | { value: Value; writable: boolean; enumerable: boolean; configurable: boolean }
+@@ -47,6 +56,23 @@ export class Obj {
+   extensible = true
+   constructor(public proto: Obj | null) {}
+ 
++  redefine(key: string | symbol, slot: Slot): void {
++    this.props.set(key, slot)
++  }
++
++  definitionCoercion(_key: string | symbol, _descriptor: Descriptor): "number" | "length" | undefined {
++    return undefined
++  }
++
++  restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    this.extensible = false
++    if (level === "preventExtensions") return
++    for (const slot of this.props.values()) {
++      slot.configurable = false
++      if (level === "freeze" && "value" in slot) slot.writable = false
++    }
++  }
++
+   /** The class name `Object.prototype.toString` reports: `[object Map]`. */
+   readonly tag: string = "Object"
+ 
+@@ -95,14 +121,38 @@ export class Obj {
+ 
+ export class Arr extends Obj {
+   override readonly tag = "Array"
+-  /** The attributes every live element shares; `seal` and `freeze` narrow them since elements have no slots. */
+-  elements: Attributes = data
++  customAttributes = false
+   constructor(
+     proto: Obj,
+     readonly items: Array<Value> = [],
+   ) {
+     super(proto)
+   }
++  override redefine(key: string | symbol, slot: Slot): void {
++    const position = typeof key === "string" ? parseArrayIndex(key) : undefined
++    if (position === undefined && key !== "length") return super.redefine(key, slot)
++    if (!("value" in slot)) throw typeError("Array accessor descriptors are not supported.")
++    if (position !== undefined) checkArrayLength(position + 1)
++    if (key === "length") checkArrayLength(Number(slot.value))
++    this.customAttributes = true
++    Object.defineProperty(this.items, key, slot)
++  }
++  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
++    return key === "length" && "value" in descriptor ? ("length" as const) : undefined
++  }
++  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    super.restrict(level)
++    if (level !== "preventExtensions") this.customAttributes = true
++    if (level === "freeze") {
++      Object.freeze(this.items)
++      return
++    }
++    if (level === "seal") {
++      Object.seal(this.items)
++      return
++    }
++    Object.preventExtensions(this.items)
++  }
+   override get describe() {
+     return "an array"
+   }
+@@ -440,6 +490,34 @@ export class Bytes extends Wrapper {
+   ) {
+     super(proto)
+   }
++  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
++    if (typeof key !== "string" || (key !== "-0" && String(Number(key)) !== key)) return undefined
++    const index = Number(key)
++    if (
++      !Number.isInteger(index) ||
++      index < 0 ||
++      Object.is(index, -0) ||
++      index >= this.bytes.length ||
++      "get" in descriptor ||
++      "set" in descriptor ||
++      descriptor.configurable === false ||
++      descriptor.enumerable === false ||
++      descriptor.writable === false
++    )
++      throw typeError(`Cannot redefine property: ${key}`)
++    return "value" in descriptor ? ("number" as const) : undefined
++  }
++  override redefine(key: string | symbol, slot: Slot): void {
++    if (typeof key !== "string" || String(Number(key)) !== key) return super.redefine(key, slot)
++    if (!("value" in slot)) throw typeError("Typed array accessor descriptors are not supported.")
++    Object.defineProperty(this.bytes, key, slot)
++  }
++  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
++    this.extensible = false
++    if (level !== "preventExtensions" && this.bytes.length > 0)
++      throw typeError(`Cannot ${level} array buffer views with elements.`)
++    super.restrict(level)
++  }
+   override toString() {
+     return this.bytes.join(",")
+   }
+@@ -505,10 +583,23 @@ export const own = (target: Obj, key: PropertyKey): Slot | undefined => {
+     if (at !== undefined) {
+       const items = elements(target)
+       if (!(at in items)) return undefined
+-      return { value: items[at], ...(target instanceof Arr ? target.elements : data) }
++      if (!(target instanceof Arr) || !target.customAttributes) return { value: items[at], ...data }
++      const descriptor = Object.getOwnPropertyDescriptor(items, at)
++      return {
++        value: items[at],
++        writable: descriptor?.writable === true,
++        enumerable: descriptor?.enumerable === true,
++        configurable: descriptor?.configurable === true,
++      }
+     }
+     if (target instanceof Arr && name === "length") {
+-      return { value: target.items.length, writable: target.elements.writable, enumerable: false, configurable: false }
++      return {
++        value: target.items.length,
++        writable:
++          !target.customAttributes || Object.getOwnPropertyDescriptor(target.items, "length")?.writable === true,
++        enumerable: false,
++        configurable: false,
++      }
+     }
+   }
+   return target.props.get(name)
+@@ -561,8 +652,6 @@ const writeElement = (target: Indexed, name: string | symbol, value: Value): boo
+   if (!(target instanceof Arr) || name !== "length") return undefined
+   const length = typeof value === "number" ? value : Number(value)
+   if (!Number.isInteger(length) || length < 0) throw rangeError("Invalid array length")
+-  // Shrinking deletes elements, which a sealed array forbids.
+-  if (length < target.items.length && !target.elements.configurable) return false
+   checkArrayLength(length)
+   target.items.length = length
+   return true
+@@ -620,7 +709,6 @@ export const remove = (target: Obj, key: PropertyKey): boolean => {
+     const at = index(target, name)
+     if (at !== undefined) {
+       if (target instanceof Bytes) return !(at in target.bytes)
+-      if (at in target.items && !target.elements.configurable) return false
+       return delete target.items[at]
+     }
+     if (target instanceof Arr && name === "length") return false
+@@ -637,7 +725,9 @@ export const ownKeys = (target: Obj): Array<string | symbol> => {
+   const strings = [...target.props.keys()].filter((key): key is string => typeof key === "string")
+   const symbols = [...target.props.keys()].filter((key): key is symbol => typeof key === "symbol")
+   return [
+-    ...(isIndexed(target) ? Object.keys(elements(target)) : []),
++    ...(isIndexed(target)
++      ? Object.getOwnPropertyNames(elements(target)).filter((key) => parseArrayIndex(key) !== undefined)
++      : []),
+     ...(target instanceof Arr ? ["length"] : []),
+     ...strings.filter((key) => parseArrayIndex(key) !== undefined).sort((a, b) => Number(a) - Number(b)),
+     ...strings.filter((key) => parseArrayIndex(key) === undefined),
+diff --git a/packages/codemode/src/stdlib/array.ts b/packages/codemode/src/stdlib/array.ts
+index 64a8d253ac..1207a4b367 100644
+--- a/packages/codemode/src/stdlib/array.ts
++++ b/packages/codemode/src/stdlib/array.ts
+@@ -127,18 +127,9 @@ export const arrayGlobal = <R>(ctx: Interpreter<R>) => {
+   ])
+ 
+   const self = (thisValue: Value, name: string) => receiver(Arr, thisValue, `Array.prototype.${name}`)
+-  // A mutating method fails where its first element write, delete, or `length` write would on a frozen, sealed, or
+-  // non-extensible array. `growth` is given by the methods that always write `length`, even when it is 0; holes a
+-  // method would fill on a non-extensible array are not checked.
+   const mutable = (target: Arr, growth?: number): Arr => {
+     const length = target.items.length
+     if ((growth ?? 0) > 0) rejectAddition(target, length)
+-    if ((growth ?? 0) < 0 && length > 0 && !target.elements.configurable) {
+-      throw typeError(`Cannot delete property '${length - 1}'.`)
+-    }
+-    if (!target.elements.writable && (length > 0 || growth !== undefined)) {
+-      throw typeError(`Cannot assign to read only property '${length > 0 ? 0 : "length"}'.`)
+-    }
+     return target
+   }
+   const optNumber = (value: Value): number | undefined => (value === undefined ? undefined : coerceToInteger(value))
+diff --git a/packages/codemode/src/stdlib/object.ts b/packages/codemode/src/stdlib/object.ts
+index 5297eacb40..5948a0c486 100644
+--- a/packages/codemode/src/stdlib/object.ts
++++ b/packages/codemode/src/stdlib/object.ts
+@@ -13,7 +13,6 @@ import {
+   own,
+   ownKeys,
+   Arr,
+-  Bytes,
+   Obj,
+   PromiseObj,
+   set,
+@@ -26,6 +25,7 @@ import { invoke, preserveConsumerError } from "../interpreter/callback.js"
+ import type { Interpreter } from "../interpreter/interpreter.js"
+ import { ToolReference } from "../tool-runtime.js"
+ import { groupBy } from "./collections.js"
++import { ObjectProperty } from "./property.js"
+ 
+ // ToObject for enumeration.
+ export const enumerableSource = <R>(ctx: Interpreter<R>, label: string, value: Value, node?: AstNode): Obj => {
+@@ -102,20 +102,9 @@ const classTag = (value: Value): string => {
+ const propertyKey = (value: Value): PropertyKey =>
+   value === AsyncIteratorSymbol || value === IteratorSymbol ? value : coerceToString(value)
+ 
+-// SetIntegrityLevel: primitives pass through. A typed array's bytes cannot carry attributes, so JS throws after
+-// already making it non-extensible.
+ const restrict = (level: "freeze" | "seal" | "preventExtensions", value: Value): Value => {
+   if (!(value instanceof Obj)) return value
+-  value.extensible = false
+-  if (level === "preventExtensions") return value
+-  if (value instanceof Bytes && value.bytes.length > 0) {
+-    throw typeError(`Cannot ${level} array buffer views with elements.`)
+-  }
+-  for (const slot of value.props.values()) {
+-    slot.configurable = false
+-    if (level === "freeze" && "value" in slot) slot.writable = false
+-  }
+-  if (value instanceof Arr) value.elements = { writable: level === "seal", enumerable: true, configurable: false }
++  value.restrict(level)
+   return value
+ }
+ 
+@@ -134,6 +123,7 @@ const integrity = (value: Value, frozen: boolean): boolean => {
+ // program; `values`, `entries`, `assign`, and `fromEntries` hand back the program's own values.
+ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+   const builtins = ctx.builtins
++  const properties = ObjectProperty.make(ctx)
+   const construct = (args: Array<Value>): Value => {
+     const first = args[0]
+     if (first === null || first === undefined) return new Obj(builtins.Object)
+@@ -178,6 +168,11 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+     ],
+     ["hasOwn", 2, (_, args) => hasOwn(enumerableSource(ctx, "Object.hasOwn(...)", args[0]), propertyKey(args[1]))],
+     ["is", 2, (_, args) => Object.is(args[0], args[1])],
++    ["defineProperty", 3, (_, args) => properties.defineProperty(args[0], args[1], args[2])],
++    ["defineProperties", 2, (_, args) => properties.defineProperties(args[0], args[1])],
++    ["getOwnPropertyDescriptor", 2, (_, args) => properties.getOwnPropertyDescriptor(args[0], args[1])],
++    ["getOwnPropertyDescriptors", 1, (_, args) => properties.getOwnPropertyDescriptors(args[0])],
++    ["getOwnPropertyNames", 1, (_, args) => properties.getOwnPropertyNames(args[0])],
+     ["assign", 2, (_, args) => objectAssign(ctx, args)],
+     ["fromEntries", 1, (_, args) => objectFromEntries(ctx, args[0])],
+     ["freeze", 1, (_, args) => restrict("freeze", args[0])],
+@@ -205,12 +200,8 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
+         if (args[0] !== null && !(args[0] instanceof Obj)) {
+           throw typeError("Object prototype may only be an Object or null.")
+         }
+-        if (args[1] !== undefined) {
+-          throw typeError(
+-            "Object.create property descriptors are not supported; assign the fields after creating the object.",
+-          )
+-        }
+-        return new Obj(args[0])
++        const result = new Obj(args[0])
++        return args[1] === undefined ? result : properties.defineProperties(result, args[1])
+       },
+     ],
+   ])
+diff --git a/packages/codemode/test/parity.test.ts b/packages/codemode/test/parity.test.ts
+index c70a855bd6..5c36f89595 100644
+--- a/packages/codemode/test/parity.test.ts
++++ b/packages/codemode/test/parity.test.ts
+@@ -1305,12 +1305,12 @@ describe("Object.freeze, seal, and preventExtensions", () => {
+       "TypeError: Cannot assign to read only property '0'.",
+       "TypeError: Cannot add property 5, object is not extensible.",
+       "TypeError: Cannot assign to read only property 'length'.",
+-      "TypeError: Cannot delete property '1'.",
+-      "TypeError: Cannot assign to read only property '0'.",
+-      "TypeError: Cannot assign to read only property '0'.",
+-      "TypeError: Cannot assign to read only property '0'.",
+-      "TypeError: Cannot assign to read only property '0'.",
+-      "TypeError: Cannot delete property '1'.",
++      expect.stringMatching(/^TypeError:/),
++      expect.stringMatching(/^TypeError:/),
++      expect.stringMatching(/^TypeError:/),
++      expect.stringMatching(/^TypeError:/),
++      expect.stringMatching(/^TypeError:/),
++      expect.stringMatching(/^TypeError:/),
+       "TypeError: Cannot add property 2, object is not extensible.",
+       [1, 2],
+       [2, 4],
+@@ -1395,12 +1395,10 @@ describe("Object.getPrototypeOf and Object.create", () => {
+     ).toEqual([true, ["name"], false, 1, "hi x", true, null, ["name"]])
+   })
+ 
+-  test("Object.create rejects non-object prototypes and property descriptors", async () => {
++  test("Object.create rejects non-object prototypes and accepts property descriptors", async () => {
+     expect((await error(`Object.create(1)`)).message).toContain("Object prototype may only be an Object or null")
+     expect((await error(`Object.create()`)).message).toContain("Object prototype may only be an Object or null")
+-    expect((await error(`Object.create(null, { a: { value: 1 } })`)).message).toContain(
+-      "Object.create property descriptors are not supported",
+-    )
++    expect(await value(`return Object.create(null, { field: { value: 1 } }).field`)).toBe(1)
+     expect(await value(`return Object.keys(Object.create({}, undefined))`)).toEqual([])
+   })
+ })
+diff --git a/packages/codemode/test/test262/skipped.txt b/packages/codemode/test/test262/skipped.txt
+index a4b92d47ea..02c696d3db 100644
+--- a/packages/codemode/test/test262/skipped.txt
++++ b/packages/codemode/test/test262/skipped.txt
+@@ -990,75 +990,20 @@ built-ins/Object/create/15.2.3.5-2-1.js  # TypeError: base cannot be constructed
+ built-ins/Object/create/15.2.3.5-3-1.js  # TypeError: base cannot be constructed: user-defined constructors and classes are not supported. Call
+ built-ins/Object/create/15.2.3.5-4-1.js  # TypeError: base cannot be constructed: user-defined constructors and classes are not supported. Call
+ built-ins/Object/create/15.2.3.5-4-102.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+-built-ins/Object/create/15.2.3.5-4-112.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-113.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-117.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-118.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-119.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-120.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-121.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-122.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-124.js  # TypeError: Cannot read properties of undefined (reading '…').
+-built-ins/Object/create/15.2.3.5-4-127.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-133.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-134.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-136.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-137.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-138.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-142.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-143.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-144.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-145.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-146.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-147.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-149.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-150.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-152.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-153.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-154.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-155.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-156.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+-built-ins/Object/create/15.2.3.5-4-16.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-165.js  # TypeError: Func cannot be constructed: user-defined constructors and classes are not supported. Call
+-built-ins/Object/create/15.2.3.5-4-166.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-170.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-171.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-172.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-173.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-174.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-175.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-177.js  # TypeError: Cannot read properties of undefined (reading '…').
+-built-ins/Object/create/15.2.3.5-4-178.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-18.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+-built-ins/Object/create/15.2.3.5-4-180.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-181.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-182.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-191.js  # TypeError: Func cannot be constructed: user-defined constructors and classes are not supported. Call
+-built-ins/Object/create/15.2.3.5-4-192.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-196.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-197.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-198.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-199.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-200.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-201.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-203.js  # TypeError: Cannot read properties of undefined (reading '…').
+-built-ins/Object/create/15.2.3.5-4-206.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-212.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-213.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-215.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-216.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-217.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-22.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+-built-ins/Object/create/15.2.3.5-4-221.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-222.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-223.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-224.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-225.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-226.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-228.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-229.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-231.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-232.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-233.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-234.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-244.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+@@ -1070,14 +1015,12 @@ built-ins/Object/create/15.2.3.5-4-252.js  # TypeError: Object.create property d
+ built-ins/Object/create/15.2.3.5-4-253.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-254.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-256.js  # TypeError: Cannot read properties of undefined (reading '…').
+-built-ins/Object/create/15.2.3.5-4-257.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-263.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-266.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-268.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-269.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-270.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+ built-ins/Object/create/15.2.3.5-4-279.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-28.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-280.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-284.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-285.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+@@ -1085,58 +1028,15 @@ built-ins/Object/create/15.2.3.5-4-286.js  # TypeError: Object.create property d
+ built-ins/Object/create/15.2.3.5-4-287.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-288.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-289.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-29.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-291.js  # TypeError: Cannot read properties of undefined (reading '…').
+ built-ins/Object/create/15.2.3.5-4-298.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-305.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-306.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-308.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
++built-ins/Object/create/15.2.3.5-4-300.js  # Requires a host global object as top-level this; confined top-level this is undefined
+ built-ins/Object/create/15.2.3.5-4-310.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-312.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-314.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-316.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-33.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-34.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-35.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-36.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-38.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-39.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-46.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-47.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-48.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-49.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
+-built-ins/Object/create/15.2.3.5-4-59.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-60.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-64.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-65.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-66.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-67.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-68.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-69.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-71.js  # TypeError: Cannot read properties of undefined (reading '…').
+-built-ins/Object/create/15.2.3.5-4-72.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-73.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-74.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-75.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-76.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-77.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-78.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-79.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-80.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-81.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-82.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-83.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-84.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-85.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-89.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-90.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-91.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-92.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-93.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-94.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/create/15.2.3.5-4-96.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-97.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+-built-ins/Object/create/15.2.3.5-4-99.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+ built-ins/Object/entries/inherited-properties-omitted.js  # TypeError: Cannot read properties of undefined (reading '…').
+ built-ins/Object/fromEntries/evaluation-order.js  # TypeError: Only init object properties are supported.
+ built-ins/Object/fromEntries/iterator-closed-for-throwing-entry-key-accessor.js  # Expected a DummyError but got a TypeError
+diff --git a/packages/codemode/src/stdlib/property.ts b/packages/codemode/src/stdlib/property.ts
+new file mode 100644
+index 0000000000..26f051bae2
+--- /dev/null
++++ b/packages/codemode/src/stdlib/property.ts
+@@ -0,0 +1,187 @@
++export * as ObjectProperty from "./property.js"
++
++import { Effect } from "effect"
++import { typeError, invalidData, rangeError } from "../interpreter/model.js"
++import { fn } from "../interpreter/native.js"
++import { toPrimitiveString, toPrimitiveNumber } from "../interpreter/callback.js"
++import { checkArrayLength } from "../interpreter/limits.js"
++import type { Interpreter } from "../interpreter/interpreter.js"
++import {
++  Arr,
++  Obj,
++  PromiseObj,
++  define,
++  get,
++  has,
++  own,
++  ownKeys,
++  parseArrayIndex,
++  type Descriptor,
++  type Getter,
++  type Setter,
++  type Slot,
++  type Value,
++} from "../interpreter/objects.js"
++import { rejectCircularInsertion } from "../interpreter/references.js"
++import { ToolReference } from "../tool-runtime.js"
++
++const source = <R>(ctx: Interpreter<R>, value: Value): Obj | string => {
++  if (value === null || value === undefined) throw typeError("Cannot convert undefined or null to object.")
++  if (value instanceof ToolReference || value instanceof PromiseObj)
++    throw invalidData("Property inspection requires an awaited data object.")
++  if (value instanceof Obj) return value
++  return typeof value === "string" ? value : new Obj(ctx.builtins.Object)
++}
++
++const slot = (target: Obj | string, name: string | symbol): Slot | undefined => {
++  if (typeof target !== "string") return own(target, name)
++  if (name === "length") return { value: target.length, writable: false, enumerable: false, configurable: false }
++  const index = typeof name === "string" ? parseArrayIndex(name) : undefined
++  return index !== undefined && index < target.length
++    ? { value: target[index], writable: false, enumerable: true, configurable: false }
++    : undefined
++}
++
++const names = (target: Obj | string): Array<string | symbol> => {
++  if (typeof target !== "string") return ownKeys(target)
++  checkArrayLength(target.length + 1)
++  return [...Array.from({ length: target.length }, (_, index) => String(index)), "length"]
++}
++
++const key = <R>(ctx: Interpreter<R>, value: Value) =>
++  typeof value === "symbol" ? Effect.succeed(value) : toPrimitiveString(ctx, value)
++
++const descriptor = (value: Value): Descriptor => {
++  if (!(value instanceof Obj)) throw typeError("Property description must be an object.")
++  const result: Descriptor = {}
++  if (has(value, "enumerable")) result.enumerable = Boolean(get(value, "enumerable"))
++  if (has(value, "configurable")) result.configurable = Boolean(get(value, "configurable"))
++  if (has(value, "value")) result.value = get(value, "value")
++  if (has(value, "writable")) result.writable = Boolean(get(value, "writable"))
++  for (const name of ["get", "set"] as const) {
++    if (!has(value, name)) continue
++    if (get(value, name) !== undefined) throw typeError("Program-defined accessor descriptors are not supported.")
++    result[name] = undefined
++  }
++  if (("get" in result || "set" in result) && ("value" in result || "writable" in result))
++    throw typeError("Invalid property descriptor: cannot specify both accessors and a value or writable attribute.")
++  return result
++}
++
++const apply = <R>(ctx: Interpreter<R>, target: Obj, name: string | symbol, descriptor: Descriptor) =>
++  Effect.gen(function* () {
++    const coercion = target.definitionCoercion(name, descriptor)
++    const numeric = coercion === undefined ? undefined : yield* toPrimitiveNumber(ctx, descriptor.value)
++    if (coercion === "length" && (numeric ?? 0) >>> 0 !== (yield* toPrimitiveNumber(ctx, descriptor.value)))
++      throw rangeError("Invalid array length")
++    const changes = coercion === undefined ? descriptor : { ...descriptor, value: numeric }
++    const current = own(target, name)
++    const accessor = "get" in changes || "set" in changes
++    const data = "value" in changes || "writable" in changes
++    const incompatible = () => {
++      throw typeError(`Cannot redefine property: ${String(name)}`)
++    }
++    if (current === undefined && !target.extensible) incompatible()
++    if (current !== undefined && !current.configurable) {
++      if (changes.configurable || (changes.enumerable !== undefined && changes.enumerable !== current.enumerable))
++        incompatible()
++      if ("value" in current) {
++        if (accessor) incompatible()
++        if (!current.writable && (changes.writable || ("value" in changes && !Object.is(changes.value, current.value))))
++          incompatible()
++      } else {
++        if (
++          data ||
++          ("get" in changes && current.get !== changes.get) ||
++          ("set" in changes && current.set !== changes.set)
++        )
++          incompatible()
++      }
++    }
++    if ("value" in changes) rejectCircularInsertion(target, changes.value, "Object property")
++    const base =
++      current !== undefined && !(accessor && "value" in current) && !(data && !("value" in current))
++        ? current
++        : accessor
++          ? {
++              get: undefined,
++              set: undefined,
++              enumerable: current?.enumerable ?? false,
++              configurable: current?.configurable ?? false,
++            }
++          : {
++              value: undefined,
++              writable: false,
++              enumerable: current?.enumerable ?? false,
++              configurable: current?.configurable ?? false,
++            }
++    target.redefine(name, { ...base, ...changes })
++  })
++
++export const make = <R>(ctx: Interpreter<R>) => {
++  const accessors = new WeakMap<Getter | Setter, Value>()
++  const read = (target: Obj | string, name: string | symbol): Value => {
++    const property = slot(target, name)
++    if (property === undefined) return undefined
++    const result = new Obj(ctx.builtins.Object)
++    if ("value" in property) {
++      define(result, "value", property.value)
++      define(result, "writable", property.writable)
++    } else {
++      for (const kind of ["get", "set"] as const) {
++        const accessor = property[kind]
++        if (accessor === undefined) {
++          define(result, kind, undefined)
++          continue
++        }
++        const cached = accessors.get(accessor)
++        const callable =
++          cached ??
++          fn(ctx.builtins, `${kind} ${String(name)}`, kind === "get" ? 0 : 1, (receiver, args) =>
++            kind === "get" ? property.get?.(receiver) : (property.set?.(receiver, args[0]), undefined),
++          )
++        accessors.set(accessor, callable)
++        define(result, kind, callable)
++      }
++    }
++    define(result, "enumerable", property.enumerable)
++    define(result, "configurable", property.configurable)
++    return result
++  }
++  const defineProperties = (target: Value, properties: Value) =>
++    Effect.gen(function* () {
++      if (!(target instanceof Obj)) throw typeError("Object.defineProperties called on non-object.")
++      const input = source(ctx, properties)
++      const entries = names(input)
++        .filter((name) => slot(input, name)?.enumerable)
++        .map((name) => [name, descriptor(typeof input === "string" ? input[Number(name)] : get(input, name))] as const)
++      for (const [name, value] of entries) yield* apply(ctx, target, name, value)
++      return target
++    })
++  return {
++    defineProperties,
++    defineProperty: (target: Value, property: Value, attributes: Value) =>
++      Effect.gen(function* () {
++        if (!(target instanceof Obj)) throw typeError("Object.defineProperty called on non-object.")
++        const name = yield* key(ctx, property)
++        yield* apply(ctx, target, name, descriptor(attributes))
++        return target
++      }),
++    getOwnPropertyDescriptor: (target: Value, property: Value) =>
++      Effect.gen(function* () {
++        const object = source(ctx, target)
++        return read(object, yield* key(ctx, property))
++      }),
++    getOwnPropertyDescriptors: (target: Value) => {
++      const object = source(ctx, target)
++      const result = new Obj(ctx.builtins.Object)
++      for (const name of names(object)) define(result, name, read(object, name))
++      return result
++    },
++    getOwnPropertyNames: (target: Value) =>
++      new Arr(
++        ctx.builtins.Array,
++        names(source(ctx, target)).filter((name) => typeof name === "string"),
++      ),
++  }
++}
+diff --git a/packages/codemode/test/object-properties.test.ts b/packages/codemode/test/object-properties.test.ts
+new file mode 100644
+index 0000000000..5e8c5d1d1c
+--- /dev/null
++++ b/packages/codemode/test/object-properties.test.ts
+@@ -0,0 +1,152 @@
++import { expect, test } from "bun:test"
++import { Effect } from "effect"
++import { CodeMode } from "../src/index.js"
++
++const value = async (code: string) => {
++  const result = await Effect.runPromise(CodeMode.execute({ code, tools: {} }))
++  if (!result.ok) throw new Error(result.error.message)
++  return result.value
++}
++
++test("constructs hidden, immutable data properties without changing prototypes", async () => {
++  expect(
++    await value(`
++    const prototype = { inherited: true }
++    const target = Object.create(prototype, { field: { value: 7 } })
++    let immutable = false
++    try { target.field = 8 } catch (error) { immutable = error instanceof TypeError }
++    return [target.field, Object.keys(target), Object.getOwnPropertyNames(target), immutable, Object.getPrototypeOf(target) === prototype]
++  `),
++  ).toEqual([7, [], ["field"], true, true])
++})
++
++test("validates all property descriptions before making changes", async () => {
++  expect(
++    await value(`
++    const target = {}
++    try { Object.defineProperties(target, { first: { value: 1 }, second: null }) } catch {}
++    return Object.getOwnPropertyNames(target)
++  `),
++  ).toEqual([])
++})
++
++test("empty accessor descriptions do not require exposing a global object", async () => {
++  expect(
++    await value(`
++    const target = Object.create({}, { field: { set: this } })
++    const descriptor = Object.getOwnPropertyDescriptor(target, "field")
++    return [typeof this, typeof target.field, "set" in descriptor, descriptor.enumerable, descriptor.configurable]
++  `),
++  ).toEqual(["undefined", "undefined", true, false, false])
++})
++
++test("tracks per-index attributes through array mutations", async () => {
++  expect(
++    await value(`
++    const target = [1, 2, 3]
++    Object.defineProperty(target, "1", { value: 5, enumerable: false, writable: false })
++    let rejected = false
++    try { target.fill(9) } catch (error) { rejected = error instanceof TypeError }
++    return [target, Object.keys(target), Object.getOwnPropertyNames(target), rejected, Object.getOwnPropertyDescriptor(target, "1").writable]
++  `),
++  ).toEqual([[9, 5, 3], ["0", "2"], ["0", "1", "2", "length"], true, false])
++})
++
++test("array length conversion invokes program coercion twice", async () => {
++  expect(
++    await value(`
++    const target = [1, 2, 3]
++    let conversions = 0
++    Object.defineProperty(target, "length", { value: { valueOf() { conversions++; return 2 } } })
++    return [target, conversions]
++  `),
++  ).toEqual([[1, 2], 2])
++})
++
++test("byte descriptors update confined bytes through numeric conversion", async () => {
++  expect(
++    await value(`
++    const target = new Uint8Array([0])
++    let conversions = 0
++    Object.defineProperty(target, "0", { value: { valueOf() { conversions++; return 258 } } })
++    try { Object.defineProperty(target, "0", { configurable: false, value: { valueOf() { conversions++; return 4 } } }) } catch {}
++    return [target[0], conversions]
++  `),
++  ).toEqual([2, 1])
++})
++
++test("string inspection uses UTF-16 units and immutable index descriptors", async () => {
++  expect(
++    await value(`
++    const descriptors = Object.getOwnPropertyDescriptors("🐍")
++    return [Object.getOwnPropertyNames("🐍"), descriptors.length.value, descriptors[0].value.charCodeAt(0), descriptors[0].writable, descriptors[0].configurable]
++  `),
++  ).toEqual([["0", "1", "length"], 2, 0xd83d, false, false])
++})
++
++test("native accessor reflection exposes confined callables with stable identity", async () => {
++  expect(
++    await value(`
++    const getter = Object.getOwnPropertyDescriptor(Map.prototype, "size").get
++    const repeated = Object.getOwnPropertyDescriptor(Map.prototype, "size").get
++    return [typeof getter, getter === repeated, getter.call(new Map([["key", 1]]))]
++  `),
++  ).toEqual(["function", true, 1])
++})
++
++test("property inspection cannot reveal tool paths or pending promise internals", async () => {
++  for (const target of ["tools", "tools.private", "Promise.resolve(1)"]) {
++    for (const operation of [
++      `Object.getOwnPropertyNames(${target})`,
++      `Object.getOwnPropertyDescriptors(${target})`,
++      `Object.getOwnPropertyDescriptor(${target}, "path")`,
++    ]) {
++      const result = await Effect.runPromise(CodeMode.execute({ code: `return ${operation}`, tools: {} }))
++      expect(result.ok).toBe(false)
++      if (!result.ok) expect(result.error.message).toContain("awaited data object")
++    }
++  }
++})
++
++test("reflected native accessors retain receiver checks and confined constructors", async () => {
++  expect(
++    await value(`
++    const getter = Object.getOwnPropertyDescriptor(Map.prototype, "size").get
++    let rejected = 0
++    try { getter.call({}) } catch (error) { rejected += error instanceof TypeError ? 1 : 0 }
++    try { getter.constructor("return process")() } catch { rejected++ }
++    return [rejected, Object.getOwnPropertyNames(getter).sort(), typeof getter.call]
++  `),
++  ).toEqual([2, ["length", "name"], "function"])
++})
++
++test("single-property inspection does not enumerate a long primitive string", async () => {
++  expect(
++    await value(`
++    const text = "x".repeat(10000001)
++    const descriptor = Object.getOwnPropertyDescriptor(text, "length")
++    let bounded = false
++    try { Object.getOwnPropertyNames(text) } catch (error) { bounded = error instanceof RangeError }
++    return [descriptor.value, Object.getOwnPropertyDescriptor(text, "10000000").value, bounded]
++  `),
++  ).toEqual([10000001, "x", true])
++})
++
++test("data-property creation preserves cycle and array-size limits", async () => {
++  const circular = await Effect.runPromise(
++    CodeMode.execute({
++      code: `const target = {}; Object.defineProperty(target, "self", { value: target })`,
++      tools: {},
++    }),
++  )
++  expect(circular.ok).toBe(false)
++  if (!circular.ok) expect(circular.error.message).toContain("circular")
++  expect(
++    await value(`
++    const target = []
++    let rejected = false
++    try { Object.defineProperty(target, "10000000", { value: 1 }) } catch (error) { rejected = error instanceof RangeError }
++    return [rejected, target.length]
++  `),
++  ).toEqual([true, 0])
++})

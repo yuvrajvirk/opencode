@@ -1,0 +1,9 @@
+$ tsc --noEmit
+src/interpreter/objects.ts(485,44): error TS2345: Argument of type 'Slot' is not assignable to parameter of type 'PropertyDescriptor & ThisType<any>'.
+  Type '{ get: Getter | undefined; set: Setter | undefined; enumerable: boolean; configurable: boolean; }' is not assignable to type 'PropertyDescriptor & ThisType<any>'.
+    Type '{ get: Getter | undefined; set: Setter | undefined; enumerable: boolean; configurable: boolean; }' is not assignable to type 'PropertyDescriptor'.
+      Types of property 'get' are incompatible.
+        Type 'Getter | undefined' is not assignable to type '(() => any) | undefined'.
+          Type 'Getter' is not assignable to type '() => any'.
+            Target signature provides too few arguments. Expected 1 or more, but got 0.
+error: script "typecheck" exited with code 1

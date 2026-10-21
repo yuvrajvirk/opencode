@@ -1,0 +1,2 @@
+Preparing worktree (detached HEAD 9c8e9e4bca)
+HEAD is now at 9c8e9e4bca refactor(core): remove unused NamedError, ConfigErrorV1, and iife helpers (#57822)
