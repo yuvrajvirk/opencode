@@ -13,6 +13,54 @@ import { tempLocationLayer } from "./fixture/location"
 const it = testEffect(AppNodeBuilder.build(Ripgrep.node, [Location.node.replace(tempLocationLayer)]))
 
 describe("Ripgrep", () => {
+  it.live("fails filename searches with an aborted signal", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      yield* Effect.promise(() => Bun.write(path.join(tmp.path, "file.txt"), "needle\n"))
+      const controller = new AbortController()
+      controller.abort()
+      const ripgrep = yield* Ripgrep.Service
+      const result = yield* ripgrep
+        .grepFiles({ cwd: tmp.path, pattern: "needle", limit: 10, signal: controller.signal })
+        .pipe(Effect.flip)
+      expect(result).toMatchObject({ _tag: "Ripgrep.Error", cause: controller.signal.reason })
+    }),
+  )
+
+  it.live("returns matching filenames across stdout chunks without parsing file contents", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      const filenames = Array.from({ length: 600 }, (_, index) => `${index}-${"x".repeat(110)}-雪.txt`)
+      yield* Effect.promise(() =>
+        Promise.all(filenames.map((file) => Bun.write(path.join(tmp.path, file), "needle\n"))),
+      )
+      const ripgrep = yield* Ripgrep.Service
+      const result = yield* ripgrep.grepFiles({ cwd: tmp.path, pattern: "needle", limit: filenames.length })
+      expect(result.map((entry) => entry.path).sort()).toEqual(filenames.map((file) => RelativePath.make(file)).sort())
+    }),
+  )
+
+  it.live("returns filenames without decoding matching binary and non-UTF8 content", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      yield* Effect.promise(() =>
+        Promise.all([
+          Bun.write(path.join(tmp.path, "binary.dat"), Buffer.from("needle\0tail\n")),
+          Bun.write(
+            path.join(tmp.path, "non-utf8.dat"),
+            Buffer.concat([Buffer.from("needle"), Buffer.from([255, 10])]),
+          ),
+          Bun.write(path.join(tmp.path, "other.dat"), Buffer.from("haystack\0tail\n")),
+        ]),
+      )
+      const ripgrep = yield* Ripgrep.Service
+      for (const file of ["binary.dat", "non-utf8.dat"]) {
+        const result = yield* ripgrep.grepFiles({ cwd: tmp.path, pattern: "needle", file, limit: 10 })
+        expect(result.map((entry) => entry.path)).toEqual([RelativePath.make(file)])
+      }
+    }),
+  )
+
   for (const hidden of [undefined, false, true]) {
     for (const limit of hidden ? [10] : [1, 10]) {
       it.live(`glob honors hidden=${hidden} before limit=${limit}`, () =>

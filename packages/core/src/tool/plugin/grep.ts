@@ -33,12 +33,32 @@ export const Input = Schema.Struct({
     description: "Use case-sensitive matching (default: true).",
   }),
   limit: FileSystem.GrepInput.fields.limit.annotate({
-    description: `Maximum number of matching lines to return (default: ${FileSystem.DEFAULT_SEARCH_LIMIT})`,
+    description: `Maximum number of matching lines or files to return (default: ${FileSystem.DEFAULT_SEARCH_LIMIT})`,
+  }),
+  outputMode: Schema.optionalKey(Schema.Literals(["content", "files"])).annotate({
+    description: "Return matching lines (content, default) or only matching file paths (files).",
   }),
 })
 
-export const Output = Schema.Array(FileSystem.Match)
-type EncodedOutput = typeof Output.Encoded
+const Matches = Schema.Array(FileSystem.Match)
+export const Output = Schema.Union([Matches, Schema.Array(FileSystem.Entry)])
+type EncodedOutput = typeof Matches.Encoded
+
+const filesToModelContent = (entries: readonly FileSystem.Entry[], directory: string, truncated: boolean) => {
+  const lines =
+    entries.length === 0
+      ? ["No matches found"]
+      : [
+          `Found ${entries.length} matching files`,
+          ...entries.map((entry) => JSON.stringify(path.resolve(directory, entry.path))),
+        ]
+  if (truncated)
+    lines.push(
+      "",
+      `(Results are truncated: showing first ${entries.length} files. Consider using a more specific path or pattern.)`,
+    )
+  return lines.join("\n")
+}
 
 /** Format raw search matches into concise model content. */
 export const toModelContent = (matches: EncodedOutput, truncated = false) => {
@@ -76,7 +96,7 @@ export const Plugin = {
           name,
           options: { codemode: false },
           description:
-            "Search file contents using ripgrep's regular expression syntax or literal text matching. Use it to locate specific code, symbols, or text patterns, and narrow searches with `path` or `include`. Returns matching file paths, line numbers, and line previews.",
+            "Search file contents using ripgrep's regular expression syntax or literal text matching. Use it to locate specific code, symbols, or text patterns, and narrow searches with `path` or `include`. Returns matching file paths, line numbers, and line previews. Use outputMode: files when only matching file paths are needed.",
           input: Input,
           output: Output,
           execute: (input, context) =>
@@ -95,6 +115,7 @@ export const Plugin = {
                   literal: input.literal,
                   caseSensitive: input.caseSensitive,
                   limit: input.limit,
+                  outputMode: input.outputMode,
                 },
                 sessionID: context.sessionID,
                 agent: context.agent,
@@ -108,53 +129,73 @@ export const Plugin = {
               )
               const cwd = type === "directory" ? root : path.dirname(root)
               const limit = input.limit ?? FileSystem.DEFAULT_SEARCH_LIMIT
-              const matches = yield* ripgrep
-                .grep({
-                  cwd,
-                  pattern: input.pattern,
-                  file: type === "file" ? path.basename(root) : undefined,
-                  include: input.include,
-                  literal: input.literal,
-                  caseSensitive: input.caseSensitive,
-                  limit: limit + 1,
-                })
-                .pipe(
-                  Effect.timeoutOrElse({
-                    duration: FileSystem.DEFAULT_SEARCH_TIMEOUT_MS,
-                    orElse: () =>
-                      Effect.fail(
-                        new ToolFailure({
-                          message: `Search timed out after ${FileSystem.DEFAULT_SEARCH_TIMEOUT_MS / 1_000} seconds. Consider using a more specific path or pattern.`,
-                        }),
-                      ),
-                  }),
-                  Effect.map((result) =>
-                    result.map((match) =>
-                      FileSystem.Match.make({
-                        ...match,
-                        entry: FileSystem.Entry.make({
-                          ...match.entry,
-                          path: RelativePath.make(
-                            path.relative(location.directory, path.resolve(cwd, match.entry.path)),
-                          ),
-                        }),
+              const options = {
+                cwd,
+                pattern: input.pattern,
+                file: type === "file" ? path.basename(root) : undefined,
+                include: input.include,
+                literal: input.literal,
+                caseSensitive: input.caseSensitive,
+                limit: limit + 1,
+              }
+              const found = yield* Effect.gen(function* () {
+                if (input.outputMode === "files")
+                  return { type: "files" as const, entries: yield* ripgrep.grepFiles(options) }
+                return { type: "content" as const, matches: yield* ripgrep.grep(options) }
+              }).pipe(
+                Effect.timeoutOrElse({
+                  duration: FileSystem.DEFAULT_SEARCH_TIMEOUT_MS,
+                  orElse: () =>
+                    Effect.fail(
+                      new ToolFailure({
+                        message: `Search timed out after ${FileSystem.DEFAULT_SEARCH_TIMEOUT_MS / 1_000} seconds. Consider using a more specific path or pattern.`,
                       }),
                     ),
+                }),
+              )
+              if (found.type === "files") {
+                return {
+                  type: "files" as const,
+                  entries: found.entries.slice(0, limit).map((entry) =>
+                    FileSystem.Entry.make({
+                      ...entry,
+                      path: RelativePath.make(path.relative(location.directory, path.resolve(cwd, entry.path))),
+                    }),
                   ),
-                )
-              return { matches: matches.slice(0, limit), truncated: matches.length > limit }
+                  truncated: found.entries.length > limit,
+                }
+              }
+              const matches = found.matches.map((match) =>
+                FileSystem.Match.make({
+                  ...match,
+                  entry: FileSystem.Entry.make({
+                    ...match.entry,
+                    path: RelativePath.make(path.relative(location.directory, path.resolve(cwd, match.entry.path))),
+                  }),
+                }),
+              )
+              return { type: "content" as const, matches: matches.slice(0, limit), truncated: matches.length > limit }
             }).pipe(
-              Effect.map((result) => ({
-                output: result.matches,
-                content: toModelContent(
-                  result.matches.map((match) => ({
-                    ...match,
-                    entry: { ...match.entry, path: path.resolve(location.directory, match.entry.path) },
-                  })),
-                  result.truncated,
-                ),
-                metadata: { matches: result.matches.length, truncated: result.truncated },
-              })),
+              Effect.map((result) => {
+                if (result.type === "files") {
+                  return {
+                    output: result.entries,
+                    content: filesToModelContent(result.entries, location.directory, result.truncated),
+                    metadata: { files: result.entries.length, truncated: result.truncated },
+                  }
+                }
+                return {
+                  output: result.matches,
+                  content: toModelContent(
+                    result.matches.map((match) => ({
+                      ...match,
+                      entry: { ...match.entry, path: path.resolve(location.directory, match.entry.path) },
+                    })),
+                    result.truncated,
+                  ),
+                  metadata: { matches: result.matches.length, truncated: result.truncated },
+                }
+              }),
               Effect.mapError((error) =>
                 error instanceof ToolFailure
                   ? error

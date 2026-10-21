@@ -30,6 +30,7 @@ const ripgrepStub = (entry: string, onFind: (input: Ripgrep.FindInput) => void) 
         }),
       glob: () => Effect.succeed([]),
       grep: () => Effect.succeed([]),
+      grepFiles: () => Effect.succeed([]),
     }),
   )
 
@@ -163,6 +164,7 @@ describe("FileSystemSearch", () => {
                 }),
               glob: () => Effect.succeed([]),
               grep: () => Effect.succeed([]),
+              grepFiles: () => Effect.succeed([]),
             }),
           ),
         ),
@@ -226,6 +228,7 @@ describe("FileSystemSearch", () => {
                 }),
               glob: () => Effect.succeed([]),
               grep: () => Effect.succeed([]),
+              grepFiles: () => Effect.succeed([]),
             }),
           ),
         ),

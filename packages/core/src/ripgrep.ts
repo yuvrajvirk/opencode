@@ -1,6 +1,7 @@
 export * as Ripgrep from "./ripgrep.js"
 
 import { Context, Effect, Fiber, Layer, Schema, Stream } from "effect"
+import path from "path"
 import { ChildProcess } from "effect/process"
 import { Entry, Match } from "@opencode/schema/filesystem"
 import { makeLocationNode } from "@opencode/util/effect/app-node"
@@ -84,6 +85,7 @@ export interface Interface {
   readonly find: (input: FindInput) => Effect.Effect<readonly Entry[], Error>
   readonly glob: (input: GlobInput) => Effect.Effect<readonly Entry[], Error>
   readonly grep: (input: GrepInput) => Effect.Effect<readonly Match[], Error | InvalidPatternError>
+  readonly grepFiles: (input: GrepInput) => Effect.Effect<readonly Entry[], Error | InvalidPatternError>
 }
 
 export class Service extends Context.Service<Service, Interface>()("@opencode/Ripgrep") {}
@@ -113,6 +115,7 @@ const layer = Layer.effect(
       readonly parse: (line: string) => Effect.Effect<A | undefined, Error>
       readonly pattern?: string
       readonly onItem?: (item: A) => Effect.Effect<void>
+      readonly nullDelimited?: boolean
     }) => {
       const program = Effect.scoped(
         Effect.gen(function* () {
@@ -125,8 +128,19 @@ const layer = Layer.effect(
             Effect.forkScoped,
           )
           let observed = 0
-          const rows = yield* Stream.decodeText(handle.stdout).pipe(
-            Stream.splitLines,
+          const decoded = Stream.decodeText(handle.stdout)
+          const records = input.nullDelimited
+            ? decoded.pipe(
+                Stream.mapAccum(
+                  () => "",
+                  (pending, chunk) => {
+                    const parts = (pending + chunk).split("\0")
+                    return [parts.pop()!, parts] as const
+                  },
+                ),
+              )
+            : decoded.pipe(Stream.splitLines)
+          const rows = yield* records.pipe(
             Stream.filter((line) => line.length > 0),
             Stream.mapEffect(input.parse),
             Stream.filter((row): row is A => row !== undefined),
@@ -216,6 +230,29 @@ const layer = Layer.effect(
           },
           onItem: input.onEntry,
         }).pipe(Effect.catchTag("Ripgrep.InvalidPatternError", (cause) => Effect.fail(failure(cause.message, cause)))),
+      grepFiles: (input) =>
+        run<Entry>({
+          ...input,
+          nullDelimited: true,
+          args: [
+            "--no-config",
+            "--files-with-matches",
+            "--null",
+            "--hidden",
+            "--no-messages",
+            ...(input.literal ? ["--fixed-strings"] : []),
+            ...(input.caseSensitive === false ? ["--ignore-case"] : []),
+            ...(input.include ? [`--glob=${input.include}`] : []),
+            "--glob=!**/.git/**",
+            "--",
+            input.pattern,
+            input.file ?? ".",
+          ],
+          parse: (filename) =>
+            Effect.succeed(
+              Entry.make({ path: RelativePath.make(path.normalize(filename).split(path.sep).join("/")), type: "file" }),
+            ),
+        }),
       grep: (input) =>
         run<RawMatchData>({
           ...input,
