@@ -586,6 +586,52 @@ describe("EditTool", () => {
     }),
   )
 
+  it.live("edits large uniform-ending regions without changing untouched bytes", () =>
+    withTempDir((tmp) => {
+      const edit = makeEditFixture()
+      const lines = Array.from({ length: 2048 }, (_, index) => `entry ${index}`)
+      const replacement = [...lines.slice(0, 1024), "inserted", ...lines.slice(1025)]
+      return withTool(tmp.path, edit, (registry) =>
+        Effect.gen(function* () {
+          for (const ending of ["\n", "\r\n"]) {
+            const target = path.join(tmp.path, "large.txt")
+            yield* Effect.promise(() => fs.writeFile(target, `\uFEFFprefix${ending}${lines.join(ending)}${ending}suffix`))
+            const result = yield* executeTool(
+              registry,
+              call({ path: "large.txt", oldString: lines.join("\n"), newString: replacement.join("\n") }),
+            )
+            expect(result).toMatchObject({ status: "completed", output: { replacements: 1 } })
+            expect(yield* Effect.promise(() => fs.readFile(target, "utf8"))).toBe(
+              `\uFEFFprefix${ending}${replacement.join(ending)}${ending}suffix`,
+            )
+          }
+        }),
+      )
+    }),
+  )
+
+  it.live("uses the file ending when a single-line region becomes multiline", () =>
+    withTempDir((tmp) => {
+      const edit = makeEditFixture()
+      return withTool(tmp.path, edit, (registry) =>
+        Effect.gen(function* () {
+          for (const ending of ["\n", "\r\n"]) {
+            const target = path.join(tmp.path, "single.txt")
+            yield* Effect.promise(() => fs.writeFile(target, `prefix${ending}target`))
+            const result = yield* executeTool(
+              registry,
+              call({ path: "single.txt", oldString: "target", newString: "first\nsecond\nthird" }),
+            )
+            expect(result.status).toBe("completed")
+            expect(yield* Effect.promise(() => fs.readFile(target, "utf8"))).toBe(
+              `prefix${ending}first${ending}second${ending}third`,
+            )
+          }
+        }),
+      )
+    }),
+  )
+
   it.live("matches across mixed line endings and keeps each region's endings", () =>
     withTempDir((tmp) => {
       const edit = makeEditFixture()
