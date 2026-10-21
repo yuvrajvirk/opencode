@@ -127,18 +127,9 @@ export const arrayGlobal = <R>(ctx: Interpreter<R>) => {
   ])
 
   const self = (thisValue: Value, name: string) => receiver(Arr, thisValue, `Array.prototype.${name}`)
-  // A mutating method fails where its first element write, delete, or `length` write would on a frozen, sealed, or
-  // non-extensible array. `growth` is given by the methods that always write `length`, even when it is 0; holes a
-  // method would fill on a non-extensible array are not checked.
   const mutable = (target: Arr, growth?: number): Arr => {
     const length = target.items.length
     if ((growth ?? 0) > 0) rejectAddition(target, length)
-    if ((growth ?? 0) < 0 && length > 0 && !target.elements.configurable) {
-      throw typeError(`Cannot delete property '${length - 1}'.`)
-    }
-    if (!target.elements.writable && (length > 0 || growth !== undefined)) {
-      throw typeError(`Cannot assign to read only property '${length > 0 ? 0 : "length"}'.`)
-    }
     return target
   }
   const optNumber = (value: Value): number | undefined => (value === undefined ? undefined : coerceToInteger(value))

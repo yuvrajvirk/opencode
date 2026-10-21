@@ -23,6 +23,15 @@ export type Attributes = {
 export type Getter = (receiver: Value) => Value
 export type Setter = (receiver: Value, value: Value) => void
 
+export type Descriptor = {
+  value?: Value
+  writable?: boolean
+  enumerable?: boolean
+  configurable?: boolean
+  get?: undefined
+  set?: undefined
+}
+
 /** One own property: a data slot or a native accessor pair. */
 export type Slot =
   | { value: Value; writable: boolean; enumerable: boolean; configurable: boolean }
@@ -46,6 +55,23 @@ export class Obj {
   /** [[Extensible]]: cleared by `Object.preventExtensions`, `seal`, and `freeze`. */
   extensible = true
   constructor(public proto: Obj | null) {}
+
+  redefine(key: string | symbol, slot: Slot): void {
+    this.props.set(key, slot)
+  }
+
+  definitionCoercion(_key: string | symbol, _descriptor: Descriptor): "number" | "length" | undefined {
+    return undefined
+  }
+
+  restrict(level: "freeze" | "seal" | "preventExtensions"): void {
+    this.extensible = false
+    if (level === "preventExtensions") return
+    for (const slot of this.props.values()) {
+      slot.configurable = false
+      if (level === "freeze" && "value" in slot) slot.writable = false
+    }
+  }
 
   /** The class name `Object.prototype.toString` reports: `[object Map]`. */
   readonly tag: string = "Object"
@@ -95,13 +121,37 @@ export class Obj {
 
 export class Arr extends Obj {
   override readonly tag = "Array"
-  /** The attributes every live element shares; `seal` and `freeze` narrow them since elements have no slots. */
-  elements: Attributes = data
+  customAttributes = false
   constructor(
     proto: Obj,
     readonly items: Array<Value> = [],
   ) {
     super(proto)
+  }
+  override redefine(key: string | symbol, slot: Slot): void {
+    const position = typeof key === "string" ? parseArrayIndex(key) : undefined
+    if (position === undefined && key !== "length") return super.redefine(key, slot)
+    if (!("value" in slot)) throw typeError("Array accessor descriptors are not supported.")
+    if (position !== undefined) checkArrayLength(position + 1)
+    if (key === "length") checkArrayLength(Number(slot.value))
+    this.customAttributes = true
+    Object.defineProperty(this.items, key, slot)
+  }
+  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
+    return key === "length" && "value" in descriptor ? ("length" as const) : undefined
+  }
+  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
+    super.restrict(level)
+    if (level !== "preventExtensions") this.customAttributes = true
+    if (level === "freeze") {
+      Object.freeze(this.items)
+      return
+    }
+    if (level === "seal") {
+      Object.seal(this.items)
+      return
+    }
+    Object.preventExtensions(this.items)
   }
   override get describe() {
     return "an array"
@@ -440,6 +490,34 @@ export class Bytes extends Wrapper {
   ) {
     super(proto)
   }
+  override definitionCoercion(key: string | symbol, descriptor: Descriptor) {
+    if (typeof key !== "string" || (key !== "-0" && String(Number(key)) !== key)) return undefined
+    const index = Number(key)
+    if (
+      !Number.isInteger(index) ||
+      index < 0 ||
+      Object.is(index, -0) ||
+      index >= this.bytes.length ||
+      "get" in descriptor ||
+      "set" in descriptor ||
+      descriptor.configurable === false ||
+      descriptor.enumerable === false ||
+      descriptor.writable === false
+    )
+      throw typeError(`Cannot redefine property: ${key}`)
+    return "value" in descriptor ? ("number" as const) : undefined
+  }
+  override redefine(key: string | symbol, slot: Slot): void {
+    if (typeof key !== "string" || String(Number(key)) !== key) return super.redefine(key, slot)
+    if (!("value" in slot)) throw typeError("Typed array accessor descriptors are not supported.")
+    Object.defineProperty(this.bytes, key, slot)
+  }
+  override restrict(level: "freeze" | "seal" | "preventExtensions"): void {
+    this.extensible = false
+    if (level !== "preventExtensions" && this.bytes.length > 0)
+      throw typeError(`Cannot ${level} array buffer views with elements.`)
+    super.restrict(level)
+  }
   override toString() {
     return this.bytes.join(",")
   }
@@ -505,10 +583,23 @@ export const own = (target: Obj, key: PropertyKey): Slot | undefined => {
     if (at !== undefined) {
       const items = elements(target)
       if (!(at in items)) return undefined
-      return { value: items[at], ...(target instanceof Arr ? target.elements : data) }
+      if (!(target instanceof Arr) || !target.customAttributes) return { value: items[at], ...data }
+      const descriptor = Object.getOwnPropertyDescriptor(items, at)
+      return {
+        value: items[at],
+        writable: descriptor?.writable === true,
+        enumerable: descriptor?.enumerable === true,
+        configurable: descriptor?.configurable === true,
+      }
     }
     if (target instanceof Arr && name === "length") {
-      return { value: target.items.length, writable: target.elements.writable, enumerable: false, configurable: false }
+      return {
+        value: target.items.length,
+        writable:
+          !target.customAttributes || Object.getOwnPropertyDescriptor(target.items, "length")?.writable === true,
+        enumerable: false,
+        configurable: false,
+      }
     }
   }
   return target.props.get(name)
@@ -561,8 +652,6 @@ const writeElement = (target: Indexed, name: string | symbol, value: Value): boo
   if (!(target instanceof Arr) || name !== "length") return undefined
   const length = typeof value === "number" ? value : Number(value)
   if (!Number.isInteger(length) || length < 0) throw rangeError("Invalid array length")
-  // Shrinking deletes elements, which a sealed array forbids.
-  if (length < target.items.length && !target.elements.configurable) return false
   checkArrayLength(length)
   target.items.length = length
   return true
@@ -620,7 +709,6 @@ export const remove = (target: Obj, key: PropertyKey): boolean => {
     const at = index(target, name)
     if (at !== undefined) {
       if (target instanceof Bytes) return !(at in target.bytes)
-      if (at in target.items && !target.elements.configurable) return false
       return delete target.items[at]
     }
     if (target instanceof Arr && name === "length") return false
@@ -637,7 +725,9 @@ export const ownKeys = (target: Obj): Array<string | symbol> => {
   const strings = [...target.props.keys()].filter((key): key is string => typeof key === "string")
   const symbols = [...target.props.keys()].filter((key): key is symbol => typeof key === "symbol")
   return [
-    ...(isIndexed(target) ? Object.keys(elements(target)) : []),
+    ...(isIndexed(target)
+      ? Object.getOwnPropertyNames(elements(target)).filter((key) => parseArrayIndex(key) !== undefined)
+      : []),
     ...(target instanceof Arr ? ["length"] : []),
     ...strings.filter((key) => parseArrayIndex(key) !== undefined).sort((a, b) => Number(a) - Number(b)),
     ...strings.filter((key) => parseArrayIndex(key) === undefined),

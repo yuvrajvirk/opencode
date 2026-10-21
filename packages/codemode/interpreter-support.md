@@ -336,21 +336,28 @@ reject }` object.
 - [x] `Object.getPrototypeOf`: the prototype of an object, or the built-in prototype for a string, number, or boolean
       (`Object.getPrototypeOf("a") === String.prototype`); `null`, `undefined`, and the two confined symbols throw a
       `TypeError`.
-- [x] `Object.create(proto)` with an object or `null` prototype; any other prototype is a `TypeError`
+- [x] `Object.create(proto, properties)` with an object or `null` prototype; any other prototype is a `TypeError`
       (`Object prototype may only be an Object or null`). Inherited reads, `in`, `hasOwnProperty`, and own-only
-      `Object.keys` follow the chain as in JS, but `for...in` still enumerates own keys only. A second `properties`
-      argument other than `undefined` throws a `TypeError`: property descriptors are not supported (there is no
-      `Object.defineProperty` either).
+      `Object.keys` follow the chain as in JS, but `for...in` still enumerates own keys only. The optional second
+      argument defines properties using the same rules as `Object.defineProperties`.
+- [x] `Object.defineProperty` and `Object.defineProperties` for data properties, including inherited descriptor
+      fields, individual array-index attributes, array lengths, and confined byte values. Existing non-configurable
+      and non-writable properties cannot be loosened; circular values and oversized arrays remain rejected.
+- [x] `Object.getOwnPropertyDescriptor`, `Object.getOwnPropertyDescriptors`, and `Object.getOwnPropertyNames`.
+      String inspection exposes UTF-16 index descriptors. Native accessor inspection returns confined callable
+      wrappers, not host functions.
+- [ ] Program-defined accessor descriptors. Ordinary objects accept empty accessors with `get` and `set` both
+      absent or `undefined`; non-undefined getter/setter functions and array accessor descriptors remain unsupported.
 - [x] `Object.freeze`, `Object.seal`, and `Object.preventExtensions`, with `isFrozen`, `isSealed`, and `isExtensible`.
       Each returns its argument and passes primitives through (`Object.freeze(1) === 1`, `Object.isFrozen(1)`).
       Programs run as strict code, so violations throw `TypeError`: `Cannot assign to read only property 'a'`,
       `Cannot add property b, object is not extensible`, and `Cannot delete property 'a'`. Arrays enforce the same
       rules for index writes, `length`, and the mutating methods (`Object.freeze([1]).push(2)` throws; a sealed array's
-      `pop()` throws; a non-extensible array's `pop()`, `sort()`, and `splice(0, 1, x)` work). The mutating methods are
-      checked once up front, so a `fill` or `sort` that would land on a hole of a non-extensible array succeeds here
-      where JS throws. Maps, Sets, and Dates freeze their properties only, not their contents, as in JS.
-      `Object.freeze(new Uint8Array(1))` and `seal` throw `TypeError` like JS (`preventExtensions` and empty typed
-      arrays are fine). Functions are objects and freeze like any other value.
+      `pop()` throws; a non-extensible array's `pop()`, `sort()`, and `splice(0, 1, x)` work). Native array storage
+      enforces indexed attributes and deletion during mutations, including partially completed operations;
+      TypeError messages from those operations depend on the host engine. Maps, Sets, and Dates freeze their
+      properties only, not their contents. The existing Bun-compatible restriction rejects `freeze` and `seal` on
+      nonempty typed arrays; `preventExtensions` and empty typed arrays are supported. Functions freeze their properties.
 - [x] Circular references are rejected when created (`o.self = o`, `array.push(array)`), not at serialization as in JS.
 - [x] `Object.is` for supported data values.
 - [x] `Object.groupBy` over finite collections and custom synchronous iterators/generators, with string-key coercion
