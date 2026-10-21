@@ -148,7 +148,11 @@ Math.floor)` is `"3"`). A detached method loses its receiver, as in JS: `values.
       (`JSON.stringify` gives `{"0":1}`, `String` gives `[object Arguments]`). A parameter named `arguments` shadows
       it; arrows read the enclosing function's; it is only created for functions whose body mentions it. `callee`
       and `caller` are absent rather than poisoned.
-- [ ] Array methods on `arguments` and other array-likes (`Array.prototype.slice.call(arguments, 1)`); use
+- [x] Array callback methods (`map`, `filter`, `forEach`, `some`, `every`, `find`, `findIndex`, `findLast`,
+      `findLastIndex`, `reduce`, and `reduceRight`) on `arguments` and other object array-likes. They snapshot
+      the coerced length, read indexed properties live through the prototype chain, preserve callback receiver
+      identity, and retain the array length cap and missing-`await` diagnostic.
+- [ ] Other Array methods on `arguments` and array-likes (`Array.prototype.slice.call(arguments, 1)`); use
       `[...arguments]` or a rest parameter meanwhile.
 - [x] `Function.prototype.call`, `apply`, and `bind` on program functions and built-ins:
       `Array.prototype.push.call(arr, 1)`, `Math.max.apply(null, values)`, `fn.bind(obj, first)`. `apply` accepts an
