@@ -1,6 +1,6 @@
 # Draft persistence: independently measured stable chunk reuse
 
-Candidate: [`cc841a7e47`](https://github.com/yuvrajvirk/opencode/commit/cc841a7e47ede3b602d20d82029c8e8cb201bc99), against upstream `863ea413649484b5761cd0c5c0e54c559a5c8b52`.
+Published only as [fork PR #12](https://github.com/yuvrajvirk/opencode/pull/12). Candidate: [`cc841a7e47`](https://github.com/yuvrajvirk/opencode/commit/cc841a7e47ede3b602d20d82029c8e8cb201bc99), against upstream `863ea413649484b5761cd0c5c0e54c559a5c8b52`.
 
 Start with [results and limitations](draft-persistence/RESULTS.md), the [pre-implementation protocol](draft-persistence/protocol.md), [selection decision](draft-persistence/SELECTION.md) and [pre-holdout freeze](draft-persistence/freeze.json). The actual inspiring feature and its parent are tested, seven alternatives are retained, and no production/scorer tuning follows heldout access.
 

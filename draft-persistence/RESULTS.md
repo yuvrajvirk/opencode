@@ -1,6 +1,6 @@
 # Draft persistence feasibility: historical gate and current headroom
 
-Status: seven prototypes evaluated; the seventh was selected and frozen at **2026-10-21T18:48:56.217Z**, then passed untouched heldout evaluation and exact fresh remote reproduction. Candidate `cc841a7e47ede3b602d20d82029c8e8cb201bc99` is pushed only to the fork's `codex/draft-chunks`, based on latest upstream `863ea413649484b5761cd0c5c0e54c559a5c8b52`. **No PR yet; evidence is being packaged.** Alternative patches and all unfavorable runs remain in this directory. No production/scorer changes followed heldout access.
+Status: published only as [fork PR #12](https://github.com/yuvrajvirk/opencode/pull/12). Seven prototypes evaluated; the seventh was selected and frozen at **2026-10-21T18:48:56.217Z**, then passed untouched heldout evaluation and exact fresh remote reproduction. Candidate `cc841a7e47ede3b602d20d82029c8e8cb201bc99` is on the fork's `codex/draft-chunks`, based on latest upstream `863ea413649484b5761cd0c5c0e54c559a5c8b52`. Alternative patches and all unfavorable runs remain in this directory. No production/scorer changes followed heldout access. Evidence is on the fork's `codex/draft-evidence` branch, not an upstream PR or new gist.
 
 ## Frozen development content
 
