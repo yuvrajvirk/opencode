@@ -5,6 +5,7 @@ import { invalidData, IteratorSymbol, rangeError, typeError } from "../interpret
 import {
   define,
   get,
+  has,
   hidden,
   Arr,
   GeneratorObj,
@@ -18,7 +19,13 @@ import {
   type Value,
 } from "../interpreter/objects.js"
 import { describeValue, rejectCircularInsertion } from "../interpreter/references.js"
-import { applyCollectionCallback, invoke, preserveConsumerError, withPrimitives } from "../interpreter/callback.js"
+import {
+  applyCollectionCallback,
+  invoke,
+  preserveConsumerError,
+  toPrimitive,
+  withPrimitives,
+} from "../interpreter/callback.js"
 import type { Interpreter } from "../interpreter/interpreter.js"
 import { compareText } from "../tool-runtime.js"
 
@@ -386,10 +393,39 @@ export const arrayGlobal = <R>(ctx: Interpreter<R>) => {
         })
       },
     ],
-    ...callbackMethods(ctx, "Array", self, (target) => target.items, wrap),
+    ...callbackMethods(
+      ctx,
+      "Array",
+      (thisValue, name) => {
+        const target = receiver(Obj, thisValue, `Array.prototype.${name}`)
+        if (target instanceof PromiseObj) {
+          throw invalidData(`Array.prototype.${name} received an un-awaited Promise.`)
+        }
+        return target
+      },
+      (target) => {
+        if (target instanceof Arr) return target.items
+        return Effect.map(toPrimitive(ctx, get(target, "length"), "number"), (value) => {
+          const length = Math.max(0, coerceToInteger(value))
+          checkArrayLength(length)
+          return {
+            length,
+            get: (index: number) => get(target, index),
+            has: (index: number) => has(target, index),
+          }
+        })
+      },
+      wrap,
+    ),
   ])
   define(proto, IteratorSymbol, get(proto, "values"), hidden)
   return array
+}
+
+type IndexedSource = {
+  readonly length: number
+  readonly get: (index: number) => Value
+  readonly has: (index: number) => boolean
 }
 
 /**
@@ -400,14 +436,14 @@ export const callbackMethods = <R, T extends Obj>(
   ctx: Interpreter<R>,
   label: string,
   self: (thisValue: Value, name: string) => T,
-  elements: (target: T) => ArrayLike<Value>,
+  elements: (target: T) => ArrayLike<Value> | Effect.Effect<IndexedSource, unknown, R>,
   wrap: (values: Array<Value>) => Value,
 ): Array<Method> => {
   const iterate = (
     name: string,
     length: number,
     body: (
-      target: ArrayLike<Value>,
+      target: IndexedSource,
       receiver: T,
       apply: (args: Array<Value>) => Effect.Effect<Value, unknown, R>,
       args: Array<Value>,
@@ -417,10 +453,15 @@ export const callbackMethods = <R, T extends Obj>(
     length,
     (thisValue, args) => {
       const target = self(thisValue, name)
-      const call = applyCollectionCallback(ctx, args[0], `${label}.${name}`)
-      // reduce and reduceRight take an initial value where the others take a thisArg.
-      const thisArg = name.startsWith("reduce") ? undefined : args[1]
-      return body(elements(target), target, (callbackArgs) => call(callbackArgs, thisArg), args)
+      const values = elements(target)
+      const run = (values: IndexedSource) => {
+        const call = applyCollectionCallback(ctx, args[0], `${label}.${name}`)
+        const thisArg = name.startsWith("reduce") ? undefined : args[1]
+        return body(values, target, (callbackArgs) => call(callbackArgs, thisArg), args)
+      }
+      return Effect.isEffect(values)
+        ? Effect.flatMap(values, run)
+        : run({ length: values.length, get: (index) => values[index], has: (index) => index in values })
     },
   ]
   return [
@@ -430,8 +471,8 @@ export const callbackMethods = <R, T extends Obj>(
         const values: Array<Value> = []
         values.length = length
         for (let index = 0; index < length; index += 1) {
-          if (!(index in target)) continue
-          values[index] = yield* apply([target[index], index, receiver])
+          if (!target.has(index)) continue
+          values[index] = yield* apply([target.get(index), index, receiver])
         }
         return wrap(values)
       }),
@@ -441,8 +482,8 @@ export const callbackMethods = <R, T extends Obj>(
         const length = target.length
         const values: Array<Value> = []
         for (let index = 0; index < length; index += 1) {
-          if (!(index in target)) continue
-          const item = target[index]
+          if (!target.has(index)) continue
+          const item = target.get(index)
           if (yield* apply([item, index, receiver])) values.push(item)
         }
         return wrap(values)
@@ -452,7 +493,7 @@ export const callbackMethods = <R, T extends Obj>(
       Effect.gen(function* () {
         const length = target.length
         for (let index = 0; index < length; index += 1) {
-          const item = target[index]
+          const item = target.get(index)
           if (yield* apply([item, index, receiver])) return item
         }
         return undefined
@@ -462,7 +503,7 @@ export const callbackMethods = <R, T extends Obj>(
       Effect.gen(function* () {
         const length = target.length
         for (let index = 0; index < length; index += 1) {
-          if (yield* apply([target[index], index, receiver])) return index
+          if (yield* apply([target.get(index), index, receiver])) return index
         }
         return -1
       }),
@@ -470,7 +511,7 @@ export const callbackMethods = <R, T extends Obj>(
     iterate("findLast", 1, (target, receiver, apply) =>
       Effect.gen(function* () {
         for (let index = target.length - 1; index >= 0; index -= 1) {
-          const item = target[index]
+          const item = target.get(index)
           if (yield* apply([item, index, receiver])) return item
         }
         return undefined
@@ -479,7 +520,7 @@ export const callbackMethods = <R, T extends Obj>(
     iterate("findLastIndex", 1, (target, receiver, apply) =>
       Effect.gen(function* () {
         for (let index = target.length - 1; index >= 0; index -= 1) {
-          if (yield* apply([target[index], index, receiver])) return index
+          if (yield* apply([target.get(index), index, receiver])) return index
         }
         return -1
       }),
@@ -488,8 +529,8 @@ export const callbackMethods = <R, T extends Obj>(
       Effect.gen(function* () {
         const length = target.length
         for (let index = 0; index < length; index += 1) {
-          if (!(index in target)) continue
-          if (yield* apply([target[index], index, receiver])) return true
+          if (!target.has(index)) continue
+          if (yield* apply([target.get(index), index, receiver])) return true
         }
         return false
       }),
@@ -498,8 +539,8 @@ export const callbackMethods = <R, T extends Obj>(
       Effect.gen(function* () {
         const length = target.length
         for (let index = 0; index < length; index += 1) {
-          if (!(index in target)) continue
-          if (!(yield* apply([target[index], index, receiver]))) return false
+          if (!target.has(index)) continue
+          if (!(yield* apply([target.get(index), index, receiver]))) return false
         }
         return true
       }),
@@ -508,7 +549,7 @@ export const callbackMethods = <R, T extends Obj>(
       Effect.gen(function* () {
         const length = target.length
         for (let index = 0; index < length; index += 1) {
-          if (index in target) yield* apply([target[index], index, receiver])
+          if (target.has(index)) yield* apply([target.get(index), index, receiver])
         }
         return undefined
       }),
@@ -519,16 +560,16 @@ export const callbackMethods = <R, T extends Obj>(
         let start = 0
         let accumulator = args[1]
         if (args.length < 2) {
-          while (start < length && !(start in target)) start += 1
+          while (start < length && !target.has(start)) start += 1
           if (start === length) {
             throw typeError(`${label}.reduce of an empty array with no initial value.`)
           }
-          accumulator = target[start]
+          accumulator = target.get(start)
           start += 1
         }
         for (let index = start; index < length; index += 1) {
-          if (!(index in target)) continue
-          accumulator = yield* apply([accumulator, target[index], index, receiver])
+          if (!target.has(index)) continue
+          accumulator = yield* apply([accumulator, target.get(index), index, receiver])
         }
         return accumulator
       }),
@@ -538,16 +579,16 @@ export const callbackMethods = <R, T extends Obj>(
         let start = target.length - 1
         let accumulator = args[1]
         if (args.length < 2) {
-          while (start >= 0 && !(start in target)) start -= 1
+          while (start >= 0 && !target.has(start)) start -= 1
           if (start < 0) {
             throw typeError(`${label}.reduceRight of an empty array with no initial value.`)
           }
-          accumulator = target[start]
+          accumulator = target.get(start)
           start -= 1
         }
         for (let index = start; index >= 0; index -= 1) {
-          if (!(index in target)) continue
-          accumulator = yield* apply([accumulator, target[index], index, receiver])
+          if (!target.has(index)) continue
+          accumulator = yield* apply([accumulator, target.get(index), index, receiver])
         }
         return accumulator
       }),
