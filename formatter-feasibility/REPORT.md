@@ -2,6 +2,8 @@
 
 Status: selected implementation passes development and untouched-until-freeze held-out evaluation. A fresh remote reproduction exactly matches every headline score, gain/loss count and preservation control. Publication targets `yuvrajvirk/opencode` only.
 
+Published as [fork PR #11](https://github.com/yuvrajvirk/opencode/pull/11), production commit `76401aa6543a85a7ddf366ac869a00d7a31fbf5e`. The base branch pins the measured baseline so the review contains only eight intended implementation/test/dependency/documentation files, not unrelated upstream changes.
+
 ## Intent and change
 
 OpenCode's automatic formatter selection should produce the locally declared project style after an edit. Merely having Ruff installed does not mean a project uses Ruff for formatting; many use it for linting alongside Black. Explicit custom formatter commands already work. This change adds automatic discovery of an explicit Black TOML section or a single official Black pre-commit hook, forwarding supported static formatting options and respecting path/type filters. It preserves explicit command overrides and existing fallback behavior for unsupported/ambiguous declarations.
