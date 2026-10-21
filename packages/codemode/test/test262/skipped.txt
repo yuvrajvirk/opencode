@@ -990,75 +990,20 @@ built-ins/Object/create/15.2.3.5-2-1.js  # TypeError: base cannot be constructed
 built-ins/Object/create/15.2.3.5-3-1.js  # TypeError: base cannot be constructed: user-defined constructors and classes are not supported. Call
 built-ins/Object/create/15.2.3.5-4-1.js  # TypeError: base cannot be constructed: user-defined constructors and classes are not supported. Call
 built-ins/Object/create/15.2.3.5-4-102.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
-built-ins/Object/create/15.2.3.5-4-112.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-113.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-117.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-118.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-119.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-120.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-121.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-122.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-124.js  # TypeError: Cannot read properties of undefined (reading '…').
-built-ins/Object/create/15.2.3.5-4-127.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-133.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-134.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-136.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-137.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-138.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-142.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-143.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-144.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-145.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-146.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-147.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-149.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-150.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-152.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-153.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-154.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-155.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-156.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
-built-ins/Object/create/15.2.3.5-4-16.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-165.js  # TypeError: Func cannot be constructed: user-defined constructors and classes are not supported. Call
-built-ins/Object/create/15.2.3.5-4-166.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-170.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-171.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-172.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-173.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-174.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-175.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-177.js  # TypeError: Cannot read properties of undefined (reading '…').
-built-ins/Object/create/15.2.3.5-4-178.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-18.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
-built-ins/Object/create/15.2.3.5-4-180.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-181.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-182.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-191.js  # TypeError: Func cannot be constructed: user-defined constructors and classes are not supported. Call
-built-ins/Object/create/15.2.3.5-4-192.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-196.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-197.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-198.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-199.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-200.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-201.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-203.js  # TypeError: Cannot read properties of undefined (reading '…').
-built-ins/Object/create/15.2.3.5-4-206.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-212.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-213.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-215.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-216.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-217.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-22.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
-built-ins/Object/create/15.2.3.5-4-221.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-222.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-223.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-224.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-225.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-226.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-228.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-229.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-231.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-232.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-233.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-234.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-244.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
@@ -1070,14 +1015,12 @@ built-ins/Object/create/15.2.3.5-4-252.js  # TypeError: Object.create property d
 built-ins/Object/create/15.2.3.5-4-253.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-254.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-256.js  # TypeError: Cannot read properties of undefined (reading '…').
-built-ins/Object/create/15.2.3.5-4-257.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-263.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-266.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-268.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-269.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-270.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
 built-ins/Object/create/15.2.3.5-4-279.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-28.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-280.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-284.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-285.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
@@ -1085,58 +1028,15 @@ built-ins/Object/create/15.2.3.5-4-286.js  # TypeError: Object.create property d
 built-ins/Object/create/15.2.3.5-4-287.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-288.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-289.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-29.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-291.js  # TypeError: Cannot read properties of undefined (reading '…').
 built-ins/Object/create/15.2.3.5-4-298.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-305.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-306.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-308.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
+built-ins/Object/create/15.2.3.5-4-300.js  # Requires a host global object as top-level this; confined top-level this is undefined
 built-ins/Object/create/15.2.3.5-4-310.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-312.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-314.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-316.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-33.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-34.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-35.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-36.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-38.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-39.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-46.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-47.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-48.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-49.js  # TypeError: ConstructFun cannot be constructed: user-defined constructors and classes are not support
-built-ins/Object/create/15.2.3.5-4-59.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-60.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-64.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-65.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-66.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-67.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-68.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-69.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-71.js  # TypeError: Cannot read properties of undefined (reading '…').
-built-ins/Object/create/15.2.3.5-4-72.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-73.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-74.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-75.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-76.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-77.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-78.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-79.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-80.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-81.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-82.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-83.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-84.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-85.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-89.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-90.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-91.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-92.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-93.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-94.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/create/15.2.3.5-4-96.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-97.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
-built-ins/Object/create/15.2.3.5-4-99.js  # TypeError: Object.create property descriptors are not supported; assign the fields after creating th
 built-ins/Object/entries/inherited-properties-omitted.js  # TypeError: Cannot read properties of undefined (reading '…').
 built-ins/Object/fromEntries/evaluation-order.js  # TypeError: Only init object properties are supported.
 built-ins/Object/fromEntries/iterator-closed-for-throwing-entry-key-accessor.js  # Expected a DummyError but got a TypeError

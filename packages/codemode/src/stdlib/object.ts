@@ -13,7 +13,6 @@ import {
   own,
   ownKeys,
   Arr,
-  Bytes,
   Obj,
   PromiseObj,
   set,
@@ -26,6 +25,7 @@ import { invoke, preserveConsumerError } from "../interpreter/callback.js"
 import type { Interpreter } from "../interpreter/interpreter.js"
 import { ToolReference } from "../tool-runtime.js"
 import { groupBy } from "./collections.js"
+import { ObjectProperty } from "./property.js"
 
 // ToObject for enumeration.
 export const enumerableSource = <R>(ctx: Interpreter<R>, label: string, value: Value, node?: AstNode): Obj => {
@@ -102,20 +102,9 @@ const classTag = (value: Value): string => {
 const propertyKey = (value: Value): PropertyKey =>
   value === AsyncIteratorSymbol || value === IteratorSymbol ? value : coerceToString(value)
 
-// SetIntegrityLevel: primitives pass through. A typed array's bytes cannot carry attributes, so JS throws after
-// already making it non-extensible.
 const restrict = (level: "freeze" | "seal" | "preventExtensions", value: Value): Value => {
   if (!(value instanceof Obj)) return value
-  value.extensible = false
-  if (level === "preventExtensions") return value
-  if (value instanceof Bytes && value.bytes.length > 0) {
-    throw typeError(`Cannot ${level} array buffer views with elements.`)
-  }
-  for (const slot of value.props.values()) {
-    slot.configurable = false
-    if (level === "freeze" && "value" in slot) slot.writable = false
-  }
-  if (value instanceof Arr) value.elements = { writable: level === "seal", enumerable: true, configurable: false }
+  value.restrict(level)
   return value
 }
 
@@ -134,6 +123,7 @@ const integrity = (value: Value, frozen: boolean): boolean => {
 // program; `values`, `entries`, `assign`, and `fromEntries` hand back the program's own values.
 export const objectGlobal = <R>(ctx: Interpreter<R>) => {
   const builtins = ctx.builtins
+  const properties = ObjectProperty.make(ctx)
   const construct = (args: Array<Value>): Value => {
     const first = args[0]
     if (first === null || first === undefined) return new Obj(builtins.Object)
@@ -178,6 +168,11 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
     ],
     ["hasOwn", 2, (_, args) => hasOwn(enumerableSource(ctx, "Object.hasOwn(...)", args[0]), propertyKey(args[1]))],
     ["is", 2, (_, args) => Object.is(args[0], args[1])],
+    ["defineProperty", 3, (_, args) => properties.defineProperty(args[0], args[1], args[2])],
+    ["defineProperties", 2, (_, args) => properties.defineProperties(args[0], args[1])],
+    ["getOwnPropertyDescriptor", 2, (_, args) => properties.getOwnPropertyDescriptor(args[0], args[1])],
+    ["getOwnPropertyDescriptors", 1, (_, args) => properties.getOwnPropertyDescriptors(args[0])],
+    ["getOwnPropertyNames", 1, (_, args) => properties.getOwnPropertyNames(args[0])],
     ["assign", 2, (_, args) => objectAssign(ctx, args)],
     ["fromEntries", 1, (_, args) => objectFromEntries(ctx, args[0])],
     ["freeze", 1, (_, args) => restrict("freeze", args[0])],
@@ -205,12 +200,8 @@ export const objectGlobal = <R>(ctx: Interpreter<R>) => {
         if (args[0] !== null && !(args[0] instanceof Obj)) {
           throw typeError("Object prototype may only be an Object or null.")
         }
-        if (args[1] !== undefined) {
-          throw typeError(
-            "Object.create property descriptors are not supported; assign the fields after creating the object.",
-          )
-        }
-        return new Obj(args[0])
+        const result = new Obj(args[0])
+        return args[1] === undefined ? result : properties.defineProperties(result, args[1])
       },
     ],
   ])
