@@ -397,11 +397,15 @@ const operationBody = (
   const resolved = resolve(document, operation.requestBody)
   if (!isRecord(resolved)) return { ok: true, value: { fields: [], body: undefined } }
   const content = isRecord(resolved.content) ? resolved.content : {}
-  const selected = jsonContent(content)
+  const form = Object.entries(content).find(
+    ([mediaType]) => mediaType.split(";")[0]?.trim().toLowerCase() === "application/x-www-form-urlencoded",
+  )
+  const selected =
+    jsonContent(content) ?? (form && isRecord(form[1]) ? { mediaType: form[0], schema: form[1].schema } : undefined)
   if (selected === undefined) {
     return {
       ok: false,
-      reason: `request body has no JSON content (declared: ${Object.keys(content).join(", ") || "none"})`,
+      reason: `request body has no supported content (declared: ${Object.keys(content).join(", ") || "none"})`,
     }
   }
   const resolvedSchema = resolve(document, selected.schema)
@@ -409,6 +413,27 @@ const operationBody = (
     ? directionalSchema(document, { value: resolvedSchema, root: resolvedSchema }, "request")
     : resolvedSchema
   const required = resolved.required === true
+  let encoding: Record<string, boolean> | undefined
+  if (selected.mediaType.split(";")[0]?.trim().toLowerCase() === "application/x-www-form-urlencoded") {
+    if (!isRecord(schema) || schema.type !== "object")
+      return { ok: false, reason: "URL-encoded request body must be an object" }
+    const media = content[selected.mediaType]
+    const fields = isRecord(media) ? media.encoding : undefined
+    if (fields !== undefined && !isRecord(fields))
+      return { ok: false, reason: "URL-encoded request body has invalid encoding" }
+    encoding = {}
+    for (const [name, field] of Object.entries(fields ?? {})) {
+      if (
+        !isRecord(field) ||
+        (field.style !== undefined && field.style !== "form") ||
+        (field.explode !== undefined && typeof field.explode !== "boolean") ||
+        (field.allowReserved !== undefined && field.allowReserved !== false) ||
+        field.contentType !== undefined
+      )
+        return { ok: false, reason: `URL-encoded body field '${name}' uses unsupported encoding` }
+      Object.defineProperty(encoding, name, { value: field.explode !== false, enumerable: true })
+    }
+  }
   if (!isFlattenableObjectBody(schema, required)) {
     return {
       ok: true,
@@ -423,7 +448,7 @@ const operationBody = (
             explode: undefined,
           },
         ],
-        body: { required, mode: "value", mediaType: selected.mediaType },
+        body: { required, mode: "value", mediaType: selected.mediaType, encoding },
       },
     }
   }
@@ -443,7 +468,7 @@ const operationBody = (
         style: undefined,
         explode: undefined,
       })),
-      body: { required, mode: "object", mediaType: selected.mediaType },
+      body: { required, mode: "object", mediaType: selected.mediaType, encoding },
     },
   }
 }

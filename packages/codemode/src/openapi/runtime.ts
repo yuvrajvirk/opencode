@@ -89,13 +89,20 @@ const buildRequest = (
       request = HttpClientRequest.setHeader(request, field.name, serialized)
     }
 
-    const setBody = (value: unknown, mediaType: string) =>
-      HttpClientRequest.bodyJson(request, value).pipe(
+    const setBody = (value: unknown, mediaType: string) => {
+      if (plan.body?.encoding !== undefined) {
+        const parameters = serializeForm(value, plan.body.encoding)
+        return parameters instanceof ToolError
+          ? Effect.fail(parameters)
+          : Effect.succeed(HttpClientRequest.bodyUrlParams(request, parameters))
+      }
+      return HttpClientRequest.bodyJson(request, value).pipe(
         Effect.map((next) => HttpClientRequest.setHeader(next, "content-type", mediaType)),
         Effect.mapError((cause) =>
           toolError(`Invalid JSON body for ${plan.operation.method} ${plan.operation.path}.`, cause),
         ),
       )
+    }
     if (plan.body?.mode === "value") {
       const field = plan.fields.find((field) => field.location === "body")
       const body = field === undefined ? undefined : own(input, field.inputName)
@@ -113,6 +120,33 @@ const buildRequest = (
     }
     return request
   })
+
+const serializeForm = (
+  value: unknown,
+  encoding: Readonly<Record<string, boolean>>,
+): ReadonlyArray<readonly [string, string]> | ToolError => {
+  if (!isRecord(value)) return toolError("URL-encoded request body must be an object.")
+  const parameters: Array<readonly [string, string]> = []
+  for (const [name, item] of Object.entries(value)) {
+    const values = Array.isArray(item) ? item : [item]
+    if (
+      values.some(
+        (value) =>
+          typeof value !== "string" &&
+          typeof value !== "boolean" &&
+          (typeof value !== "number" || !Number.isFinite(value)),
+      )
+    )
+      return toolError(`URL-encoded body field '${name}' contains an unsupported value.`)
+    const serialized = serializeQuery(
+      { name, inputName: name, style: "form", explode: own(encoding, name) !== false },
+      item,
+    )
+    if (serialized instanceof ToolError) return serialized
+    parameters.push(...serialized)
+  }
+  return parameters
+}
 
 const resolveAuth = (plan: Plan): Effect.Effect<AppliedAuth, unknown> =>
   Effect.gen(function* () {
@@ -224,7 +258,7 @@ const buildUrl = (plan: Plan, input: Readonly<Record<string, unknown>>): string 
 }
 
 const serializeSimple = (
-  field: Plan["fields"][number],
+  field: Pick<Plan["fields"][number], "inputName" | "explode">,
   value: unknown,
   encode: (value: string) => string,
 ): string | ToolError => {
@@ -248,7 +282,7 @@ const serializeSimple = (
 }
 
 const serializeQuery = (
-  field: Plan["fields"][number],
+  field: Pick<Plan["fields"][number], "name" | "inputName" | "style" | "explode">,
   value: unknown,
 ): ReadonlyArray<readonly [string, string]> | ToolError => {
   if (field.style === "deepObject") {

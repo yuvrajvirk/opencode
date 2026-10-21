@@ -13,6 +13,7 @@ The initial adapter intentionally skips operations it cannot execute correctly. 
 - Relative or templated server URLs and server variables.
 - Base URLs containing query strings or fragments.
 - Runtime response-schema validation and full content negotiation.
+- URL-encoded form fields with JSON content types, nested values, and additional encoding styles.
 - Binary response values and explicit byte-oriented return types.
 - SSE, WebSocket, and other streaming transports.
 - Recovery of responses rejected by a status-filtering `HttpClient`.
