@@ -88,7 +88,7 @@ describe("search tools", () => {
               expect.arrayContaining(entries),
             )
             expect(new Set(entries.map((entry) => entry.path)).size).toBe(limit)
-            expect(result.metadata).toEqual({ files: limit, truncated: limit < 3 })
+            expect(result.metadata).toEqual({ matches: limit, truncated: limit < 3 })
             const text = result.content?.[0]?.type === "text" ? result.content[0].text : ""
             expect(text).not.toContain("Line ")
             expect(text).not.toContain("needle")
@@ -140,7 +140,7 @@ describe("search tools", () => {
           expect(result.output).toEqual(
             expect.arrayContaining(filenames.map((file) => ({ path: path.normalize(file), type: "file" }))),
           )
-          expect(result.metadata).toEqual({ files: filenames.length, truncated: false })
+          expect(result.metadata).toEqual({ matches: filenames.length, truncated: false })
           const text = result.content?.[0]?.type === "text" ? result.content[0].text : ""
           expect(
             text
@@ -156,7 +156,7 @@ describe("search tools", () => {
           expect(file).toMatchObject({
             status: "completed",
             output: [{ path: path.normalize(filenames[0]!), type: "file" }],
-            metadata: { files: 1, truncated: false },
+            metadata: { matches: 1, truncated: false },
           })
         }),
       )
@@ -173,7 +173,7 @@ describe("search tools", () => {
             status: "completed",
             output: [],
             content: [{ type: "text", text: "No matches found" }],
-            metadata: { files: 0, truncated: false },
+            metadata: { matches: 0, truncated: false },
           })
           for (const input of [
             { pattern: "[" },

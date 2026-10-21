@@ -181,7 +181,7 @@ export const Plugin = {
                   return {
                     output: result.entries,
                     content: filesToModelContent(result.entries, location.directory, result.truncated),
-                    metadata: { files: result.entries.length, truncated: result.truncated },
+                    metadata: { matches: result.entries.length, truncated: result.truncated },
                   }
                 }
                 return {
