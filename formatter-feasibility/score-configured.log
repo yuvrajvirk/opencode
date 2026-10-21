@@ -1,0 +1,290 @@
+{
+  "fixture_sha256": "ea9cf19a2bdb7587890f7ff6117f27d0ad609050d5280164cb1c183212dadbc0",
+  "files": 192,
+  "fixture_errors": [
+    {
+      "id": "0443a1ed59b7946b6b9dc85c3de7dcd80c4d7274077c1e32924e9ce8bf6a5e61",
+      "repo": "tox-dev/tox",
+      "path": "src/tox/session/cmd/run/__init__.py",
+      "error": "No eligible operator token"
+    },
+    {
+      "id": "0836baf6162a6d433efb1b9f2c6fc4820b7911e1b1fa7870f7654b7acda03d32",
+      "repo": "Ouranosinc/xclim",
+      "path": "xclim/stats.py",
+      "error": "No eligible operator token"
+    },
+    {
+      "id": "05dbae638ca92317bd182de452398d70287e8bb1b2c22e737d0205df90744790",
+      "repo": "reata/sqllineage",
+      "path": "sqllineage/core/parser/sqlparse/handlers/__init__.py",
+      "error": "No eligible operator token"
+    },
+    {
+      "id": "00bce2fcb17faa99443fb45e77f57b72b8a68ca7944bfa1d010de51fb6b7092e",
+      "repo": "robotframework/robotframework",
+      "path": "src/robot/htmldata/common/__init__.py",
+      "error": "No eligible operator token"
+    },
+    {
+      "id": "3689b31eba574d6b547d52b31aed5cde84818df5994cb785c8c234469aa9eb2c",
+      "repo": "adamchainz/apig-wsgi",
+      "path": "example/app/testapp/views.py",
+      "error": "No eligible operator token"
+    }
+  ],
+  "versions": [
+    {
+      "name": "before",
+      "revision": "b848b7ebae7b783ae5dc121f1c865f17da453543",
+      "source_sha256": "d96e0b7058f2c2d574ace8ed3f7872fc4ce33e28145d5b1f85157f0b97a08cd4",
+      "snapshots": 64,
+      "outcomes": 187,
+      "errors": [],
+      "correct": 10,
+      "total": 83,
+      "changed_input_correct": 8,
+      "changed_input_total": 81,
+      "by_tool": {
+        "black": {
+          "correct": 4,
+          "total": 77
+        },
+        "ruff": {
+          "correct": 6,
+          "total": 6
+        }
+      }
+    },
+    {
+      "name": "original",
+      "revision": "9d0f88e60463cc1de5b1e5e586b9f8fcdf98ac4c",
+      "source_sha256": "3aea3b2f6d58b98b3100e2231e6eeac70fd242203f0e755ce5b48b231f0bc47e",
+      "snapshots": 64,
+      "outcomes": 187,
+      "errors": [],
+      "correct": 50,
+      "total": 83,
+      "changed_input_correct": 49,
+      "changed_input_total": 81,
+      "by_tool": {
+        "black": {
+          "correct": 44,
+          "total": 77
+        },
+        "ruff": {
+          "correct": 6,
+          "total": 6
+        }
+      }
+    },
+    {
+      "name": "latest",
+      "revision": "870ab9dc5f2eb97c82024f56278f168353a0b068",
+      "source_sha256": "282345f3944488f11da49caf87ea615817af34c7942fdc69a7c1925a635a45d5",
+      "snapshots": 64,
+      "outcomes": 187,
+      "errors": [],
+      "correct": 10,
+      "total": 83,
+      "changed_input_correct": 8,
+      "changed_input_total": 81,
+      "by_tool": {
+        "black": {
+          "correct": 4,
+          "total": 77
+        },
+        "ruff": {
+          "correct": 6,
+          "total": 6
+        }
+      }
+    },
+    {
+      "name": "variant-literal",
+      "revision": "870ab9dc5f2eb97c82024f56278f168353a0b068",
+      "source_sha256": "cb18cc35aca4d38a1ce0e94b06078c9a8787ad14286c1ccfca82f4a0815ae97c",
+      "snapshots": 64,
+      "outcomes": 187,
+      "errors": [],
+      "correct": 50,
+      "total": 83,
+      "changed_input_correct": 49,
+      "changed_input_total": 81,
+      "by_tool": {
+        "black": {
+          "correct": 44,
+          "total": 77
+        },
+        "ruff": {
+          "correct": 6,
+          "total": 6
+        }
+      }
+    },
+    {
+      "name": "variant-configured",
+      "revision": "870ab9dc5f2eb97c82024f56278f168353a0b068",
+      "source_sha256": "5e0a67e1e52c678098ede928826e433eb8cae6491002870cf554e97804b58181",
+      "snapshots": 64,
+      "outcomes": 187,
+      "errors": [],
+      "correct": 41,
+      "total": 83,
+      "changed_input_correct": 40,
+      "changed_input_total": 81,
+      "by_tool": {
+        "black": {
+          "correct": 35,
+          "total": 77
+        },
+        "ruff": {
+          "correct": 6,
+          "total": 6
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "before": "before",
+      "after": "original",
+      "gains": 41,
+      "gaining_repositories": [
+        "frictionlessdata/frictionless-py",
+        "tox-dev/tox",
+        "mplanchard/pydecor",
+        "iterative/dvc",
+        "borgbackup/borg",
+        "PennyLaneAI/pennylane",
+        "aesara-devs/aesara",
+        "hynek/structlog",
+        "khornberg/octokit.py",
+        "mit-ll-responsible-ai/hydra-zen",
+        "sktime/sktime",
+        "pyvista/pyvista",
+        "adamchainz/apig-wsgi",
+        "XKNX/xknx"
+      ],
+      "losses": 1,
+      "losing_repositories": [
+        "PennyLaneAI/pennylane"
+      ],
+      "preservation_controls": 104,
+      "changed_controls": [
+        {
+          "id": "01158b1590571932fad888eb9c66bba0fe841f25a0b0f2853adc9296ee69db25",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "examples/gallery/seismology/velo_arrow_ellipse.py"
+        },
+        {
+          "id": "01648b1210df25e2f6bc05fee419ac8f8a79a986f5eb07cfd44418f7d558826f",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "examples/projections/cyl/cyl_mercator.py"
+        },
+        {
+          "id": "01f7ff268df1eb0b66bb9fe59d65e0a0c6566f0a89065b34bd014ba0709b5985",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "pygmt/helpers/utils.py"
+        },
+        {
+          "id": "06d12d03e0f37064231b8d0e7b126f28ed475b9a191930167f073eae9de919c2",
+          "repo": "tobymao/sqlglot",
+          "path": "tests/helpers.py"
+        },
+        {
+          "id": "1354ccbe98b66cde049ae945ad44daab4a735cabf43beb14b9ce5533c2f08a4b",
+          "repo": "tobymao/sqlglot",
+          "path": "sqlglot/helper.py"
+        },
+        {
+          "id": "17451497af47311b181b8ee47c386464c2987c6e335b48c14dfcb98105fe81b3",
+          "repo": "tobymao/sqlglot",
+          "path": "sqlglot/tokens.py"
+        }
+      ]
+    },
+    {
+      "before": "latest",
+      "after": "variant-literal",
+      "gains": 41,
+      "gaining_repositories": [
+        "frictionlessdata/frictionless-py",
+        "tox-dev/tox",
+        "mplanchard/pydecor",
+        "iterative/dvc",
+        "borgbackup/borg",
+        "PennyLaneAI/pennylane",
+        "aesara-devs/aesara",
+        "hynek/structlog",
+        "khornberg/octokit.py",
+        "mit-ll-responsible-ai/hydra-zen",
+        "sktime/sktime",
+        "pyvista/pyvista",
+        "adamchainz/apig-wsgi",
+        "XKNX/xknx"
+      ],
+      "losses": 1,
+      "losing_repositories": [
+        "PennyLaneAI/pennylane"
+      ],
+      "preservation_controls": 104,
+      "changed_controls": [
+        {
+          "id": "01158b1590571932fad888eb9c66bba0fe841f25a0b0f2853adc9296ee69db25",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "examples/gallery/seismology/velo_arrow_ellipse.py"
+        },
+        {
+          "id": "01648b1210df25e2f6bc05fee419ac8f8a79a986f5eb07cfd44418f7d558826f",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "examples/projections/cyl/cyl_mercator.py"
+        },
+        {
+          "id": "01f7ff268df1eb0b66bb9fe59d65e0a0c6566f0a89065b34bd014ba0709b5985",
+          "repo": "GenericMappingTools/pygmt",
+          "path": "pygmt/helpers/utils.py"
+        },
+        {
+          "id": "06d12d03e0f37064231b8d0e7b126f28ed475b9a191930167f073eae9de919c2",
+          "repo": "tobymao/sqlglot",
+          "path": "tests/helpers.py"
+        },
+        {
+          "id": "1354ccbe98b66cde049ae945ad44daab4a735cabf43beb14b9ce5533c2f08a4b",
+          "repo": "tobymao/sqlglot",
+          "path": "sqlglot/helper.py"
+        },
+        {
+          "id": "17451497af47311b181b8ee47c386464c2987c6e335b48c14dfcb98105fe81b3",
+          "repo": "tobymao/sqlglot",
+          "path": "sqlglot/tokens.py"
+        }
+      ]
+    },
+    {
+      "before": "latest",
+      "after": "variant-configured",
+      "gains": 32,
+      "gaining_repositories": [
+        "frictionlessdata/frictionless-py",
+        "tox-dev/tox",
+        "mplanchard/pydecor",
+        "iterative/dvc",
+        "borgbackup/borg",
+        "PennyLaneAI/pennylane",
+        "hynek/structlog",
+        "khornberg/octokit.py",
+        "pyvista/pyvista",
+        "adamchainz/apig-wsgi",
+        "XKNX/xknx"
+      ],
+      "losses": 1,
+      "losing_repositories": [
+        "PennyLaneAI/pennylane"
+      ],
+      "preservation_controls": 104,
+      "changed_controls": []
+    }
+  ]
+}

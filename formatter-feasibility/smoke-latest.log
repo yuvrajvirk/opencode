@@ -1,0 +1,263 @@
+[10:56:17.556] INFO (#2): database schema bootstrap started {
+  migrations: 50,
+}
+[10:56:17.576] INFO (#2): database schema bootstrap completed {
+  migrations: 50,
+  durationMs: 21,
+}
+[10:56:17.593] INFO (#12): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:17.612] INFO (#12): spawning process {
+  command: "git",
+  args: [ "remote", "get-url", "origin" ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:17.619] INFO (#12): spawning process {
+  command: "git",
+  args: [ "rev-list", "--max-parents=0", "HEAD" ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:17.679] INFO (#110): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config",
+  type: "directory",
+  ignores: 6,
+}
+[10:56:17.686] INFO (#114): watcher subscribe {
+  path: "/etc",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.687] INFO (#115): watcher started {
+  path: "/etc",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.688] INFO (#116): watcher subscribe {
+  path: "/",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.688] INFO (#117): watcher started {
+  path: "/",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.688] INFO (#118): watcher subscribe {
+  path: "/tmp",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.693] INFO (#119): watcher started {
+  path: "/tmp",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#120): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#121): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#122): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#123): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#124): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#125): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.694] INFO (#126): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/home",
+  type: "entries",
+  ignores: 0,
+}
+[10:56:17.695] INFO (#127): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/home",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:17.715] INFO (#111): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config",
+  type: "directory",
+  backend: "inotify",
+  ignores: 6,
+}
+[10:56:17.753] INFO (#12): location services booted {
+  directory: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+  workspaceID: undefined,
+  durationMs: 172,
+}
+[10:56:18.199] INFO (#403): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[10:56:18.199] INFO (#501): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:18.199] INFO (#403): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[10:56:18.200] INFO (#503): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:18.228] INFO (#403): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[10:56:18.228] INFO (#530): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skill",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:18.230] INFO (#403): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[10:56:18.230] INFO (#532): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skills",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:18.268] INFO (#540): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "symbolic-ref", "--quiet", "--short",
+    "HEAD"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:18.270] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "remote"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:18.274] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "for-each-ref", "--format=%(refname:short)",
+    "refs/heads"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:18.278] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "config", "init.defaultBranch"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:18.336] INFO (#591): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+}
+[10:56:18.340] INFO (#604): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/.git/HEAD",
+  type: "file",
+  ignores: 0,
+}
+[10:56:18.340] INFO (#605): watcher started {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/.git/HEAD",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[10:56:18.352] INFO (#604): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/.git/HEAD",
+  type: "file",
+}
+[10:56:18.374] INFO (#529): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skill",
+  type: "file",
+}
+[10:56:18.375] INFO (#531): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/skills",
+  type: "file",
+}
+[10:56:18.377] INFO (#502): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846/AGENTS.md",
+  type: "file",
+}
+[10:56:18.378] INFO (#500): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config/AGENTS.md",
+  type: "file",
+}
+[10:56:18.386] INFO (#114): watcher stopped {
+  path: "/etc",
+  type: "entries",
+}
+[10:56:18.386] INFO (#116): watcher stopped {
+  path: "/",
+  type: "entries",
+}
+[10:56:18.386] INFO (#118): watcher stopped {
+  path: "/tmp",
+  type: "entries",
+}
+[10:56:18.386] INFO (#120): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy",
+  type: "entries",
+}
+[10:56:18.386] INFO (#122): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories",
+  type: "entries",
+}
+[10:56:18.386] INFO (#124): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/repositories/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+  type: "entries",
+}
+[10:56:18.386] INFO (#126): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/home",
+  type: "entries",
+}
+[10:56:18.389] INFO (#110): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-7ubYqy/tmp/opencode-core-test-yZxzws/config",
+  type: "directory",
+}
+frictionlessdata/frictionless-py@84a1a8ad: 3 outcomes
+{"root":"/home/yvirk2/opencode-research/formatter-feasibility/checkouts/latest","historical":false,"revision":"870ab9dc5f2eb97c82024f56278f168353a0b068","source_sha256":"282345f3944488f11da49caf87ea615817af34c7942fdc69a7c1925a635a45d5","fixture_sha256":"ea9cf19a2bdb7587890f7ff6117f27d0ad609050d5280164cb1c183212dadbc0","results":[{"repo":"frictionlessdata/frictionless-py","revision":"84a1a8ad75c91758b2aad37f1be42a39d42d1846","outcomes":[{"id":"00f49f5a1469bf94d12a90d1579911c1ef69a754192788295d5291aac8f82e97","path":"frictionless/detector.py","formatted":false,"actual_sha256":"c84231e80264122cf40fdccdb95d1b21eac1256b4f1c3b3a2d9307ccadd2c96b","correct":false,"changed_input":false},{"id":"01fc40f6a7c160fc1e9a716e5092738d82ce6ce700aa5aec682ce2c04d743ef1","path":"tests/types/test_integer.py","formatted":false,"actual_sha256":"aba64a030b8019b59d3d5dcc8be828fe0f2b678b0d84073f9ad2c8c6b1c1ba6c","correct":false,"changed_input":false},{"id":"0284d8b12c5f0561aeaf2f35a952aed578fb1fbc78b9d7a1800c7f949ac8c89b","path":"frictionless/parser.py","formatted":false,"actual_sha256":"4827382b654dee7e6378041261cde7e48172e2d096818c248ab5c7355101560a","correct":false,"changed_input":false}]}]}

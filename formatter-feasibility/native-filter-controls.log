@@ -1,0 +1,21 @@
+[12:46:00.126] INFO (#7): spawning process {
+  command: "/usr/bin/python3",
+  args: [ "-I", "-S", "-c", "import json, re, sys\nif sys.version_info[0] != 3:\n    sys.exit(2)\ndata = json.load(sys.stdin)\nincluded = all(\n    (entry.get(\"files\") is None or re.search(entry[\"files\"], data[\"path\"]) is not None)\n    and (entry.get(\"exclude\") is None or re.search(entry[\"exclude\"], data[\"path\"]) is None)\n    for entry in data[\"filters\"]\n)\nsys.stdout.write(\"1\" if included else \"0\")\n" ],
+  cwd: "/tmp/formatter-native-controls-iZCX8R",
+}
+[12:46:00.148] INFO (#24): spawning process {
+  command: "/usr/bin/python3",
+  args: [ "-I", "-S", "-c", "import json, re, sys\nif sys.version_info[0] != 3:\n    sys.exit(2)\ndata = json.load(sys.stdin)\nincluded = all(\n    (entry.get(\"files\") is None or re.search(entry[\"files\"], data[\"path\"]) is not None)\n    and (entry.get(\"exclude\") is None or re.search(entry[\"exclude\"], data[\"path\"]) is None)\n    for entry in data[\"filters\"]\n)\nsys.stdout.write(\"1\" if included else \"0\")\n" ],
+  cwd: "/tmp/formatter-native-controls-iZCX8R",
+}
+[12:46:00.166] INFO (#41): spawning process {
+  command: "/usr/bin/python3",
+  args: [ "-I", "-S", "-c", "import json, re, sys\nif sys.version_info[0] != 3:\n    sys.exit(2)\ndata = json.load(sys.stdin)\nincluded = all(\n    (entry.get(\"files\") is None or re.search(entry[\"files\"], data[\"path\"]) is not None)\n    and (entry.get(\"exclude\") is None or re.search(entry[\"exclude\"], data[\"path\"]) is None)\n    for entry in data[\"filters\"]\n)\nsys.stdout.write(\"1\" if included else \"0\")\n" ],
+  cwd: "/tmp/formatter-native-controls-iZCX8R",
+}
+[12:46:00.185] INFO (#58): spawning process {
+  command: "/usr/bin/python3",
+  args: [ "-I", "-S", "-c", "import json, re, sys\nif sys.version_info[0] != 3:\n    sys.exit(2)\ndata = json.load(sys.stdin)\nincluded = all(\n    (entry.get(\"files\") is None or re.search(entry[\"files\"], data[\"path\"]) is not None)\n    and (entry.get(\"exclude\") is None or re.search(entry[\"exclude\"], data[\"path\"]) is None)\n    for entry in data[\"filters\"]\n)\nsys.stdout.write(\"1\" if included else \"0\")\n" ],
+  cwd: "/tmp/formatter-native-controls-iZCX8R",
+}
+{"scope":"Post-prototype process and failure-boundary controls, not held-out quality evidence","source_sha256":"52a0f92a7e83556c46dd03b3dff1347fd61657aa19af7395b9d1f15c8eb134e9","correct":4,"total":4,"results":[{"name":"project module shadows stay unexecuted","pattern":"\\Aexample\\.py\\Z","target":"example.py","expected":"command","actual":"command","correct":true,"elapsed_ms":28.184448999999972},{"name":"verbose regex remains data","pattern":"(?x)^example\\.py$ # __import__('os').system('exit 93')","target":"example.py","expected":"command","actual":"command","correct":true,"elapsed_ms":17.75522799999999},{"name":"invalid native regex fails closed","pattern":"[","target":"example.py","expected":"skip","actual":"skip","correct":true,"elapsed_ms":18.927295000000072},{"name":"pathological regex is bounded","pattern":"^(a+)+$","target":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!.py","expected":"skip","actual":"skip","correct":true,"elapsed_ms":2008.5190229999998}]}

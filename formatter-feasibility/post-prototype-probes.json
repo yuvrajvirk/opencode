@@ -1,0 +1,50 @@
+{
+  "snapshots": [
+    {
+      "repo": "independent/toml-string",
+      "revision": "toml-string",
+      "declaration": {
+        "tool": null
+      },
+      "configs": [
+        {
+          "path": "pyproject.toml",
+          "text": "[project]\nname = \"sample\"\nversion = \"0.1.0\"\ndescription = \"\"\"\n[tool.black]\nThis is documentation, not a formatter declaration.\n\"\"\"\n"
+        }
+      ],
+      "files": [
+        {
+          "id": "toml-string",
+          "path": "sample.py",
+          "original": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "input": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "expected": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "expected_sha256": "f966d764fe60bde82c975a30b3b9261922cd3a5f8e502225dce0522e3326cb63"
+        }
+      ]
+    },
+    {
+      "repo": "independent/yaml-scalar",
+      "revision": "yaml-scalar",
+      "declaration": {
+        "tool": null
+      },
+      "configs": [
+        {
+          "path": ".pre-commit-config.yaml",
+          "text": "notes: |\n  - repo: https://github.com/psf/black\n    hooks:\n      - id: black\nrepos: []\n"
+        }
+      ],
+      "files": [
+        {
+          "id": "yaml-scalar",
+          "path": "sample.py",
+          "original": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "input": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "expected": "answer   =   { \"label\" : \"unchanged\" }\n",
+          "expected_sha256": "f966d764fe60bde82c975a30b3b9261922cd3a5f8e502225dce0522e3326cb63"
+        }
+      ]
+    }
+  ]
+}

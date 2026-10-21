@@ -1,0 +1,44 @@
+{
+  "scope": "Post-prototype process and failure-boundary controls, not held-out quality evidence",
+  "source_sha256": "213e30886bcaeba4d27877728b117181a2233850860b67d3a6ae5353a487b72d",
+  "correct": 4,
+  "total": 4,
+  "results": [
+    {
+      "name": "project module shadows stay unexecuted",
+      "pattern": "\\Aexample\\.py\\Z",
+      "target": "example.py",
+      "expected": "command",
+      "actual": "command",
+      "correct": true,
+      "elapsed_ms": 41.021750999999995
+    },
+    {
+      "name": "verbose regex remains data",
+      "pattern": "(?x)^example\\.py$ # __import__('os').system('exit 93')",
+      "target": "example.py",
+      "expected": "command",
+      "actual": "command",
+      "correct": true,
+      "elapsed_ms": 24.668137
+    },
+    {
+      "name": "invalid native regex fails closed",
+      "pattern": "[",
+      "target": "example.py",
+      "expected": "skip",
+      "actual": "skip",
+      "correct": true,
+      "elapsed_ms": 21.43991600000004
+    },
+    {
+      "name": "pathological regex is bounded",
+      "pattern": "^(a+)+$",
+      "target": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!.py",
+      "expected": "skip",
+      "actual": "skip",
+      "correct": true,
+      "elapsed_ms": 2007.7854350000002
+    }
+  ]
+}

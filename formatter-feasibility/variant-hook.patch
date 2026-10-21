@@ -1,0 +1,40 @@
+diff --git a/packages/core/src/formatter/builtins.ts b/packages/core/src/formatter/builtins.ts
+index 86b3714add..ebd46bcbcf 100644
+--- a/packages/core/src/formatter/builtins.ts
++++ b/packages/core/src/formatter/builtins.ts
+@@ -173,6 +173,27 @@ export function make(input: {
+     }).pipe(Effect.orElseSucceed(() => disabled)),
+   }
+ 
++  const black: Info = {
++    name: "black",
++    extensions: [".py", ".pyi"],
++    enabled: Effect.gen(function* () {
++      const bin = findExecutable("black")
++      if (!bin || (yield* ruff.enabled) !== false) return disabled
++      for (const file of yield* findUp("pyproject.toml")) {
++        if (/^\s*\[tool\.black\]\s*(?:#.*)?$/m.test(yield* readText(file))) return [bin, "--quiet", "$FILE"]
++      }
++      for (const file of yield* findUp(".pre-commit-config.yaml")) {
++        if (
++          /^\s*(?:-\s*)?repo:\s*["']?https:\/\/github\.com\/(?:psf\/black(?:-pre-commit-mirror)?|ambv\/black)["']?\s*(?:#.*)?$/m.test(
++            yield* readText(file),
++          )
++        )
++          return [bin, "--quiet", "$FILE"]
++      }
++      return disabled
++    }).pipe(Effect.orElseSucceed(() => disabled)),
++  }
++
+   const air: Info = {
+     name: "air",
+     extensions: [".R"],
+@@ -247,6 +268,7 @@ export function make(input: {
+     clang,
+     ktlint,
+     ruff,
++    black,
+     air,
+     uv,
+     rubocop,

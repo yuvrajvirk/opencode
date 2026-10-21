@@ -1,0 +1,4363 @@
+{
+  "scope": "Supplementary post-prototype Python re filter semantics; not untouched holdout",
+  "reference": "https://docs.python.org/3/library/re.html#regular-expression-syntax",
+  "python": "3.13.14 (main, Jun 23 2026, 15:18:27) [Clang 22.1.3 ]",
+  "patterns": [
+    {
+      "pattern": "",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": true
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": true
+        },
+        {
+          "path": "docs/example.py",
+          "matches": true
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": true
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": true
+        },
+        {
+          "path": "docs/example.py",
+          "matches": true
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^(src|tests)/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": true
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/[^/]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "\\Asrc/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "\\.py\\Z",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": true
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": true
+        },
+        {
+          "path": "docs/example.py",
+          "matches": true
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\w+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\W+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\d+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\D+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\s+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\S+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "\\btest\\b",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "(?i)^src/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "(?m)^src/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "(?s)^src/.*\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "(?x)^ (src | tests) / [^/]+ \\.py $ # file\n",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": true
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "(?x)^src/[ #]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "(?x)^src/\\ \\#\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^(?P<directory>src)/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^(src)/\\1\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/[]a]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/[^]a]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/.*\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/.+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "^src/(?!generated/).*\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": true
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": true
+        },
+        {
+          "path": "src/ .py",
+          "matches": true
+        },
+        {
+          "path": "src/ #.py",
+          "matches": true
+        },
+        {
+          "path": "src/#.py",
+          "matches": true
+        },
+        {
+          "path": "src/].py",
+          "matches": true
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": true
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": true
+        },
+        {
+          "path": "src/\r.py",
+          "matches": true
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "pattern": "(?<=src/)example\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/[a-z]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": true
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/[0-9]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\x61+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": true
+        },
+        {
+          "path": "src/aa.py",
+          "matches": true
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\u00e9+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": true
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/\\U0001F40D\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": true
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^src/(?:test_)?example\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": true
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": true
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^doc/",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": false
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": false
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    },
+    {
+      "pattern": "^((xknx|test|examples|docs)/.+)?[^/]+\\.py$",
+      "cases": [
+        {
+          "path": "example.py",
+          "matches": true
+        },
+        {
+          "path": "src/example.py",
+          "matches": false
+        },
+        {
+          "path": "tests/example.py",
+          "matches": false
+        },
+        {
+          "path": "docs/example.py",
+          "matches": true
+        },
+        {
+          "path": "SRC/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/generated/example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test_example.py",
+          "matches": false
+        },
+        {
+          "path": "src/test.py",
+          "matches": false
+        },
+        {
+          "path": "src/test\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9test.py",
+          "matches": false
+        },
+        {
+          "path": "src/src.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00e9.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u86c7.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ud83d\udc0d.py",
+          "matches": false
+        },
+        {
+          "path": "src/123.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u0661\u0662\u0663.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u00b2.py",
+          "matches": false
+        },
+        {
+          "path": "src/ .py",
+          "matches": false
+        },
+        {
+          "path": "src/ #.py",
+          "matches": false
+        },
+        {
+          "path": "src/#.py",
+          "matches": false
+        },
+        {
+          "path": "src/].py",
+          "matches": false
+        },
+        {
+          "path": "src/a.py",
+          "matches": false
+        },
+        {
+          "path": "src/aa.py",
+          "matches": false
+        },
+        {
+          "path": "src/\t.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u001c.py",
+          "matches": false
+        },
+        {
+          "path": "src/\ufeff.py",
+          "matches": false
+        },
+        {
+          "path": "src/\r.py",
+          "matches": false
+        },
+        {
+          "path": "src/\n.py",
+          "matches": false
+        },
+        {
+          "path": "src/\u2028.py",
+          "matches": false
+        }
+      ]
+    }
+  ]
+}

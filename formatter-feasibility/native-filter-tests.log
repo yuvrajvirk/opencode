@@ -1,0 +1,968 @@
+bun test v1.4.2 (744846f84)
+
+test/formatter.test.ts:
+[17:35:46.169] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HPebJK/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.170] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-e7wNtT/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.170] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.170] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.195] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HPebJK/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.196] INFO (#362): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HPebJK/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.452] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-WRIDvz/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.452] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-t9C08P/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.452] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.452] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.458] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-WRIDvz/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.459] INFO (#1345): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-WRIDvz/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.634] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-P0ovpQ/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.634] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LE4VbQ/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.634] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.635] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.643] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-P0ovpQ/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.644] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-P0ovpQ/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.645] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LE4VbQ/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.646] INFO (#2317): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LE4VbQ/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.887] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-9wZFcC/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.887] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-BCAW9L/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.887] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.887] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.893] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-9wZFcC/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.894] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-9wZFcC/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.894] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-BCAW9L/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:46.895] INFO (#3303): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-BCAW9L/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.061] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HBJatf/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.062] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-zahNoA/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.062] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.062] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.069] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HBJatf/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.070] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HBJatf/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.070] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-zahNoA/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.071] INFO (#4281): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-zahNoA/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.253] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TnSVqI/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.253] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-wldmQh/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.253] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.254] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.260] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TnSVqI/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.260] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TnSVqI/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.261] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-wldmQh/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.261] INFO (#5259): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-wldmQh/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.405] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gdfsbr/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.405] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-iMuSDh/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.405] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.405] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.411] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gdfsbr/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.411] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gdfsbr/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.412] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-iMuSDh/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.412] INFO (#6237): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-iMuSDh/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.562] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1J7u6r/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.563] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-f9Msov/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.563] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.563] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.569] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1J7u6r/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.570] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1J7u6r/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.570] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-f9Msov/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.571] INFO (#7213): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-f9Msov/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.742] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-IMPf2k/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.742] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nFRqXr/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.742] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.742] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.750] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-IMPf2k/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.751] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-IMPf2k/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.752] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nFRqXr/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.753] INFO (#8189): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nFRqXr/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.932] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TDzVBL/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.932] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-gXaND2/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.932] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.932] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.939] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TDzVBL/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.939] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-TDzVBL/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.940] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-gXaND2/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:47.941] INFO (#9155): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-gXaND2/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.149] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HJaO4c/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.150] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-a69oZm/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.150] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.150] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.155] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HJaO4c/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.156] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-HJaO4c/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.156] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-a69oZm/.opencode/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.157] INFO (#10133): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-a69oZm/.opencode/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.298] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-VIqhU8/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.298] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-ZtFRZI/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.298] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.298] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.302] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-VIqhU8/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.303] INFO (#11109): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-VIqhU8/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.471] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-F0vMtu/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.471] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-sQTjUs/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.471] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.472] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.476] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-F0vMtu/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.477] INFO (#12073): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-F0vMtu/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.629] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AkSG5v/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.630] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-RZ2d1m/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.630] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.630] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.634] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AkSG5v/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.634] INFO (#13033): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AkSG5v/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.763] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-FyxicF/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.763] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-thjJFr/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.763] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.763] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.767] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-FyxicF/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.768] INFO (#13989): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-FyxicF/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.923] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1xi9Kd/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.923] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-mC9c1o/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.924] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.924] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.928] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1xi9Kd/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:48.928] INFO (#14957): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-1xi9Kd/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.062] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nfQQio/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.063] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-NCdZwo/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.063] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.063] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.067] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nfQQio/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.068] INFO (#15913): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-nfQQio/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.227] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-OeoeXN/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.227] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-F2ohDc/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.227] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.228] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.233] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-OeoeXN/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.233] INFO (#16881): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-OeoeXN/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.376] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AoIshd/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.376] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-aAxr1y/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.376] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.376] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.380] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AoIshd/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.381] INFO (#17839): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-AoIshd/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.591] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-s8pEju/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.591] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-4gZSnj/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.591] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.591] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.596] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-s8pEju/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.597] INFO (#18805): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-s8pEju/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.785] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LYfnwO/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.785] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-H2Ustj/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.785] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.785] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.791] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LYfnwO/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.791] INFO (#19773): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-LYfnwO/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.961] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-V7z0fp/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.962] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-gLMFWd/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.962] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.962] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.967] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-V7z0fp/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:49.968] INFO (#20731): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-V7z0fp/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.112] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Z0icel/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.112] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-2emUB9/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.112] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.112] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.117] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Z0icel/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.118] INFO (#21689): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Z0icel/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.292] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.292] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-8D39ix/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.293] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.293] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.298] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.299] INFO (#22647): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.426] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.426] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-pa0ho5/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.427] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.427] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.432] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.433] INFO (#23128): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-E8Tufr/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.636] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-i1psYs/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.636] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-qVr0n3/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.636] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.636] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.641] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-i1psYs/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.642] INFO (#24538): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-i1psYs/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.833] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-vyXwMn/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.833] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-kdx80T/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.833] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.833] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.841] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-vyXwMn/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:50.842] INFO (#25506): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-vyXwMn/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.050] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gfe81p/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.050] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-rdA7nh/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.050] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.051] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.057] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gfe81p/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.058] INFO (#26482): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-Gfe81p/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.265] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-hOIWpz/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.265] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-6YnlpF/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.265] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.265] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.270] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-hOIWpz/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[17:35:51.270] INFO (#27458): watcher subscribe {
+  path: "/tmp/oc-kFlHQq/tmp/opencode-core-test-hOIWpz/config/skills",
+  type: "file",
+  ignores: 0,
+}
+
+ 61 pass
+ 0 fail
+ 80 expect() calls
+Ran 61 tests across 2 files. [6.64s]

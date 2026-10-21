@@ -1,0 +1,21 @@
+Preparing worktree (detached HEAD b848b7ebae)
+Updating files:  43% (1955/4483)Updating files:  44% (1973/4483)Updating files:  45% (2018/4483)Updating files:  46% (2063/4483)Updating files:  47% (2108/4483)Updating files:  48% (2152/4483)Updating files:  49% (2197/4483)Updating files:  50% (2242/4483)Updating files:  51% (2287/4483)Updating files:  52% (2332/4483)Updating files:  53% (2376/4483)Updating files:  54% (2421/4483)Updating files:  55% (2466/4483)Updating files:  56% (2511/4483)Updating files:  57% (2556/4483)Updating files:  58% (2601/4483)Updating files:  59% (2645/4483)Updating files:  60% (2690/4483)Updating files:  61% (2735/4483)Updating files:  62% (2780/4483)Updating files:  63% (2825/4483)Updating files:  64% (2870/4483)Updating files:  65% (2914/4483)Updating files:  66% (2959/4483)Updating files:  67% (3004/4483)Updating files:  68% (3049/4483)Updating files:  69% (3094/4483)Updating files:  70% (3139/4483)Updating files:  71% (3183/4483)Updating files:  72% (3228/4483)Updating files:  73% (3273/4483)Updating files:  74% (3318/4483)Updating files:  75% (3363/4483)Updating files:  76% (3408/4483)Updating files:  77% (3452/4483)Updating files:  78% (3497/4483)Updating files:  79% (3542/4483)Updating files:  80% (3587/4483)Updating files:  81% (3632/4483)Updating files:  82% (3677/4483)Updating files:  83% (3721/4483)Updating files:  84% (3766/4483)Updating files:  85% (3811/4483)Updating files:  86% (3856/4483)Updating files:  87% (3901/4483)Updating files:  88% (3946/4483)Updating files:  89% (3990/4483)Updating files:  90% (4035/4483)Updating files:  91% (4080/4483)Updating files:  92% (4125/4483)Updating files:  93% (4170/4483)Updating files:  93% (4183/4483)Updating files:  94% (4215/4483)Updating files:  95% (4259/4483)Updating files:  96% (4304/4483)Updating files:  97% (4349/4483)Updating files:  98% (4394/4483)Updating files:  99% (4439/4483)Updating files: 100% (4483/4483)Updating files: 100% (4483/4483), done.
+HEAD is now at b848b7ebae fix(app): session timeline jumping on scroll (#18993)
+bun install v1.4.2 (744846f84)
+Resolving dependencies
+Resolved, downloaded and extracted [24]
+
++ @actions/artifact@5.0.1
++ @tsconfig/bun@1.0.9
++ @types/mime-types@3.0.1
++ @typescript/native-preview@7.0.0-dev.20251207.1
++ glob@13.0.5
++ husky@9.1.7
++ prettier@3.6.2
++ semver@7.7.4 (v7.8.5 available)
++ sst@3.18.10
++ turbo@2.8.13
++ @aws-sdk/client-s3@3.933.0
++ typescript@5.8.2
+
+2217 packages installed [2.64s]

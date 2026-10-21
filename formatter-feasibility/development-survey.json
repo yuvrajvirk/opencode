@@ -1,0 +1,56 @@
+{
+  "snapshots": 64,
+  "repositories": 56,
+  "configuration_files": 228,
+  "non_utf8_files": 0,
+  "signals_not_ground_truth": {
+    "black_section:all_paths": {
+      "snapshots": 16,
+      "repositories": 14
+    },
+    "black_section:root_only": {
+      "snapshots": 16,
+      "repositories": 14
+    },
+    "black_hook:all_paths": {
+      "snapshots": 22,
+      "repositories": 19
+    },
+    "black_hook:root_only": {
+      "snapshots": 22,
+      "repositories": 19
+    },
+    "ruff_format_section:all_paths": {
+      "snapshots": 1,
+      "repositories": 1
+    },
+    "ruff_format_section:root_only": {
+      "snapshots": 1,
+      "repositories": 1
+    },
+    "ruff_format_hook:all_paths": {
+      "snapshots": 1,
+      "repositories": 1
+    },
+    "ruff_format_hook:root_only": {
+      "snapshots": 1,
+      "repositories": 1
+    },
+    "black_word:all_paths": {
+      "snapshots": 34,
+      "repositories": 30
+    },
+    "black_word:root_only": {
+      "snapshots": 34,
+      "repositories": 30
+    },
+    "ruff_word:all_paths": {
+      "snapshots": 5,
+      "repositories": 5
+    },
+    "ruff_word:root_only": {
+      "snapshots": 5,
+      "repositories": 5
+    }
+  }
+}

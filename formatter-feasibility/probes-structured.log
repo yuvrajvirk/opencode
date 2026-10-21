@@ -1,0 +1,525 @@
+[11:18:41.368] INFO (#2): database schema bootstrap started {
+  migrations: 50,
+}
+[11:18:41.388] INFO (#2): database schema bootstrap completed {
+  migrations: 50,
+  durationMs: 20,
+}
+[11:18:41.413] INFO (#12): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:41.450] INFO (#12): spawning process {
+  command: "git",
+  args: [ "remote", "get-url", "origin" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:41.461] INFO (#12): spawning process {
+  command: "git",
+  args: [ "rev-list", "--max-parents=0", "HEAD" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:41.557] INFO (#110): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config",
+  type: "directory",
+  ignores: 6,
+}
+[11:18:41.568] INFO (#114): watcher subscribe {
+  path: "/etc",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.569] INFO (#115): watcher started {
+  path: "/etc",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.570] INFO (#116): watcher subscribe {
+  path: "/",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.570] INFO (#117): watcher started {
+  path: "/",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.571] INFO (#118): watcher subscribe {
+  path: "/tmp",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.571] INFO (#119): watcher started {
+  path: "/tmp",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.571] INFO (#120): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.571] INFO (#121): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.571] INFO (#122): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.572] INFO (#123): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.572] INFO (#124): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.572] INFO (#125): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.572] INFO (#126): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:41.573] INFO (#127): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:41.604] INFO (#111): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config",
+  type: "directory",
+  backend: "inotify",
+  ignores: 6,
+}
+[11:18:41.656] INFO (#12): location services booted {
+  directory: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+  workspaceID: undefined,
+  durationMs: 260,
+}
+[11:18:42.171] INFO (#401): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.172] INFO (#501): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.172] INFO (#401): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.172] INFO (#503): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.204] INFO (#401): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.205] INFO (#530): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skill",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.207] INFO (#401): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.207] INFO (#532): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skills",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.252] INFO (#540): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "symbolic-ref", "--quiet", "--short",
+    "HEAD"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:42.254] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "remote"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:42.258] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "for-each-ref", "--format=%(refname:short)",
+    "refs/heads"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:42.261] INFO (#541): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "config", "init.defaultBranch"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:42.299] INFO (#591): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+}
+[11:18:42.304] INFO (#605): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/.git/HEAD",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.305] INFO (#606): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/.git/HEAD",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.345] INFO (#605): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/.git/HEAD",
+  type: "file",
+}
+[11:18:42.366] INFO (#529): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skill",
+  type: "file",
+}
+[11:18:42.366] INFO (#531): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/skills",
+  type: "file",
+}
+[11:18:42.369] INFO (#502): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string/AGENTS.md",
+  type: "file",
+}
+[11:18:42.369] INFO (#500): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config/AGENTS.md",
+  type: "file",
+}
+[11:18:42.376] INFO (#114): watcher stopped {
+  path: "/etc",
+  type: "entries",
+}
+[11:18:42.376] INFO (#116): watcher stopped {
+  path: "/",
+  type: "entries",
+}
+[11:18:42.377] INFO (#118): watcher stopped {
+  path: "/tmp",
+  type: "entries",
+}
+[11:18:42.377] INFO (#120): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+}
+[11:18:42.377] INFO (#122): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+}
+[11:18:42.377] INFO (#124): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/toml-string",
+  type: "entries",
+}
+[11:18:42.377] INFO (#126): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+}
+[11:18:42.393] INFO (#110): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iHaEfP/config",
+  type: "directory",
+}
+independent/toml-string@toml-str: 1 outcomes
+[11:18:42.406] INFO (#1066): database schema bootstrap started {
+  migrations: 50,
+}
+[11:18:42.412] INFO (#1066): database schema bootstrap completed {
+  migrations: 50,
+  durationMs: 6,
+}
+[11:18:42.416] INFO (#1076): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.422] INFO (#1076): spawning process {
+  command: "git",
+  args: [ "remote", "get-url", "origin" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.428] INFO (#1076): spawning process {
+  command: "git",
+  args: [ "rev-list", "--max-parents=0", "HEAD" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.469] INFO (#1174): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config",
+  type: "directory",
+  ignores: 6,
+}
+[11:18:42.471] INFO (#1178): watcher subscribe {
+  path: "/etc",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.472] INFO (#1179): watcher started {
+  path: "/etc",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.472] INFO (#1180): watcher subscribe {
+  path: "/",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.473] INFO (#1181): watcher started {
+  path: "/",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.473] INFO (#1182): watcher subscribe {
+  path: "/tmp",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.473] INFO (#1183): watcher started {
+  path: "/tmp",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.474] INFO (#1184): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.474] INFO (#1185): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.474] INFO (#1186): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.475] INFO (#1187): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.475] INFO (#1188): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.475] INFO (#1189): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.475] INFO (#1190): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+  ignores: 0,
+}
+[11:18:42.476] INFO (#1191): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.488] INFO (#1175): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config",
+  type: "directory",
+  backend: "inotify",
+  ignores: 6,
+}
+[11:18:42.505] INFO (#1076): location services booted {
+  directory: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+  workspaceID: undefined,
+  durationMs: 92,
+}
+[11:18:42.657] INFO (#1467): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.657] INFO (#1559): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.657] INFO (#1467): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/AGENTS.md",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.657] INFO (#1561): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/AGENTS.md",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.674] INFO (#1467): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skill",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.675] INFO (#1588): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skill",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.675] INFO (#1467): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skills",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.676] INFO (#1590): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skills",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.703] INFO (#1598): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "symbolic-ref", "--quiet", "--short",
+    "HEAD"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.705] INFO (#1599): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "remote"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.711] INFO (#1599): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "for-each-ref", "--format=%(refname:short)",
+    "refs/heads"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.714] INFO (#1599): spawning process {
+  command: "git",
+  args: [
+    "--no-optional-locks", "-c", "core.autocrlf=false", "-c", "core.fsmonitor=false", "-c", "core.longpaths=true",
+    "-c", "core.symlinks=true", "-c", "core.quotepath=false", "config", "init.defaultBranch"
+  ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.747] INFO (#1649): spawning process {
+  command: "git",
+  args: [ "rev-parse", "--git-dir", "--git-common-dir", "--show-toplevel" ],
+  cwd: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+}
+[11:18:42.752] INFO (#1662): watcher subscribe {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/.git/HEAD",
+  type: "file",
+  ignores: 0,
+}
+[11:18:42.752] INFO (#1663): watcher started {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/.git/HEAD",
+  type: "file",
+  backend: "node",
+  ignores: 0,
+}
+[11:18:42.772] INFO (#1662): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/.git/HEAD",
+  type: "file",
+}
+[11:18:42.790] INFO (#1587): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skill",
+  type: "file",
+}
+[11:18:42.790] INFO (#1589): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/skills",
+  type: "file",
+}
+[11:18:42.792] INFO (#1560): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar/AGENTS.md",
+  type: "file",
+}
+[11:18:42.792] INFO (#1558): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config/AGENTS.md",
+  type: "file",
+}
+[11:18:42.799] INFO (#1178): watcher stopped {
+  path: "/etc",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1180): watcher stopped {
+  path: "/",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1182): watcher stopped {
+  path: "/tmp",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1184): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1186): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1188): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/repositories/yaml-scalar",
+  type: "entries",
+}
+[11:18:42.799] INFO (#1190): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/home",
+  type: "entries",
+}
+[11:18:42.821] INFO (#1174): watcher stopped {
+  path: "/tmp/opencode-formatter-worker-febIrb/tmp/opencode-core-test-iQNv9v/config",
+  type: "directory",
+}
+independent/yaml-scalar@yaml-sca: 1 outcomes
+{"root":"/home/yvirk2/opencode-worktrees/black-formatter","historical":false,"revision":"ab249a9684f60179b5ebe0bb401b23fa0988e733","source_sha256":"a0aa5b546427c9b56a26e6efb5db46f9275d5b8c258b1273a648bbed07ccf8f7","source_files":{"packages/core/src/formatter/builtins.ts":"a0aa5b546427c9b56a26e6efb5db46f9275d5b8c258b1273a648bbed07ccf8f7","packages/core/src/formatter.ts":"e9a1812449f34402923a7ca00e5cf1fbce3714aa874e983bfc377bf3ce959f9a","packages/core/src/config/plugin/formatter.ts":"cf4f27b63e4de1e70225fe48eaf2882fe080c1a52b22dab7bf167b45068c07b7","packages/core/src/formatter/black.ts":"2d4933aae2cb944146e4b352c1c48f958f9b0109e95d765672567ee15d458c60","bun.lock":"6487a09236043c8f6e9737cb4ab28a6edab5c5c1949a37e8907cae7d7a1531b9"},"fixture_sha256":"24285755022638585b34756002c2a106305c6a7b5fe4eced5b7ab07cc90c494a","results":[{"repo":"independent/toml-string","revision":"toml-string","outcomes":[{"id":"toml-string","path":"sample.py","formatted":false,"actual_sha256":"f966d764fe60bde82c975a30b3b9261922cd3a5f8e502225dce0522e3326cb63","correct":true,"changed_input":false}]},{"repo":"independent/yaml-scalar","revision":"yaml-scalar","outcomes":[{"id":"yaml-scalar","path":"sample.py","formatted":false,"actual_sha256":"f966d764fe60bde82c975a30b3b9261922cd3a5f8e502225dce0522e3326cb63","correct":true,"changed_input":false}]}]}

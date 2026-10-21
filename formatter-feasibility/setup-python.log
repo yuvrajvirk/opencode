@@ -1,0 +1,18 @@
+Using CPython 3.13.14
+Creating virtual environment at: /home/yvirk2/opencode-research/formatter-feasibility/.venv
+Activate with: source /home/yvirk2/opencode-research/formatter-feasibility/.venv/bin/activate
+Using Python 3.13.14 environment at: /home/yvirk2/opencode-research/formatter-feasibility/.venv
+Resolved 9 packages in 647ms
+Downloading ruff (11.0MiB)
+ Downloaded ruff
+Prepared 6 packages in 585ms
+Installed 9 packages in 538ms
+ + black==24.1.0
+ + click==8.1.7
+ + mypy-extensions==1.1.0
+ + packaging==26.3
+ + pathspec==1.1.1
+ + platformdirs==4.13.5
+ + pyyaml==6.0.2
+ + ruff==0.11.13
+ + tomli==2.2.1

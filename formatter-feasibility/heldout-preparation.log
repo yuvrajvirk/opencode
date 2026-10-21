@@ -1,0 +1,31 @@
+{
+  "snapshots": 24,
+  "files": 72,
+  "fixture_errors": 2,
+  "by_declaration": {
+    "black": {
+      "snapshots": 5,
+      "repositories": 3,
+      "files": 15,
+      "usable_oracles": 15,
+      "oracle_changes_input": 15,
+      "oracle_errors": 0
+    },
+    "ruff": {
+      "snapshots": 0,
+      "repositories": 0,
+      "files": 0,
+      "usable_oracles": 0,
+      "oracle_changes_input": 0,
+      "oracle_errors": 0
+    },
+    "preservation_control": {
+      "snapshots": 19,
+      "repositories": 6,
+      "files": 57,
+      "usable_oracles": 0,
+      "oracle_changes_input": 0,
+      "oracle_errors": 0
+    }
+  }
+}

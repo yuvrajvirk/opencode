@@ -1,0 +1,94 @@
+{
+  "fixture_sha256": "56148bed6a20fdc65336daf64a436b84dc87356dc784ab2774137c2f2413b717",
+  "files": 72,
+  "fixture_errors": [
+    {
+      "id": "01f812ab5503b7135669d8cf6eab55146a028c1ee1e4ac20410b520defcb5249",
+      "repo": "sphinx-doc/sphinx",
+      "path": "tests/roots/test-ext-autosummary-recursive/package/package/module.py",
+      "error": "No eligible operator token"
+    },
+    {
+      "id": "02bb9cccc949e7b8da894997a0f797ab2c0b06ad30b1cd5502b87e0f264eea69",
+      "repo": "sphinx-doc/sphinx",
+      "path": "tests/roots/test-ext-autosummary-recursive/package2/module.py",
+      "error": "No eligible operator token"
+    }
+  ],
+  "versions": [
+    {
+      "name": "heldout-latest",
+      "revision": "8a360e103e247f7ecb588cfeb24feb006baf14ca",
+      "source_sha256": "f35cb772951de7ff19ef3dce61caa0b1c6d1196e040cc13eb0aa7fcb6acb83e8",
+      "source_files": {
+        "packages/core/src/formatter/builtins.ts": "f35cb772951de7ff19ef3dce61caa0b1c6d1196e040cc13eb0aa7fcb6acb83e8",
+        "packages/core/src/formatter.ts": "d58110a565a5ee843a1e87025d9940099c662df68b603ee88d0b187821b31979",
+        "packages/core/src/config/plugin/formatter.ts": "cf4f27b63e4de1e70225fe48eaf2882fe080c1a52b22dab7bf167b45068c07b7",
+        "bun.lock": "b3c986e644b07c996881e1398c28b398736d1f4bb14b898fe9fc66b937a2f29a"
+      },
+      "runner_sha256": "468e247b5a4d9d529b9474cfd8e49702fd1d3f5a73bde77af2a4e1e0b74e2245",
+      "snapshots": 24,
+      "outcomes": 70,
+      "errors": [],
+      "correct": 3,
+      "total": 15,
+      "changed_input_correct": 3,
+      "changed_input_total": 15,
+      "by_tool": {
+        "black": {
+          "correct": 3,
+          "total": 15
+        },
+        "ruff": {
+          "correct": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "name": "heldout-candidate",
+      "revision": "8a360e103e247f7ecb588cfeb24feb006baf14ca",
+      "source_sha256": "87622a0fddf788c7d07d39ebadffc3adb7c5322614c068932a86c084f3971593",
+      "source_files": {
+        "packages/core/src/formatter/builtins.ts": "87622a0fddf788c7d07d39ebadffc3adb7c5322614c068932a86c084f3971593",
+        "packages/core/src/formatter.ts": "e9a1812449f34402923a7ca00e5cf1fbce3714aa874e983bfc377bf3ce959f9a",
+        "packages/core/src/config/plugin/formatter.ts": "cf4f27b63e4de1e70225fe48eaf2882fe080c1a52b22dab7bf167b45068c07b7",
+        "packages/core/src/formatter/black.ts": "213e30886bcaeba4d27877728b117181a2233850860b67d3a6ae5353a487b72d",
+        "bun.lock": "7c638442071e8987df1f3d649d009744a5b28f75dfa16a1f601192a50d3f25bc"
+      },
+      "runner_sha256": "468e247b5a4d9d529b9474cfd8e49702fd1d3f5a73bde77af2a4e1e0b74e2245",
+      "snapshots": 24,
+      "outcomes": 70,
+      "errors": [],
+      "correct": 15,
+      "total": 15,
+      "changed_input_correct": 15,
+      "changed_input_total": 15,
+      "by_tool": {
+        "black": {
+          "correct": 15,
+          "total": 15
+        },
+        "ruff": {
+          "correct": 0,
+          "total": 0
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "before": "heldout-latest",
+      "after": "heldout-candidate",
+      "gains": 12,
+      "gaining_repositories": [
+        "django/django",
+        "pytest-dev/pytest"
+      ],
+      "losses": 0,
+      "losing_repositories": [],
+      "preservation_controls": 55,
+      "changed_controls": []
+    }
+  ]
+}

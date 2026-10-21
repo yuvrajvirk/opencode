@@ -1,0 +1,817 @@
+diff --git a/bun.lock b/bun.lock
+index 6fac785879..b9b5e0a59b 100644
+--- a/bun.lock
++++ b/bun.lock
+@@ -293,8 +293,10 @@
+         "https-proxy-agent": "7.0.6",
+         "immer": "11.1.4",
+         "jose": "6.0.11",
++        "js-yaml": "4.3.1",
+         "jsonc-parser": "3.3.1",
+         "mime-types": "3.0.2",
++        "smol-toml": "1.9.1",
+         "tree-sitter-bash": "0.25.0",
+         "tree-sitter-powershell": "0.25.10",
+         "web-tree-sitter": "0.25.10",
+@@ -317,6 +319,7 @@
+         "@parcel/watcher-win32-x64": "2.5.1",
+         "@tsconfig/bun": "catalog:",
+         "@types/bun": "catalog:",
++        "@types/js-yaml": "4.0.9",
+         "@types/node": "catalog:",
+         "@types/which": "3.0.4",
+         "drizzle-kit": "catalog:",
+@@ -3147,7 +3150,7 @@
+ 
+     "arg": ["arg@5.0.2", "", {}, "sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg=="],
+ 
+-    "argparse": ["argparse@1.0.10", "", { "dependencies": { "sprintf-js": "~1.0.2" } }, "sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg=="],
++    "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+ 
+     "aria-query": ["aria-query@5.3.2", "", {}, "sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw=="],
+ 
+@@ -4135,7 +4138,7 @@
+ 
+     "js-tokens": ["js-tokens@4.0.0", "", {}, "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="],
+ 
+-    "js-yaml": ["js-yaml@3.15.1", "", { "dependencies": { "argparse": "^1.0.7", "esprima": "^4.0.0" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-S99WuO3HlhO3XN41EtYUNl9zzXjoJx7QvmipxsJVxtCBT0YHEFy+iOJhjSvrmV12nYhWpZaM8lPHkJm0yUMbag=="],
++    "js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+ 
+     "jsbi": ["jsbi@4.3.2", "", {}, "sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew=="],
+ 
+@@ -4921,7 +4924,7 @@
+ 
+     "smob": ["smob@1.6.2", "", {}, "sha512-RQsvleCbF8cVHEv+xuDGaA4pOizFqJ0GgjtMSRo6oP8pnN7WsigHgVGey6aILRBKv4W2YOMHLqbKdnB6hpB9fw=="],
+ 
+-    "smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
++    "smol-toml": ["smol-toml@1.9.1", "", {}, "sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ=="],
+ 
+     "socket.io-client": ["socket.io-client@4.8.3", "", { "dependencies": { "@socket.io/component-emitter": "~3.1.0", "debug": "~4.4.1", "engine.io-client": "~6.6.1", "socket.io-parser": "~4.2.4" } }, "sha512-uP0bpjWrjQmUt5DTHq9RuoCBdFJF10cdX9X+a368j/Ft0wmaVgxlrjvK3kjvgCODOMMOz9lcaRzxmso0bTWZ/g=="],
+ 
+@@ -5461,14 +5464,14 @@
+ 
+     "@astrojs/cloudflare/@cloudflare/vite-plugin": ["@cloudflare/vite-plugin@1.52.1", "", { "dependencies": { "@cloudflare/unenv-preset": "2.16.1", "miniflare": "5.20260811.1-alpha", "unenv": "2.0.0-rc.24", "workerd": "1.20260811.1", "wrangler": "4.123.0", "ws": "8.21.0" }, "peerDependencies": { "vite": "^6.1.0 || ^7.0.0 || ^8.0.0" }, "bin": { "cf-vite": "bin/cf-vite" } }, "sha512-O2IkD8E03qsUxNBdDRfDI9JPl25XIPt+76WJf8tgm206c34jYk8nn12ylBiOI/6NA8XUFhLjRTF1BGY+kVylXw=="],
+ 
+-    "@astrojs/internal-helpers/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
++    "@astrojs/internal-helpers/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
+ 
+     "@astrojs/markdown-remark/@astrojs/internal-helpers": ["@astrojs/internal-helpers@0.6.1", "", {}, "sha512-l5Pqf6uZu31aG+3Lv8nl/3s4DbUzdlxTWDof4pEpto6GUJNhhCbelVi9dEyurOVyqaelwmS9oSyOWOENSfgo9A=="],
+ 
+-    "@astrojs/markdown-remark/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "@astrojs/markdown-remark/shiki": ["shiki@3.23.0", "", { "dependencies": { "@shikijs/core": "3.23.0", "@shikijs/engine-javascript": "3.23.0", "@shikijs/engine-oniguruma": "3.23.0", "@shikijs/langs": "3.23.0", "@shikijs/themes": "3.23.0", "@shikijs/types": "3.23.0", "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-55Dj73uq9ZXL5zyeRPzHQsK7Nbyt6Y10k5s7OjuFZGMhpp4r/rsLBH0o/0fstIzX1Lep9VxefWljK/SKCzygIA=="],
+ 
++    "@astrojs/markdown-remark/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
++
+     "@astrojs/markdown-satteri/@astrojs/prism": ["@astrojs/prism@4.0.2", "", { "dependencies": { "prismjs": "^1.30.0" } }, "sha512-KTivpmnz6lDsC6o9H4+DNm2SrE/GHzw8cNAvEJwAvUT+eoaEnn/4NtbDNfRRaxaJHdp15gf+tfHAWiXR4wB3BA=="],
+ 
+     "@astrojs/mdx/@astrojs/internal-helpers": ["@astrojs/internal-helpers@0.10.2", "", { "dependencies": { "@types/hast": "^3.0.4", "@types/mdast": "^4.0.4", "js-yaml": "^4.3.0", "picomatch": "^4.0.4", "retext-smartypants": "^6.2.0", "shiki": "^4.0.2", "smol-toml": "^1.6.0", "unified": "^11.0.5" } }, "sha512-yt7fMgPYqSM4Tmr+taTW6Per+hjJ8Pk6lA1PAcDyqzOt8HzJ6Kje5WzCxA2Sd+9wsUW7uhkLeoTMK0cXPwH9rQ=="],
+@@ -5487,8 +5490,6 @@
+ 
+     "@astrojs/starlight/astro": ["astro@5.7.13", "", { "dependencies": { "@astrojs/compiler": "^2.11.0", "@astrojs/internal-helpers": "0.6.1", "@astrojs/markdown-remark": "6.3.1", "@astrojs/telemetry": "3.2.1", "@capsizecss/unpack": "^2.4.0", "@oslojs/encoding": "^1.1.0", "@rollup/pluginutils": "^5.1.4", "acorn": "^8.14.1", "aria-query": "^5.3.2", "axobject-query": "^4.1.0", "boxen": "8.0.1", "ci-info": "^4.2.0", "clsx": "^2.1.1", "common-ancestor-path": "^1.0.1", "cookie": "^1.0.2", "cssesc": "^3.0.0", "debug": "^4.4.0", "deterministic-object-hash": "^2.0.2", "devalue": "^5.1.1", "diff": "^5.2.0", "dlv": "^1.1.3", "dset": "^3.1.4", "es-module-lexer": "^1.6.0", "esbuild": "^0.25.0", "estree-walker": "^3.0.3", "flattie": "^1.1.1", "fontace": "~0.3.0", "github-slugger": "^2.0.0", "html-escaper": "3.0.3", "http-cache-semantics": "^4.1.1", "js-yaml": "^4.1.0", "kleur": "^4.1.5", "magic-string": "^0.30.17", "magicast": "^0.3.5", "mrmime": "^2.0.1", "neotraverse": "^0.6.18", "p-limit": "^6.2.0", "p-queue": "^8.1.0", "package-manager-detector": "^1.1.0", "picomatch": "^4.0.2", "prompts": "^2.4.2", "rehype": "^13.0.2", "semver": "^7.7.1", "shiki": "^3.2.1", "tinyexec": "^0.3.2", "tinyglobby": "^0.2.12", "tsconfck": "^3.1.5", "ultrahtml": "^1.6.0", "unifont": "~0.5.0", "unist-util-visit": "^5.0.0", "unstorage": "^1.15.0", "vfile": "^6.0.3", "vite": "^6.3.4", "vitefu": "^1.0.6", "xxhash-wasm": "^1.1.0", "yargs-parser": "^21.1.1", "yocto-spinner": "^0.2.1", "zod": "^3.24.2", "zod-to-json-schema": "^3.24.5", "zod-to-ts": "^1.2.0" }, "optionalDependencies": { "sharp": "^0.33.3" }, "bin": { "astro": "astro.js" } }, "sha512-cRGq2llKOhV3XMcYwQpfBIUcssN6HEK5CRbcMxAfd9OcFhvWE7KUy50zLioAZVVl3AqgUTJoNTlmZfD2eG0G1w=="],
+ 
+-    "@astrojs/starlight/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "@astrojs/telemetry/ci-info": ["ci-info@4.4.0", "", {}, "sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg=="],
+ 
+     "@aws-crypto/crc32/@aws-sdk/types": ["@aws-sdk/types@3.974.4", "", { "dependencies": { "@smithy/types": "^4.16.1", "tslib": "^2.6.2" } }, "sha512-dSFDNG00MEz0/xl5gxL62giLd1iYyJsTxZ1I1DOj6lC+bbgLB4TRsYClJg3b62dhXT1uATzsTNXPnC+33EJV3A=="],
+@@ -5861,8 +5862,6 @@
+ 
+     "anymatch/picomatch": ["picomatch@2.3.2", "", {}, "sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA=="],
+ 
+-    "app-builder-lib/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "app-builder-lib/semver": ["semver@7.7.4", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA=="],
+ 
+     "app-builder-lib/which": ["which@5.0.0", "", { "dependencies": { "isexe": "^3.1.1" }, "bin": { "node-which": "bin/which.js" } }, "sha512-JEdGzHwwkrbWoGOlIHqQ5gtprKGOenpDHpxE9zVR1bWbOtYRyPPHMe9FaP6x61CmNaTThSkb0DAJte5jD+DmzQ=="],
+@@ -5881,7 +5880,7 @@
+ 
+     "astro/get-tsconfig": ["get-tsconfig@5.0.0-beta.4", "", { "dependencies": { "resolve-pkg-maps": "^1.0.0" } }, "sha512-7nF7C9fIPFEMHgEMEfgIlO9wDdZ8CyHw27rWciFZfHvHDReIiPhsYuzPRXsfvBCqFy1l8RRyyWV7QLM+ZhUJsQ=="],
+ 
+-    "astro/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
++    "astro/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
+ 
+     "astro/unstorage": ["unstorage@1.17.5", "", { "dependencies": { "anymatch": "^3.1.3", "chokidar": "^5.0.0", "destr": "^2.0.5", "h3": "^1.15.10", "lru-cache": "^11.2.7", "node-fetch-native": "^1.6.7", "ofetch": "^1.5.1", "ufo": "^1.6.3" }, "peerDependencies": { "@azure/app-configuration": "^1.8.0", "@azure/cosmos": "^4.2.0", "@azure/data-tables": "^13.3.0", "@azure/identity": "^4.6.0", "@azure/keyvault-secrets": "^4.9.0", "@azure/storage-blob": "^12.26.0", "@capacitor/preferences": "^6 || ^7 || ^8", "@deno/kv": ">=0.9.0", "@netlify/blobs": "^6.5.0 || ^7.0.0 || ^8.1.0 || ^9.0.0 || ^10.0.0", "@planetscale/database": "^1.19.0", "@upstash/redis": "^1.34.3", "@vercel/blob": ">=0.27.1", "@vercel/functions": "^2.2.12 || ^3.0.0", "@vercel/kv": "^1 || ^2 || ^3", "aws4fetch": "^1.0.20", "db0": ">=0.2.1", "idb-keyval": "^6.2.1", "ioredis": "^5.4.2", "uploadthing": "^7.4.4" }, "optionalPeers": ["@azure/app-configuration", "@azure/cosmos", "@azure/data-tables", "@azure/identity", "@azure/keyvault-secrets", "@azure/storage-blob", "@capacitor/preferences", "@deno/kv", "@netlify/blobs", "@planetscale/database", "@upstash/redis", "@vercel/blob", "@vercel/functions", "@vercel/kv", "aws4fetch", "db0", "idb-keyval", "ioredis", "uploadthing"] }, "sha512-0i3iqvRfx29hkNntHyQvJTpf5W9dQ9ZadSoRU8+xVlhVtT7jAX57fazYO9EHvcRCfBCyi5YRya7XCDOsbTgkPg=="],
+ 
+@@ -5899,8 +5898,6 @@
+ 
+     "boxen/chalk": ["chalk@5.6.2", "", {}, "sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA=="],
+ 
+-    "builder-util/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "chromium-bidi/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
+ 
+     "cliui/string-width": ["string-width@4.2.3", "", { "dependencies": { "emoji-regex": "^8.0.0", "is-fullwidth-code-point": "^3.0.0", "strip-ansi": "^6.0.1" } }, "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g=="],
+@@ -5927,8 +5924,6 @@
+ 
+     "dir-compare/p-limit": ["p-limit@3.1.0", "", { "dependencies": { "yocto-queue": "^0.1.0" } }, "sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ=="],
+ 
+-    "dmg-builder/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "dom-serializer/entities": ["entities@4.5.0", "", {}, "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="],
+ 
+     "duplexer2/readable-stream": ["readable-stream@2.3.8", "", { "dependencies": { "core-util-is": "~1.0.0", "inherits": "~2.0.3", "isarray": "~1.0.0", "process-nextick-args": "~2.0.0", "safe-buffer": "~5.1.1", "string_decoder": "~1.1.1", "util-deprecate": "~1.0.1" } }, "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA=="],
+@@ -5939,8 +5934,6 @@
+ 
+     "electron-publish/mime": ["mime@2.6.0", "", { "bin": { "mime": "cli.js" } }, "sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg=="],
+ 
+-    "electron-updater/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "electron-updater/semver": ["semver@7.7.4", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA=="],
+ 
+     "electron-winstaller/fs-extra": ["fs-extra@7.0.1", "", { "dependencies": { "graceful-fs": "^4.1.2", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw=="],
+@@ -5979,6 +5972,8 @@
+ 
+     "gitlab-ai-provider/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
+ 
++    "gray-matter/js-yaml": ["js-yaml@3.15.1", "", { "dependencies": { "argparse": "^1.0.7", "esprima": "^4.0.0" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-S99WuO3HlhO3XN41EtYUNl9zzXjoJx7QvmipxsJVxtCBT0YHEFy+iOJhjSvrmV12nYhWpZaM8lPHkJm0yUMbag=="],
++
+     "hosted-git-info/lru-cache": ["lru-cache@6.0.0", "", { "dependencies": { "yallist": "^4.0.0" } }, "sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA=="],
+ 
+     "htmlparser2/entities": ["entities@4.5.0", "", {}, "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="],
+@@ -6183,10 +6178,6 @@
+ 
+     "@astrojs/cloudflare/@cloudflare/vite-plugin/wrangler": ["wrangler@4.123.0", "", { "dependencies": { "@cloudflare/kv-asset-handler": "0.5.0", "@cloudflare/unenv-preset": "2.16.1", "blake3-wasm": "2.1.5", "esbuild": "0.28.1", "miniflare": "5.20260811.1-alpha", "path-to-regexp": "6.3.0", "unenv": "2.0.0-rc.24", "workerd": "1.20260811.1" }, "optionalDependencies": { "fsevents": "2.3.3" }, "peerDependencies": { "@cloudflare/workers-types": "^5.20260811.1" }, "optionalPeers": ["@cloudflare/workers-types"], "bin": { "wrangler": "bin/wrangler.js", "wrangler2": "bin/wrangler.js", "cf-wrangler": "bin/cf-wrangler.js" } }, "sha512-VXo2I1oa0x9aGAKIFPRSQPqTh0RBY5Ktl44YOhNmsJQFUdJKDA2vVTU6Xj+FC2koll6orJqWZN8jbXVIk9O67Q=="],
+ 
+-    "@astrojs/internal-helpers/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+-    "@astrojs/markdown-remark/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "@astrojs/markdown-remark/shiki/@shikijs/core": ["@shikijs/core@3.23.0", "", { "dependencies": { "@shikijs/types": "3.23.0", "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4", "hast-util-to-html": "^9.0.5" } }, "sha512-NSWQz0riNb67xthdm5br6lAkvpDJRTgB36fxlo37ZzM2yq0PQFFzbd8psqC2XMPgCzo1fW6cVi18+ArJ44wqgA=="],
+ 
+     "@astrojs/markdown-remark/shiki/@shikijs/engine-javascript": ["@shikijs/engine-javascript@3.23.0", "", { "dependencies": { "@shikijs/types": "3.23.0", "@shikijs/vscode-textmate": "^10.0.2", "oniguruma-to-es": "^4.3.4" } }, "sha512-aHt9eiGFobmWR5uqJUViySI1bHMqrAgamWE1TYSUoftkAeCCAiGawPMwM+VCadylQtF4V3VNOZ5LmfItH5f3yA=="],
+@@ -6199,7 +6190,7 @@
+ 
+     "@astrojs/markdown-remark/shiki/@shikijs/types": ["@shikijs/types@3.23.0", "", { "dependencies": { "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-3JZ5HXOZfYjsYSk0yPwBrkupyYSLpAE26Qc0HLghhZNGTZg/SKxXIIgoxOpmmeQP0RRSDJTk1/vPfw9tbw+jSQ=="],
+ 
+-    "@astrojs/mdx/@astrojs/internal-helpers/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
++    "@astrojs/mdx/@astrojs/internal-helpers/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
+ 
+     "@astrojs/mdx/@astrojs/markdown-remark/@astrojs/prism": ["@astrojs/prism@4.0.2", "", { "dependencies": { "prismjs": "^1.30.0" } }, "sha512-KTivpmnz6lDsC6o9H4+DNm2SrE/GHzw8cNAvEJwAvUT+eoaEnn/4NtbDNfRRaxaJHdp15gf+tfHAWiXR4wB3BA=="],
+ 
+@@ -6247,8 +6238,6 @@
+ 
+     "@astrojs/starlight/astro/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
+ 
+-    "@astrojs/starlight/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "@aws-crypto/sha1-browser/@smithy/util-utf8/@smithy/util-buffer-from": ["@smithy/util-buffer-from@2.2.0", "", { "dependencies": { "@smithy/is-array-buffer": "^2.2.0", "tslib": "^2.6.2" } }, "sha512-IJdWBbTcMQ6DA0gdNhh/BwrLkDR+ADW5Kr1aZmd4k3DIF6ezMV4R2NIAmT08wQJ3yUK82thHWmC/TnK/wpMMIA=="],
+ 
+     "@aws-crypto/sha256-browser/@smithy/util-utf8/@smithy/util-buffer-from": ["@smithy/util-buffer-from@2.2.0", "", { "dependencies": { "@smithy/is-array-buffer": "^2.2.0", "tslib": "^2.6.2" } }, "sha512-IJdWBbTcMQ6DA0gdNhh/BwrLkDR+ADW5Kr1aZmd4k3DIF6ezMV4R2NIAmT08wQJ3yUK82thHWmC/TnK/wpMMIA=="],
+@@ -6473,8 +6462,6 @@
+ 
+     "@opencode/web/astro/fontace": ["fontace@0.3.1", "", { "dependencies": { "@types/fontkit": "^2.0.8", "fontkit": "^2.0.4" } }, "sha512-9f5g4feWT1jWT8+SbL85aLIRLIXUaDygaM2xPXRmzPYxrOMNok79Lr3FGJoKVNKibE0WCunNiEVG2mwuE+2qEg=="],
+ 
+-    "@opencode/web/astro/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "@opencode/web/astro/magicast": ["magicast@0.3.5", "", { "dependencies": { "@babel/parser": "^7.25.4", "@babel/types": "^7.25.4", "source-map-js": "^1.2.0" } }, "sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ=="],
+ 
+     "@opencode/web/astro/neotraverse": ["neotraverse@0.6.18", "", {}, "sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA=="],
+@@ -6561,8 +6548,6 @@
+ 
+     "ansi-align/string-width/strip-ansi": ["strip-ansi@6.0.1", "", { "dependencies": { "ansi-regex": "^5.0.1" } }, "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A=="],
+ 
+-    "app-builder-lib/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "app-builder-lib/which/isexe": ["isexe@3.1.5", "", {}, "sha512-6B3tLtFqtQS4ekarvLVMZ+X+VlvQekbe4taUkf/rhVO3d/h0M2rfARm/pXLcPEsjjMsFgrFgSrhQIxcSVrBz8w=="],
+ 
+     "archiver-utils/glob/jackspeak": ["jackspeak@3.4.3", "", { "dependencies": { "@isaacs/cliui": "^8.0.2" }, "optionalDependencies": { "@pkgjs/parseargs": "^0.11.0" } }, "sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw=="],
+@@ -6589,8 +6574,6 @@
+ 
+     "astro-expressive-code/astro/fontace": ["fontace@0.3.1", "", { "dependencies": { "@types/fontkit": "^2.0.8", "fontkit": "^2.0.4" } }, "sha512-9f5g4feWT1jWT8+SbL85aLIRLIXUaDygaM2xPXRmzPYxrOMNok79Lr3FGJoKVNKibE0WCunNiEVG2mwuE+2qEg=="],
+ 
+-    "astro-expressive-code/astro/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "astro-expressive-code/astro/magicast": ["magicast@0.3.5", "", { "dependencies": { "@babel/parser": "^7.25.4", "@babel/types": "^7.25.4", "source-map-js": "^1.2.0" } }, "sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ=="],
+ 
+     "astro-expressive-code/astro/neotraverse": ["neotraverse@0.6.18", "", {}, "sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA=="],
+@@ -6667,8 +6650,6 @@
+ 
+     "astro/esbuild/@esbuild/win32-x64": ["@esbuild/win32-x64@0.28.1", "", { "os": "win32", "cpu": "x64" }, "sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A=="],
+ 
+-    "astro/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "astro/unstorage/chokidar": ["chokidar@5.0.0", "", { "dependencies": { "readdirp": "^5.0.0" } }, "sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw=="],
+ 
+     "astro/unstorage/h3": ["h3@1.15.11", "", { "dependencies": { "cookie-es": "^1.2.3", "crossws": "^0.3.5", "defu": "^6.1.6", "destr": "^2.0.5", "iron-webcrypto": "^1.2.1", "node-mock-http": "^1.0.4", "radix3": "^1.1.2", "ufo": "^1.6.3", "uncrypto": "^0.1.3" } }, "sha512-L3THSe2MPeBwgIZVSH5zLdBBU90TOxarvhK9d04IDY2AmVS8j2Jz2LIWtwsGOU3lu2I5jCN7FNvVfY2+XyF+mg=="],
+@@ -6681,8 +6662,6 @@
+ 
+     "babel-plugin-module-resolver/glob/path-scurry": ["path-scurry@1.11.1", "", { "dependencies": { "lru-cache": "^10.2.0", "minipass": "^5.0.0 || ^6.0.2 || ^7.0.0" } }, "sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA=="],
+ 
+-    "builder-util/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "cliui/string-width/emoji-regex": ["emoji-regex@8.0.0", "", {}, "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="],
+ 
+     "cliui/strip-ansi/ansi-regex": ["ansi-regex@5.0.1", "", {}, "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="],
+@@ -6701,14 +6680,10 @@
+ 
+     "dir-compare/p-limit/yocto-queue": ["yocto-queue@0.1.0", "", {}, "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="],
+ 
+-    "dmg-builder/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "duplexer2/readable-stream/safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
+ 
+     "duplexer2/readable-stream/string_decoder": ["string_decoder@1.1.1", "", { "dependencies": { "safe-buffer": "~5.1.0" } }, "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="],
+ 
+-    "electron-updater/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "electron-winstaller/fs-extra/jsonfile": ["jsonfile@4.0.0", "", { "optionalDependencies": { "graceful-fs": "^4.1.6" } }, "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg=="],
+ 
+     "electron-winstaller/fs-extra/universalify": ["universalify@0.1.2", "", {}, "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg=="],
+@@ -6725,6 +6700,8 @@
+ 
+     "gcp-metadata/gaxios/node-fetch": ["node-fetch@3.3.2", "", { "dependencies": { "data-uri-to-buffer": "^4.0.0", "fetch-blob": "^3.1.4", "formdata-polyfill": "^4.0.10" } }, "sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA=="],
+ 
++    "gray-matter/js-yaml/argparse": ["argparse@1.0.10", "", { "dependencies": { "sprintf-js": "~1.0.2" } }, "sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg=="],
++
+     "hosted-git-info/lru-cache/yallist": ["yallist@4.0.0", "", {}, "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="],
+ 
+     "lazystream/readable-stream/safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
+@@ -6819,8 +6796,6 @@
+ 
+     "toolbeam-docs-theme/astro/fontace": ["fontace@0.3.1", "", { "dependencies": { "@types/fontkit": "^2.0.8", "fontkit": "^2.0.4" } }, "sha512-9f5g4feWT1jWT8+SbL85aLIRLIXUaDygaM2xPXRmzPYxrOMNok79Lr3FGJoKVNKibE0WCunNiEVG2mwuE+2qEg=="],
+ 
+-    "toolbeam-docs-theme/astro/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
+-
+     "toolbeam-docs-theme/astro/magicast": ["magicast@0.3.5", "", { "dependencies": { "@babel/parser": "^7.25.4", "@babel/types": "^7.25.4", "source-map-js": "^1.2.0" } }, "sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ=="],
+ 
+     "toolbeam-docs-theme/astro/neotraverse": ["neotraverse@0.6.18", "", {}, "sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA=="],
+@@ -6927,14 +6902,14 @@
+ 
+     "@astrojs/cloudflare/@cloudflare/vite-plugin/wrangler/esbuild": ["esbuild@0.28.1", "", { "optionalDependencies": { "@esbuild/aix-ppc64": "0.28.1", "@esbuild/android-arm": "0.28.1", "@esbuild/android-arm64": "0.28.1", "@esbuild/android-x64": "0.28.1", "@esbuild/darwin-arm64": "0.28.1", "@esbuild/darwin-x64": "0.28.1", "@esbuild/freebsd-arm64": "0.28.1", "@esbuild/freebsd-x64": "0.28.1", "@esbuild/linux-arm": "0.28.1", "@esbuild/linux-arm64": "0.28.1", "@esbuild/linux-ia32": "0.28.1", "@esbuild/linux-loong64": "0.28.1", "@esbuild/linux-mips64el": "0.28.1", "@esbuild/linux-ppc64": "0.28.1", "@esbuild/linux-riscv64": "0.28.1", "@esbuild/linux-s390x": "0.28.1", "@esbuild/linux-x64": "0.28.1", "@esbuild/netbsd-arm64": "0.28.1", "@esbuild/netbsd-x64": "0.28.1", "@esbuild/openbsd-arm64": "0.28.1", "@esbuild/openbsd-x64": "0.28.1", "@esbuild/openharmony-arm64": "0.28.1", "@esbuild/sunos-x64": "0.28.1", "@esbuild/win32-arm64": "0.28.1", "@esbuild/win32-ia32": "0.28.1", "@esbuild/win32-x64": "0.28.1" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-HrJrvZv5ayxBzPfwphOoNzkzOIIlifzk0KJrGK2c8R4+LKpMtpYLQeUdjnwjWv/LZlkH2laZk+4w78pi99D4Vw=="],
+ 
+-    "@astrojs/mdx/@astrojs/internal-helpers/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "@astrojs/starlight/@astrojs/mdx/@astrojs/markdown-remark/@astrojs/internal-helpers": ["@astrojs/internal-helpers@0.7.6", "", {}, "sha512-GOle7smBWKfMSP8osUIGOlB5kaHdQLV3foCsf+5Q9Wsuu+C6Fs3Ez/ttXmhjZ1HkSgsogcM1RXSjjOVieHq16Q=="],
+ 
+     "@astrojs/starlight/@astrojs/mdx/@astrojs/markdown-remark/@astrojs/prism": ["@astrojs/prism@3.3.0", "", { "dependencies": { "prismjs": "^1.30.0" } }, "sha512-q8VwfU/fDZNoDOf+r7jUnMC2//H2l0TuQ6FkGJL8vD8nw/q5KiL3DS1KKBI3QhI9UQhpJ5dc7AtqfbXWuOgLCQ=="],
+ 
+     "@astrojs/starlight/@astrojs/mdx/@astrojs/markdown-remark/shiki": ["shiki@3.23.0", "", { "dependencies": { "@shikijs/core": "3.23.0", "@shikijs/engine-javascript": "3.23.0", "@shikijs/engine-oniguruma": "3.23.0", "@shikijs/langs": "3.23.0", "@shikijs/themes": "3.23.0", "@shikijs/types": "3.23.0", "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-55Dj73uq9ZXL5zyeRPzHQsK7Nbyt6Y10k5s7OjuFZGMhpp4r/rsLBH0o/0fstIzX1Lep9VxefWljK/SKCzygIA=="],
+ 
++    "@astrojs/starlight/@astrojs/mdx/@astrojs/markdown-remark/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
++
+     "@astrojs/starlight/astro/@astrojs/telemetry/is-docker": ["is-docker@3.0.0", "", { "bin": { "is-docker": "cli.js" } }, "sha512-eljcgEDlEns/7AXFosB5K/2nCM4P7FQPkGc/DWLy5rmFEWvZayGrik1d9/QIY5nJ4f9YsVvBkA6kJpHn9rISdQ=="],
+ 
+     "@astrojs/starlight/astro/@astrojs/telemetry/is-wsl": ["is-wsl@3.1.1", "", { "dependencies": { "is-inside-container": "^1.0.0" } }, "sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw=="],
+@@ -7231,8 +7206,6 @@
+ 
+     "@opencode/web/astro/@astrojs/telemetry/is-wsl": ["is-wsl@3.1.1", "", { "dependencies": { "is-inside-container": "^1.0.0" } }, "sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw=="],
+ 
+-    "@opencode/web/astro/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "@opencode/web/astro/p-queue/p-timeout": ["p-timeout@6.1.4", "", {}, "sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg=="],
+ 
+     "@opencode/web/astro/sharp/@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
+@@ -7291,7 +7264,7 @@
+ 
+     "@opencode/web/astro/unstorage/ofetch": ["ofetch@1.5.1", "", { "dependencies": { "destr": "^2.0.5", "node-fetch-native": "^1.6.7", "ufo": "^1.6.1" } }, "sha512-2W4oUZlVaqAPAil6FUg/difl6YhqhUR7x2eZY4bQCko22UXg3hptq9KLQdqFClV+Wu85UX7hNtdGTngi/1BxcA=="],
+ 
+-    "@opencode/www/@astrojs/markdown-remark/@astrojs/internal-helpers/js-yaml": ["js-yaml@4.3.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ=="],
++    "@opencode/www/@astrojs/markdown-remark/@astrojs/internal-helpers/smol-toml": ["smol-toml@1.8.0", "", {}, "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ=="],
+ 
+     "@puppeteer/browsers/yargs/cliui/string-width": ["string-width@7.2.0", "", { "dependencies": { "emoji-regex": "^10.3.0", "get-east-asian-width": "^1.0.0", "strip-ansi": "^7.1.0" } }, "sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ=="],
+ 
+@@ -7309,8 +7282,6 @@
+ 
+     "astro-expressive-code/astro/@astrojs/telemetry/is-wsl": ["is-wsl@3.1.1", "", { "dependencies": { "is-inside-container": "^1.0.0" } }, "sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw=="],
+ 
+-    "astro-expressive-code/astro/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "astro-expressive-code/astro/p-queue/p-timeout": ["p-timeout@6.1.4", "", {}, "sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg=="],
+ 
+     "astro-expressive-code/astro/sharp/@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
+@@ -7405,8 +7376,6 @@
+ 
+     "toolbeam-docs-theme/astro/@astrojs/telemetry/is-wsl": ["is-wsl@3.1.1", "", { "dependencies": { "is-inside-container": "^1.0.0" } }, "sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw=="],
+ 
+-    "toolbeam-docs-theme/astro/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "toolbeam-docs-theme/astro/p-queue/p-timeout": ["p-timeout@6.1.4", "", {}, "sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg=="],
+ 
+     "toolbeam-docs-theme/astro/sharp/@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
+@@ -7661,8 +7630,6 @@
+ 
+     "@opencode/web/astro/unstorage/h3/crossws": ["crossws@0.3.5", "", { "dependencies": { "uncrypto": "^0.1.3" } }, "sha512-ojKiDvcmByhwa8YYqbQI/hg7MEU0NC03+pSdEq4ZUnZR9xXpwk7E43SMNGkn+JxJGPFtNvQ48+vV2p+P1ml5PA=="],
+ 
+-    "@opencode/www/@astrojs/markdown-remark/@astrojs/internal-helpers/js-yaml/argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
+-
+     "@solidjs/start/shiki/@shikijs/engine-javascript/oniguruma-to-es/regex": ["regex@5.1.1", "", { "dependencies": { "regex-utilities": "^2.3.0" } }, "sha512-dN5I359AVGPnwzJm2jN1k0W9LPZ+ePvoOeVMMfqIMFz53sSwXkxaJoxr50ptnsC771lK95BnTrVSZxq0b9yCGw=="],
+ 
+     "@solidjs/start/shiki/@shikijs/engine-javascript/oniguruma-to-es/regex-recursion": ["regex-recursion@5.1.1", "", { "dependencies": { "regex": "^5.1.1", "regex-utilities": "^2.3.0" } }, "sha512-ae7SBCbzVNrIjgSbh7wMznPcQel1DNlDtzensnFxpiNpXt1U2ju/bHugH422r+4LAVS1FpW1YCwilmnNsjum9w=="],
+diff --git a/packages/core/package.json b/packages/core/package.json
+index 7cad834246..feb62938b7 100644
+--- a/packages/core/package.json
++++ b/packages/core/package.json
+@@ -90,6 +90,7 @@
+     "@parcel/watcher-win32-x64": "2.5.1",
+     "@tsconfig/bun": "catalog:",
+     "@types/bun": "catalog:",
++    "@types/js-yaml": "4.0.9",
+     "@types/node": "catalog:",
+     "@types/which": "3.0.4",
+     "drizzle-kit": "catalog:",
+@@ -128,8 +129,10 @@
+     "https-proxy-agent": "7.0.6",
+     "immer": "11.1.4",
+     "jose": "6.0.11",
++    "js-yaml": "4.3.1",
+     "jsonc-parser": "3.3.1",
+     "mime-types": "3.0.2",
++    "smol-toml": "1.9.1",
+     "tree-sitter-bash": "0.25.0",
+     "tree-sitter-powershell": "0.25.10",
+     "web-tree-sitter": "0.25.10",
+diff --git a/packages/core/src/formatter.ts b/packages/core/src/formatter.ts
+index 46bb4e6b28..caf52b8baa 100644
+--- a/packages/core/src/formatter.ts
++++ b/packages/core/src/formatter.ts
+@@ -45,7 +45,8 @@ const layer = Layer.effect(
+       }),
+     })
+ 
+-    const command = Effect.fnUntraced(function* (formatter: Info) {
++    const command = Effect.fnUntraced(function* (formatter: Info, filepath: string) {
++      if (typeof formatter.enabled === "function") return yield* formatter.enabled(filepath)
+       const cached = commands.get(formatter)
+       if (cached !== undefined) return cached
+       const result = yield* formatter.enabled
+@@ -58,7 +59,8 @@ const layer = Layer.effect(
+       const matching = state.get().formatters.filter((formatter) => formatter.extensions.includes(extension))
+ 
+       for (const formatter of matching) {
+-        const enabled = yield* command(formatter)
++        const enabled = yield* command(formatter, filepath)
++        if (enabled === "skip") return false
+         if (enabled === false) continue
+         const cmd = enabled.map((argument) => argument.replace("$FILE", filepath))
+         yield* Effect.logInfo("formatting file", { file: filepath, command: cmd })
+diff --git a/packages/core/src/formatter/builtins.ts b/packages/core/src/formatter/builtins.ts
+index 86b3714add..bc2ca9d527 100644
+--- a/packages/core/src/formatter/builtins.ts
++++ b/packages/core/src/formatter/builtins.ts
+@@ -9,7 +9,9 @@ export interface Info {
+   readonly name: string
+   readonly environment?: Record<string, string>
+   readonly extensions: readonly string[]
+-  readonly enabled: Effect.Effect<string[] | false>
++  readonly enabled:
++    | Effect.Effect<string[] | false>
++    | ((filepath: string) => Effect.Effect<string[] | false | "skip">)
+ }
+ 
+ export function make(input: {
+@@ -152,6 +154,25 @@ export function make(input: {
+ 
+   const ktlint = executable("ktlint", [".kt", ".kts"], ["-F", "$FILE"], findExecutable)
+ 
++  const black: Info = {
++    name: "black",
++    extensions: [".py", ".pyi"],
++    enabled: (filepath) =>
++      Effect.gen(function* () {
++        const bin = findExecutable("black")
++        if (!bin) return disabled
++        const { BlackFormatter } = yield* Effect.promise(() => import("./black.js"))
++        return yield* BlackFormatter.command({
++          filepath,
++          directory: input.directory,
++          worktree: input.worktree,
++          fs: input.fs,
++          processes: input.processes,
++          bin,
++        })
++      }),
++  }
++
+   const ruff: Info = {
+     name: "ruff",
+     extensions: [".py", ".pyi"],
+@@ -246,6 +267,7 @@ export function make(input: {
+     zig,
+     clang,
+     ktlint,
++    black,
+     ruff,
+     air,
+     uv,
+diff --git a/packages/core/test/formatter.test.ts b/packages/core/test/formatter.test.ts
+index 1530d93992..3eb04363df 100644
+--- a/packages/core/test/formatter.test.ts
++++ b/packages/core/test/formatter.test.ts
+@@ -156,6 +156,44 @@ const layered: { name: string; layers: ConfigInput["formatter"][]; expected: Rec
+ ]
+ 
+ describe("Formatter", () => {
++  it.live("resolves each file without caching dynamic commands and honors an explicit skip", () =>
++    withFormatter(false, (formatter, directory) =>
++      Effect.gen(function* () {
++        const called: string[] = []
++        yield* formatter.transform((editor) => {
++          editor.set({
++            name: "dynamic",
++            extensions: [".dynamic"],
++            enabled: (filepath) =>
++              Effect.sync(() => {
++                called.push(path.basename(filepath))
++                return path.basename(filepath) === "skip.dynamic" ? "skip" : append(JSON.stringify(path.basename(filepath)))
++              }),
++          })
++          editor.set({ name: "fallback", extensions: [".dynamic"], enabled: Effect.succeed(append("'fallback'")) })
++        })
++        for (const name of ["first.dynamic", "second.dynamic", "skip.dynamic"]) {
++          const file = path.join(directory, name)
++          yield* Effect.promise(() => fs.writeFile(file, ""))
++          expect(yield* formatter.file(file)).toBe(name !== "skip.dynamic")
++          expect(yield* Effect.promise(() => fs.readFile(file, "utf8"))).toBe(name === "skip.dynamic" ? "" : name)
++        }
++        expect(called).toEqual(["first.dynamic", "second.dynamic", "skip.dynamic"])
++      }),
++    ),
++  )
++
++  it.live("explicit Black command overrides replace built-in discovery", () =>
++    withFormatter({ black: { command: append("'override'") } }, (formatter, directory) =>
++      Effect.gen(function* () {
++        const file = path.join(directory, "sample.py")
++        yield* Effect.promise(() => fs.writeFile(file, ""))
++        expect(yield* formatter.file(file)).toBe(true)
++        expect(yield* Effect.promise(() => fs.readFile(file, "utf8"))).toBe("override")
++      }),
++    ),
++  )
++
+   layered.forEach((entry) =>
+     it.live(entry.name, () =>
+       withLayers(entry.layers, (formatter, directory) =>
+diff --git a/packages/core/src/formatter/black.ts b/packages/core/src/formatter/black.ts
+new file mode 100644
+index 0000000000..95e1b3ac63
+--- /dev/null
++++ b/packages/core/src/formatter/black.ts
+@@ -0,0 +1,148 @@
++export * as BlackFormatter from "./black.js"
++
++import path from "path"
++import { Effect, Schema } from "effect"
++import { ChildProcess } from "effect/process"
++import type { FSUtil } from "@opencode/util/fs-util"
++import type { AppProcess } from "@opencode/util/process"
++import { parse } from "smol-toml"
++import { load } from "js-yaml"
++import { which } from "../util/which.js"
++
++const Table = Schema.Record(Schema.String, Schema.Unknown)
++const Project = Schema.Struct({
++  tool: Schema.optionalKey(
++    Schema.Struct({
++      black: Schema.optionalKey(Table),
++      ruff: Schema.optionalKey(Schema.Struct({ format: Schema.optionalKey(Table) })),
++    }),
++  ),
++})
++const Hook = Schema.Struct({
++  id: Schema.String,
++  args: Schema.optionalKey(Schema.Array(Schema.String)),
++  files: Schema.optionalKey(Schema.String),
++  exclude: Schema.optionalKey(Schema.String),
++  entry: Schema.optionalKey(Schema.String),
++  language: Schema.optionalKey(Schema.String),
++  types: Schema.optionalKey(Schema.Array(Schema.String)),
++  types_or: Schema.optionalKey(Schema.Array(Schema.String)),
++  exclude_types: Schema.optionalKey(Schema.Array(Schema.String)),
++  pass_filenames: Schema.optionalKey(Schema.Boolean),
++})
++const Hooks = Schema.Struct({
++  files: Schema.optionalKey(Schema.String),
++  exclude: Schema.optionalKey(Schema.String),
++  repos: Schema.Array(Schema.Struct({ repo: Schema.String, hooks: Schema.Array(Hook) })),
++})
++const sources = new Set([
++  "https://github.com/psf/black",
++  "https://github.com/ambv/black",
++  "https://github.com/psf/black-pre-commit-mirror",
++])
++const flags = new Set([
++  "--safe",
++  "--fast",
++  "--quiet",
++  "--preview",
++  "--skip-string-normalization",
++  "--skip-magic-trailing-comma",
++  "-S",
++  "-C",
++])
++const types = new Set(["file", "text", "python", "pyi"])
++const match = `import json, re, sys
++if sys.version_info[0] != 3:
++    sys.exit(2)
++data = json.load(sys.stdin)
++included = all(
++    (entry.get("files") is None or re.search(entry["files"], data["path"]) is not None)
++    and (entry.get("exclude") is None or re.search(entry["exclude"], data["path"]) is None)
++    for entry in data["filters"]
++)
++sys.stdout.write("1" if included else "0")
++`
++
++export const command = Effect.fn("BlackFormatter.command")(function* (input: {
++  filepath: string
++  directory: string
++  worktree: string
++  fs: FSUtil.Interface
++  processes: AppProcess.Interface
++  bin: string
++}) {
++  const configs = yield* input.fs.findUp(".pre-commit-config.yaml", input.directory, input.worktree)
++  if (configs.length) {
++    const text = yield* input.fs.readFileString(configs[0])
++    const config = yield* Effect.try(() => Schema.decodeUnknownSync(Hooks)(load(text, { json: true })))
++    const hooks = config.repos.flatMap((repo) =>
++      repo.hooks
++        .filter((hook) => hook.id === "black" || hook.id === "ruff-format")
++        .map((hook) => ({ repo: repo.repo, ...hook })),
++    )
++    if (hooks.length) {
++      if (hooks.length !== 1) return false
++      const hook = hooks[0]
++      if (hook.id !== "black" || !sources.has(hook.repo)) return false
++      if (hook.entry !== undefined && hook.entry !== "black") return false
++      if (hook.language !== undefined && hook.language !== "python" && hook.language !== "system") return false
++      if (hook.pass_filenames === false) return false
++      if ([...(hook.types ?? []), ...(hook.types_or ?? []), ...(hook.exclude_types ?? [])].some((type) => !types.has(type)))
++        return false
++      const args = [...(hook.args ?? [])]
++      for (let index = 0; index < args.length; index++) {
++        const argument = args[index]
++        if (flags.has(argument)) continue
++        if (/^--line-length=\d+$/.test(argument) || /^--target-version=py\d+$/.test(argument)) continue
++        if (argument === "--line-length" || argument === "-l") {
++          if (!/^\d+$/.test(args[++index] ?? "")) return false
++          continue
++        }
++        if (argument === "--target-version" || argument === "-t") {
++          if (!/^py\d+$/.test(args[++index] ?? "")) return false
++          continue
++        }
++        return false
++      }
++      const relative = path.relative(path.dirname(configs[0]), input.filepath).split(path.sep).join("/")
++      const filters = [config, hook]
++        .map((filter) => ({ files: filter.files, exclude: filter.exclude }))
++        .filter((filter) => filter.files !== undefined || filter.exclude !== undefined)
++      if (filters.length) {
++        const executable = yield* input.fs.realPath(input.bin).pipe(Effect.orElseSucceed(() => input.bin))
++        const names = ["python", "python3"]
++        const candidates = path.isAbsolute(executable)
++          ? [...names.map((name) => path.join(path.dirname(executable), name)), "python3", "python"]
++          : ["python3", "python"]
++        const python = candidates.map((name) => which(name)).find((executable) => executable !== null)
++        if (!python) return "skip" as const
++        const result = yield* input.processes
++          .run(ChildProcess.make(python, ["-I", "-S", "-c", match], { cwd: input.directory, extendEnv: true }), {
++            stdin: JSON.stringify({ path: relative, filters }),
++            timeout: "2 seconds",
++            maxOutputBytes: 64,
++            maxErrorBytes: 1024,
++          })
++          .pipe(Effect.orElseSucceed(() => undefined))
++        if (result?.exitCode !== 0 || result.stdout.toString("utf8") !== "1") return "skip" as const
++      }
++      const tags = new Set(["file", "text", path.extname(input.filepath) === ".pyi" ? "pyi" : "python"])
++      if (
++        hook.types?.some((type) => !tags.has(type)) ||
++        (hook.types_or !== undefined && !hook.types_or.some((type) => tags.has(type))) ||
++        hook.exclude_types?.some((type) => tags.has(type))
++      )
++        return "skip" as const
++      return [input.bin, "--quiet", ...args, "$FILE"]
++    }
++  }
++  for (const file of yield* input.fs.findUp("pyproject.toml", input.directory, input.worktree)) {
++    const text = yield* input.fs.readFileString(file)
++    const config = yield* Effect.try(() =>
++      Schema.decodeUnknownSync(Project)(parse(text, { integersAsBigInt: "asNeeded" })),
++    )
++    if (config.tool?.ruff?.format !== undefined) return false
++    if (config.tool?.black !== undefined) return [input.bin, "--quiet", "$FILE"]
++  }
++  return false
++}, Effect.orElseSucceed(() => false as const))
+diff --git a/packages/core/test/formatter-black.test.ts b/packages/core/test/formatter-black.test.ts
+new file mode 100644
+index 0000000000..8d4816f1cd
+--- /dev/null
++++ b/packages/core/test/formatter-black.test.ts
+@@ -0,0 +1,212 @@
++import fs from "fs/promises"
++import path from "path"
++import { expect } from "bun:test"
++import { Effect } from "effect"
++import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
++import { BlackFormatter } from "@opencode/core/formatter/black"
++import { FSUtil } from "@opencode/util/fs-util"
++import { AppProcess } from "@opencode/util/process"
++import { LayerNode } from "@opencode/util/effect/layer-node"
++import { withTempDir } from "./fixture/tmpdir"
++import { testEffect } from "./lib/effect"
++
++const it = testEffect(AppNodeBuilder.build(LayerNode.group([FSUtil.node, AppProcess.node])))
++const python = Bun.which("python3") ?? Bun.which("python")
++const command = ["black", "--quiet", "$FILE"]
++const hook = (input: Record<string, unknown> = {}, root: Record<string, unknown> = {}) =>
++  JSON.stringify({
++    ...root,
++    repos: [{ repo: "https://github.com/psf/black", hooks: [{ id: "black", ...input }] }],
++  })
++
++const cases: {
++  name: string
++  files: Record<string, string>
++  target?: string
++  expected: false | "skip" | string[]
++  python?: boolean
++}[] = [
++  { name: "does not infer formatting without a declaration", files: {}, expected: false },
++  { name: "recognizes a Black table", files: { "pyproject.toml": "[tool.black]\nline-length = 90\n" }, expected: command },
++  {
++    name: "recognizes quoted TOML keys",
++    files: { "pyproject.toml": '["tool"."black"]\nline-length = 90\n' },
++    expected: command,
++  },
++  {
++    name: "does not interpret a TOML string as a table",
++    files: { "pyproject.toml": '[project]\ndescription = """\n[tool.black]\nexample\n"""\n' },
++    expected: false,
++  },
++  {
++    name: "does not interpret isort compatibility as Black selection",
++    files: { "pyproject.toml": '[tool.isort]\nprofile = "black"\n' },
++    expected: false,
++  },
++  {
++    name: "does not reject unrelated large TOML integers",
++    files: { "pyproject.toml": "seed = 9007199254740999\n[tool.black]\n" },
++    expected: command,
++  },
++  {
++    name: "distinguishes Ruff lint configuration from formatting",
++    files: { "pyproject.toml": '[tool.black]\n[tool.ruff.lint]\nselect = ["E"]\n' },
++    expected: command,
++  },
++  {
++    name: "defers to explicit Ruff formatting",
++    files: { "pyproject.toml": '[tool.black]\n[tool.ruff]\nformat.quote-style = "single"\n' },
++    expected: false,
++  },
++  { name: "recognizes an official hook", files: { ".pre-commit-config.yaml": hook() }, expected: command },
++  {
++    name: "uses the last duplicate mapping key as PyYAML does",
++    files: { ".pre-commit-config.yaml": 'repos: []\nrepos:\n  - repo: https://github.com/psf/black\n    hooks: [{id: black}]\n' },
++    expected: command,
++  },
++  {
++    name: "accepts unindented flow sequence contents as PyYAML does",
++    files: { ".pre-commit-config.yaml": 'repos:\n  - repo: https://github.com/psf/black\n    hooks:\n      - id: black\n        additional_dependencies: [\n        "unrelated-package",\n        ]\n' },
++    expected: command,
++  },
++  {
++    name: "preserves supported formatting options",
++    files: { ".pre-commit-config.yaml": hook({ args: ["--safe", "--line-length", "120", "--target-version=py38", "-C"] }) },
++    expected: ["black", "--quiet", "--safe", "--line-length", "120", "--target-version=py38", "-C", "$FILE"],
++  },
++  {
++    name: "reads aliased hook objects as structured data",
++    files: { ".pre-commit-config.yaml": "formatter: &formatter {id: black}\nrepos:\n  - repo: https://github.com/psf/black\n    hooks: [*formatter]\n" },
++    expected: command,
++  },
++  {
++    name: "does not interpret a YAML scalar as a hook",
++    files: { ".pre-commit-config.yaml": "notes: |\n  - repo: https://github.com/psf/black\n    hooks:\n      - id: black\nrepos: []\n" },
++    expected: false,
++  },
++  {
++    name: "honors a hook inclusion filter",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "^src/" }) },
++    target: "docs/example.py",
++    expected: "skip",
++  },
++  {
++    name: "honors root-level exclusions",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({}, { files: "^src/", exclude: "^src/generated/" }) },
++    target: "src/generated/example.py",
++    expected: "skip",
++  },
++  {
++    name: "allows files matching both levels of filters",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "example\\.py$" }, { files: "^src/" }) },
++    target: "src/example.py",
++    expected: command,
++  },
++  {
++    name: "honors supported file type restrictions",
++    files: { ".pre-commit-config.yaml": hook({ types: ["python"] }) },
++    target: "example.pyi",
++    expected: "skip",
++  },
++  {
++    name: "accepts stub files through types_or",
++    files: { ".pre-commit-config.yaml": hook({ types_or: ["python", "pyi"] }) },
++    target: "example.pyi",
++    expected: command,
++  },
++  {
++    name: "honors excluded file types",
++    files: { ".pre-commit-config.yaml": hook({ exclude_types: ["python"] }) },
++    expected: "skip",
++  },
++  {
++    name: "does not guess unsupported file tags",
++    files: { ".pre-commit-config.yaml": hook({ types: ["executable"] }) },
++    expected: false,
++  },
++  {
++    name: "does not execute a replacement hook entry",
++    files: { ".pre-commit-config.yaml": hook({ entry: "custom-command" }) },
++    expected: false,
++  },
++  {
++    name: "does not execute hooks that ignore filenames",
++    files: { ".pre-commit-config.yaml": hook({ pass_filenames: false }) },
++    expected: false,
++  },
++  {
++    name: "does not pass arbitrary arguments to Black",
++    files: { ".pre-commit-config.yaml": hook({ args: ["--config", "/outside/project.toml"] }) },
++    expected: false,
++  },
++  {
++    name: "rejects a missing formatting option value",
++    files: { ".pre-commit-config.yaml": hook({ args: ["--line-length"] }) },
++    expected: false,
++  },
++  {
++    name: "does not choose between competing formatting hooks",
++    files: { ".pre-commit-config.yaml": 'repos: [{repo: "https://github.com/psf/black", hooks: [{id: black}, {id: ruff-format}]}]' },
++    expected: false,
++  },
++  {
++    name: "does not treat a local custom hook as official Black",
++    files: { ".pre-commit-config.yaml": 'repos: [{repo: local, hooks: [{id: black}]}]' },
++    expected: false,
++  },
++  { name: "rejects malformed TOML", files: { "pyproject.toml": "[tool.black" }, expected: false },
++  { name: "rejects malformed YAML", files: { ".pre-commit-config.yaml": "repos: [" }, expected: false },
++  {
++    name: "supports Python verbose regular expressions",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "(?x)^src/" }) },
++    target: "src/example.py",
++    expected: command,
++  },
++  {
++    name: "preserves Python anchors and Unicode character classes",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "\\Asrc/\\w+\\.py\\Z" }) },
++    target: "src/蛇.py",
++    expected: command,
++  },
++  {
++    name: "does not import project modules when evaluating filters",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "\\.py$" }), "re.py": "raise RuntimeError('project code executed')\n" },
++    expected: command,
++  },
++  {
++    name: "does not fall through to another formatter when a declared filter is invalid",
++    python: true,
++    files: { ".pre-commit-config.yaml": hook({ files: "[" }) },
++    expected: "skip",
++  },
++]
++
++for (const entry of cases) {
++  ;(entry.python && !python ? it.live.skip : it.live)(entry.name, () =>
++    withTempDir((temporary) =>
++      Effect.gen(function* () {
++        const filesystem = yield* FSUtil.Service
++        const processes = yield* AppProcess.Service
++        yield* Effect.promise(() =>
++          Promise.all(Object.entries(entry.files).map(([name, content]) => fs.writeFile(path.join(temporary.path, name), content))),
++        )
++        expect(
++          yield* BlackFormatter.command({
++            filepath: path.join(temporary.path, entry.target ?? "example.py"),
++            directory: temporary.path,
++            worktree: temporary.path,
++            fs: filesystem,
++            processes,
++            bin: "black",
++          }),
++        ).toEqual(entry.expected)
++      }),
++    ),
++  )
++}

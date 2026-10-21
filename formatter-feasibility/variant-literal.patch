@@ -1,0 +1,33 @@
+diff --git a/packages/core/src/formatter/builtins.ts b/packages/core/src/formatter/builtins.ts
+index 86b3714add..2efc15f609 100644
+--- a/packages/core/src/formatter/builtins.ts
++++ b/packages/core/src/formatter/builtins.ts
+@@ -173,6 +173,20 @@ export function make(input: {
+     }).pipe(Effect.orElseSucceed(() => disabled)),
+   }
+ 
++  const black: Info = {
++    name: "black",
++    extensions: [".py", ".pyi"],
++    enabled: Effect.gen(function* () {
++      const bin = findExecutable("black")
++      if (!bin || (yield* ruff.enabled) !== false) return disabled
++      for (const dependency of ["requirements.txt", "pyproject.toml", "Pipfile"]) {
++        const found = yield* findUp(dependency)
++        if (found.length && (yield* readText(found[0])).includes("black")) return [bin, "--quiet", "$FILE"]
++      }
++      return disabled
++    }).pipe(Effect.orElseSucceed(() => disabled)),
++  }
++
+   const air: Info = {
+     name: "air",
+     extensions: [".R"],
+@@ -247,6 +261,7 @@ export function make(input: {
+     clang,
+     ktlint,
+     ruff,
++    black,
+     air,
+     uv,
+     rubocop,

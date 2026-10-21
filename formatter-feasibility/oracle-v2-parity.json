@@ -1,0 +1,28 @@
+{
+  "original_fixture_sha256": "ea9cf19a2bdb7587890f7ff6117f27d0ad609050d5280164cb1c183212dadbc0",
+  "revised_fixture_sha256": "651724068cfdef15cb524f6e62eab4fc30015ed72a0921a65bcd2fb9ceeeee48",
+  "snapshots_verified": 64,
+  "identical_files": 192,
+  "changed_input_or_expected_bytes": 0,
+  "new_root_filter_metadata": [
+    {
+      "repo": "yukinarit/pyserde",
+      "filters": {
+        "files": "serde/|tests/|examples/|bench/bench.py",
+        "exclude": ".git|.tox"
+      }
+    },
+    {
+      "repo": "wemake-services/wemake-python-styleguide",
+      "filters": {
+        "exclude": "^(tests/fixtures/|tests/test_formatter/__snapshots__/)"
+      }
+    },
+    {
+      "repo": "aesara-devs/aesara",
+      "filters": {
+        "exclude": "(?x)^(\n    versioneer\\.py|\n    aesara/_version\\.py|\n    doc/.*|\n    bin/.*\n)$\n"
+      }
+    }
+  ]
+}

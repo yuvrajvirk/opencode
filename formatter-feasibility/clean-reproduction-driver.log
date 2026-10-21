@@ -1,0 +1,65 @@
+Downloaded and verified 88 complete source archives; licenses remain inside
+python-setup
+python-install
+development-survey
+development-prepare
+heldout-survey
+heldout-prepare
+source-init
+source-remote
+before-fetch
+before-checkout
+original-fetch
+original-checkout
+latest-fetch
+latest-checkout
+candidate-checkout
+candidate-apply
+before-install
+before
+original-install
+original
+latest-install
+latest
+candidate-install
+candidate
+development-score
+heldout-latest
+heldout-candidate
+heldout-score
+{
+  "development": [
+    {
+      "name": "before",
+      "correct": 10,
+      "total": 83
+    },
+    {
+      "name": "original",
+      "correct": 50,
+      "total": 83
+    },
+    {
+      "name": "latest",
+      "correct": 10,
+      "total": 83
+    },
+    {
+      "name": "candidate",
+      "correct": 80,
+      "total": 83
+    }
+  ],
+  "heldout": [
+    {
+      "name": "heldout-latest",
+      "correct": 3,
+      "total": 15
+    },
+    {
+      "name": "heldout-candidate",
+      "correct": 15,
+      "total": 15
+    }
+  ]
+}

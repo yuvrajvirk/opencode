@@ -1,0 +1,618 @@
+[
+  {
+    "repo": "pytorch/ignite",
+    "revision": "81ba5b36de92453422a43252b604a335059fcedd",
+    "url": "https://codeload.github.com/pytorch/ignite/tar.gz/81ba5b36de92453422a43252b604a335059fcedd",
+    "bytes": 2472180,
+    "sha256": "90eed3f4daedfae359556b114d577c54466d669bfb83f85c6c3dbdcb24f7c61a"
+  },
+  {
+    "repo": "oasis-open/cti-taxii-server",
+    "revision": "119d8fc6c742931e1e41632cad780c1743425292",
+    "url": "https://codeload.github.com/oasis-open/cti-taxii-server/tar.gz/119d8fc6c742931e1e41632cad780c1743425292",
+    "bytes": 58864,
+    "sha256": "817590d7162a7143e758c190e5845a99fd8498accb2b6dd6abd0fbf5f8ec56cf"
+  },
+  {
+    "repo": "tobymao/sqlglot",
+    "revision": "00f3b38dd933669708105dd76bff1147e6cf9618",
+    "url": "https://codeload.github.com/tobymao/sqlglot/tar.gz/00f3b38dd933669708105dd76bff1147e6cf9618",
+    "bytes": 29723,
+    "sha256": "df02300e2124553d9c00a41368bdd3f4a40d258894284f54b0992c12a75d96f6"
+  },
+  {
+    "repo": "yukinarit/pyserde",
+    "revision": "508c54d86a5e1fb954eea865e32ea426ee98f1cc",
+    "url": "https://codeload.github.com/yukinarit/pyserde/tar.gz/508c54d86a5e1fb954eea865e32ea426ee98f1cc",
+    "bytes": 254787,
+    "sha256": "da21d2acfbf504768a59aafaea1b4c6052c3ff638c30c6acd98de974c896aed9"
+  },
+  {
+    "repo": "networkx/networkx",
+    "revision": "464bf8fc08ffa09cfd0183fb5cae1adfe6839e12",
+    "url": "https://codeload.github.com/networkx/networkx/tar.gz/464bf8fc08ffa09cfd0183fb5cae1adfe6839e12",
+    "bytes": 1431847,
+    "sha256": "02329c2f95827a655ff0e8fa0b41311336d11201e9c0b68878587e322731c58b"
+  },
+  {
+    "repo": "frictionlessdata/frictionless-py",
+    "revision": "84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+    "url": "https://codeload.github.com/frictionlessdata/frictionless-py/tar.gz/84a1a8ad75c91758b2aad37f1be42a39d42d1846",
+    "bytes": 13710948,
+    "sha256": "6576fb0e7a5834da9a5533dc591c40f0fdb49ed88a15691b789e5b417aeb548a"
+  },
+  {
+    "repo": "zopefoundation/persistent",
+    "revision": "f91227e6a01a7cfcc29beba0d3ea384deecb3bc3",
+    "url": "https://codeload.github.com/zopefoundation/persistent/tar.gz/f91227e6a01a7cfcc29beba0d3ea384deecb3bc3",
+    "bytes": 101750,
+    "sha256": "13290a804f8cdc5b93d12e88432fe6bc491cec6fa80f5a47b91c84284701f80c"
+  },
+  {
+    "repo": "collective/zpretty",
+    "revision": "78402172b55d68f4d9ee4df341a0652891c83264",
+    "url": "https://codeload.github.com/collective/zpretty/tar.gz/78402172b55d68f4d9ee4df341a0652891c83264",
+    "bytes": 22507,
+    "sha256": "45998d24300b22db3e128a54b52546bf8c5a29b7c7f56ef241620f816295b6b8"
+  },
+  {
+    "repo": "GenericMappingTools/pygmt",
+    "revision": "4163497b9a12bcfc35b337ced20dde9afae10ce7",
+    "url": "https://codeload.github.com/GenericMappingTools/pygmt/tar.gz/4163497b9a12bcfc35b337ced20dde9afae10ce7",
+    "bytes": 3610026,
+    "sha256": "a60083e1c5b24e3fc2d73a2ef186e443e9c2053951679b40a6e8ab0d0dd02bcf"
+  },
+  {
+    "repo": "GenericMappingTools/pygmt",
+    "revision": "89857c32c7e61c57fb1f03993cfb090c76366783",
+    "url": "https://codeload.github.com/GenericMappingTools/pygmt/tar.gz/89857c32c7e61c57fb1f03993cfb090c76366783",
+    "bytes": 10065919,
+    "sha256": "1ea77f960e7386aceb0162651ea6a1224a77a7054e881bb52268e9fcf97371e2"
+  },
+  {
+    "repo": "hidrokit/hidrokit",
+    "revision": "6f2cfd89a468405d1a6cd7e7ffe022dbc0c70951",
+    "url": "https://codeload.github.com/hidrokit/hidrokit/tar.gz/6f2cfd89a468405d1a6cd7e7ffe022dbc0c70951",
+    "bytes": 67395,
+    "sha256": "eec5e58ca074a5668d024d552a518828f563212f1835a2fe0f505716fc271faa"
+  },
+  {
+    "repo": "tox-dev/tox",
+    "revision": "b8307e79a8e6f6e7f1440c22a63765ecf895f208",
+    "url": "https://codeload.github.com/tox-dev/tox/tar.gz/b8307e79a8e6f6e7f1440c22a63765ecf895f208",
+    "bytes": 260095,
+    "sha256": "107e68c1df523f4292272e55c101761ae10d57d54766e07fff376e45b4fcbd51"
+  },
+  {
+    "repo": "mplanchard/pydecor",
+    "revision": "b7554cfa64f62e5619511438a821e0fae0a51a19",
+    "url": "https://codeload.github.com/mplanchard/pydecor/tar.gz/b7554cfa64f62e5619511438a821e0fae0a51a19",
+    "bytes": 42276,
+    "sha256": "e3193ca326a610821affc93e42b4fd8f20b508f5c8d3f7941eafba99186e84d3"
+  },
+  {
+    "repo": "wemake-services/wemake-python-styleguide",
+    "revision": "3daaea47fdc3bca4d8ea64e0c35761b7325c7479",
+    "url": "https://codeload.github.com/wemake-services/wemake-python-styleguide/tar.gz/3daaea47fdc3bca4d8ea64e0c35761b7325c7479",
+    "bytes": 2237826,
+    "sha256": "b103de0ecae3ddfd998922d8c6aa799d3ac6f20f0d8fdf8053295ca9abae16de"
+  },
+  {
+    "repo": "hgrecco/pint",
+    "revision": "f1dc122abc48eae80d88bc3adeb99081e46e6f29",
+    "url": "https://codeload.github.com/hgrecco/pint/tar.gz/f1dc122abc48eae80d88bc3adeb99081e46e6f29",
+    "bytes": 271329,
+    "sha256": "4de3863c2a6cf448100c1660b0fc5be7b7be6da832cfaf62ed81025789fb5bd6"
+  },
+  {
+    "repo": "cdent/gabbi",
+    "revision": "d91d8ec9a5516615289d77a30529f9ea496b98c4",
+    "url": "https://codeload.github.com/cdent/gabbi/tar.gz/d91d8ec9a5516615289d77a30529f9ea496b98c4",
+    "bytes": 195750,
+    "sha256": "909b8dc8b7dbac84b5d0f81bf02c8e7c9dbe922ae2d15874261246db4f30aeec"
+  },
+  {
+    "repo": "PennyLaneAI/pennylane",
+    "revision": "e675ed7a63efbb2a92d3c8539fb96cc89459a43f",
+    "url": "https://codeload.github.com/PennyLaneAI/pennylane/tar.gz/e675ed7a63efbb2a92d3c8539fb96cc89459a43f",
+    "bytes": 16453475,
+    "sha256": "9e9c0c601b349b1f28c3e00c3b84be1712afbfc1b4d7dda42d024acc5070cfa4"
+  },
+  {
+    "repo": "tianocore/edk2-pytool-library",
+    "revision": "f521d59041afee6a8a82206b3871960409aaa612",
+    "url": "https://codeload.github.com/tianocore/edk2-pytool-library/tar.gz/f521d59041afee6a8a82206b3871960409aaa612",
+    "bytes": 230718,
+    "sha256": "b61e52568cac070389316fbab112066b103967e0881cc069212a4c24cbfe89c3"
+  },
+  {
+    "repo": "stfc/fparser",
+    "revision": "57d0ca7b4955a9f60e9efe48702c4e8c2a846a56",
+    "url": "https://codeload.github.com/stfc/fparser/tar.gz/57d0ca7b4955a9f60e9efe48702c4e8c2a846a56",
+    "bytes": 278374,
+    "sha256": "a4ed180780caecc067480edbd462204667c6ed1bee76f6ac48c807fd8526dd77"
+  },
+  {
+    "repo": "Sage-Bionetworks/challengeutils",
+    "revision": "0b2129349fef07c072f9dc0d42c7de8485e3cc57",
+    "url": "https://codeload.github.com/Sage-Bionetworks/challengeutils/tar.gz/0b2129349fef07c072f9dc0d42c7de8485e3cc57",
+    "bytes": 687820,
+    "sha256": "738901b1812d6bc5151925bc0ad0e6dc0eb4159f29c404059594a2eaf3154c25"
+  },
+  {
+    "repo": "iterative/dvc",
+    "revision": "9a298fc835e0266d919fde046d6c567e52d4f045",
+    "url": "https://codeload.github.com/iterative/dvc/tar.gz/9a298fc835e0266d919fde046d6c567e52d4f045",
+    "bytes": 148556,
+    "sha256": "43041e933ff66d9ded840a21c646d85ee990210e25d4334f9c7ea7f057f39638"
+  },
+  {
+    "repo": "ucfopen/canvasapi",
+    "revision": "f24904ff3e8275ba1f134692b1e7cc08e6972eda",
+    "url": "https://codeload.github.com/ucfopen/canvasapi/tar.gz/f24904ff3e8275ba1f134692b1e7cc08e6972eda",
+    "bytes": 111689,
+    "sha256": "1c1a88e8f9dd5638421a1b0f1aa470024cba02f68a4902b9a15d4f15ec830221"
+  },
+  {
+    "repo": "G-Node/python-odml",
+    "revision": "a75d1db5ddb02cf7414b17ed41ef97a80c6245fb",
+    "url": "https://codeload.github.com/G-Node/python-odml/tar.gz/a75d1db5ddb02cf7414b17ed41ef97a80c6245fb",
+    "bytes": 247748,
+    "sha256": "8705dc1c6c75ba37db1d4dc171eecc16d522ebe7a63d2a6717b1c57f3c459f19"
+  },
+  {
+    "repo": "tobymao/sqlglot",
+    "revision": "18bb1a35df9e902218b8fca5be80df78ff39ae8c",
+    "url": "https://codeload.github.com/tobymao/sqlglot/tar.gz/18bb1a35df9e902218b8fca5be80df78ff39ae8c",
+    "bytes": 3495633,
+    "sha256": "2ae6addcbfb6ce1cad4fd2d5f9804e272ed52c7fb517989b8acd2e851aa64772"
+  },
+  {
+    "repo": "roaldnefs/salt-lint",
+    "revision": "9253a7aab3fa082b7063dfe47fd3bfe4fad461f0",
+    "url": "https://codeload.github.com/roaldnefs/salt-lint/tar.gz/9253a7aab3fa082b7063dfe47fd3bfe4fad461f0",
+    "bytes": 14558,
+    "sha256": "430862016b9c748958dd17bf21747d2a711eab5440145178bd47143199139282"
+  },
+  {
+    "repo": "rayokota/jsonata-python",
+    "revision": "cda7eb6c4860dcb38a546d30bd454fd774a30210",
+    "url": "https://codeload.github.com/rayokota/jsonata-python/tar.gz/cda7eb6c4860dcb38a546d30bd454fd774a30210",
+    "bytes": 79067,
+    "sha256": "7b498b4e93925c256fe06650e6ac36486dc4d8d1cb882727289bf29c323b2c08"
+  },
+  {
+    "repo": "scipp/plopp",
+    "revision": "ee4cac6caf12d8d9db219183bebf0057425a3e84",
+    "url": "https://codeload.github.com/scipp/plopp/tar.gz/ee4cac6caf12d8d9db219183bebf0057425a3e84",
+    "bytes": 161362,
+    "sha256": "6d83c398b716a6a6bade434921d9311aabefe0efe0eaab2bd7bc50494582b02f"
+  },
+  {
+    "repo": "Ouranosinc/xclim",
+    "revision": "a4a8a7c4a7d2bb527ff11b77607189415c9def13",
+    "url": "https://codeload.github.com/Ouranosinc/xclim/tar.gz/a4a8a7c4a7d2bb527ff11b77607189415c9def13",
+    "bytes": 34974951,
+    "sha256": "98895c735b743c30f45cd9bac1ce1a04ee221da063f334a2cb0db205b6cd9b12"
+  },
+  {
+    "repo": "borgbackup/borg",
+    "revision": "6b02c05f2b644320850fb040c2631b3090bb6db6",
+    "url": "https://codeload.github.com/borgbackup/borg/tar.gz/6b02c05f2b644320850fb040c2631b3090bb6db6",
+    "bytes": 2090619,
+    "sha256": "69afe8f898cb477bbeef55d6e345e4b5d9f3ca6286af4bf7a0b9c16fdea5719f"
+  },
+  {
+    "repo": "Materials-Consortia/optimade-python-tools",
+    "revision": "5fb7590db87866918745a7e9a67ecd1bdd7d7314",
+    "url": "https://codeload.github.com/Materials-Consortia/optimade-python-tools/tar.gz/5fb7590db87866918745a7e9a67ecd1bdd7d7314",
+    "bytes": 309459,
+    "sha256": "d9299792b40bacc39c76de62f065fde2ce4639ce5dcca4d8fb4984dd52f42851"
+  },
+  {
+    "repo": "cityofaustin/knackpy",
+    "revision": "0035913119e39a0c243603090370e862585a32ab",
+    "url": "https://codeload.github.com/cityofaustin/knackpy/tar.gz/0035913119e39a0c243603090370e862585a32ab",
+    "bytes": 1933433,
+    "sha256": "096e5480c3655b28ef401bed99b03830d184923bf8530bfc8b38507b29b14331"
+  },
+  {
+    "repo": "pydicom/pydicom",
+    "revision": "1c7f107449b87fa7472e953b8ebdb73691683586",
+    "url": "https://codeload.github.com/pydicom/pydicom/tar.gz/1c7f107449b87fa7472e953b8ebdb73691683586",
+    "bytes": 2221343,
+    "sha256": "1501aa22e1d832ac37738758a3927cf08e6a241aa625d9d4e303d6938195cf60"
+  },
+  {
+    "repo": "pre-commit/pre-commit-hooks",
+    "revision": "2f1e5e2abf7c3be32557ad1d70aea3be5c69c354",
+    "url": "https://codeload.github.com/pre-commit/pre-commit-hooks/tar.gz/2f1e5e2abf7c3be32557ad1d70aea3be5c69c354",
+    "bytes": 38292,
+    "sha256": "ac12fe2a68660858afc3436e8a2efce09fc2f11a0389f8a63e51451bf9d59ece"
+  },
+  {
+    "repo": "wyfo/apischema",
+    "revision": "b088ad6f7c2f03fb3fa6687cbdb157d7a2cc8648",
+    "url": "https://codeload.github.com/wyfo/apischema/tar.gz/b088ad6f7c2f03fb3fa6687cbdb157d7a2cc8648",
+    "bytes": 146189,
+    "sha256": "727dbbb7e5c88f24365c101a294ac70ee370f77beefee22cfe388852735fdc08"
+  },
+  {
+    "repo": "bridgecrewio/checkov",
+    "revision": "0e179067eecd5557d0bfda2881a983ab630b577d",
+    "url": "https://codeload.github.com/bridgecrewio/checkov/tar.gz/0e179067eecd5557d0bfda2881a983ab630b577d",
+    "bytes": 12568848,
+    "sha256": "8d588fdcb674c96250fff379f36cf06acddf26cac0f41cd52f1cab5439673075"
+  },
+  {
+    "repo": "ipython/ipython",
+    "revision": "635815e8f1ded5b764d66cacc80bbe25e9e2587f",
+    "url": "https://codeload.github.com/ipython/ipython/tar.gz/635815e8f1ded5b764d66cacc80bbe25e9e2587f",
+    "bytes": 6022470,
+    "sha256": "dfede305a197e3622fb90d79707f252f63384be07005245f7f1a90fac0a29c46"
+  },
+  {
+    "repo": "falconry/falcon",
+    "revision": "06fdf2885d70149803dbc47324ae8c951b7e58b3",
+    "url": "https://codeload.github.com/falconry/falcon/tar.gz/06fdf2885d70149803dbc47324ae8c951b7e58b3",
+    "bytes": 1150673,
+    "sha256": "a2ae6b7c4515743b26acaa5a65e85ef9b7d0c7b3ab332336314386343d916f6a"
+  },
+  {
+    "repo": "wemake-services/wemake-python-styleguide",
+    "revision": "7cf5e073c75dd5e1eb5f56eb55da4f2be13f2af1",
+    "url": "https://codeload.github.com/wemake-services/wemake-python-styleguide/tar.gz/7cf5e073c75dd5e1eb5f56eb55da4f2be13f2af1",
+    "bytes": 2221410,
+    "sha256": "a8ea5be4e6fd0bfa3b6c616000b3e5e31f39f67cf3d486de4ad65dee8b8b0dc9"
+  },
+  {
+    "repo": "iterative/dvc",
+    "revision": "daf07451f8e8f3e76a791c696b0ea175e8ed3ac1",
+    "url": "https://codeload.github.com/iterative/dvc/tar.gz/daf07451f8e8f3e76a791c696b0ea175e8ed3ac1",
+    "bytes": 502925,
+    "sha256": "4964a8e1d0e5a8a324b02dbcdb00af40d4e23cab2eb13075cc153613bd3a53f9"
+  },
+  {
+    "repo": "AzureAD/microsoft-authentication-library-for-python",
+    "revision": "78e9ccfab7c16154ba38c0de78c495ba2ee58849",
+    "url": "https://codeload.github.com/AzureAD/microsoft-authentication-library-for-python/tar.gz/78e9ccfab7c16154ba38c0de78c495ba2ee58849",
+    "bytes": 97157,
+    "sha256": "8a5a96d4b6ad1de20e15b773357980bd96339b31cce21f466fe224464856043c"
+  },
+  {
+    "repo": "Azure/azure-cli",
+    "revision": "d79710730933432d2c8ccd722d31fbbf75845ce0",
+    "url": "https://codeload.github.com/Azure/azure-cli/tar.gz/d79710730933432d2c8ccd722d31fbbf75845ce0",
+    "bytes": 5050251,
+    "sha256": "aac5184e84f63ff2ef24cf3a8ba647603061c24714e27b10bb75ec8589eebe44"
+  },
+  {
+    "repo": "googleapis/python-firestore",
+    "revision": "75d0a4821b09c3bed710353cf86082e41c28191f",
+    "url": "https://codeload.github.com/googleapis/python-firestore/tar.gz/75d0a4821b09c3bed710353cf86082e41c28191f",
+    "bytes": 302281,
+    "sha256": "387ad09b948126e8842c150d5eb166f649f63eb9a0485328acef21a9080abc44"
+  },
+  {
+    "repo": "PennyLaneAI/pennylane",
+    "revision": "a6049f21338ad1a61f0d33cca9f0bc449f764ea7",
+    "url": "https://codeload.github.com/PennyLaneAI/pennylane/tar.gz/a6049f21338ad1a61f0d33cca9f0bc449f764ea7",
+    "bytes": 22733189,
+    "sha256": "37f3437aa48fc2f71238447a60f4fe847ea9c7cd83fe90fd47768ee2b147dd3b"
+  },
+  {
+    "repo": "alerta/python-alerta-client",
+    "revision": "10f200428c8e5be995b8925b2663ac22ad88080a",
+    "url": "https://codeload.github.com/alerta/python-alerta-client/tar.gz/10f200428c8e5be995b8925b2663ac22ad88080a",
+    "bytes": 154356,
+    "sha256": "fc674c667c0bbb357aaa3dde1f4ffa1ed13bf1619f3b8ffb761a77bb109667da"
+  },
+  {
+    "repo": "aesara-devs/aesara",
+    "revision": "064e72f4c37d069dbb5e829e38cf196d32c89fa8",
+    "url": "https://codeload.github.com/aesara-devs/aesara/tar.gz/064e72f4c37d069dbb5e829e38cf196d32c89fa8",
+    "bytes": 7859696,
+    "sha256": "f6ef4e10791e8d434b1bd7278b61345b84a862cc9b17a2c7d3c02b3d7ac8b07f"
+  },
+  {
+    "repo": "reata/sqllineage",
+    "revision": "3c70f2956d7bae3284123c3320c9dcbd9152d5a4",
+    "url": "https://codeload.github.com/reata/sqllineage/tar.gz/3c70f2956d7bae3284123c3320c9dcbd9152d5a4",
+    "bytes": 601114,
+    "sha256": "ca11b8c2d2b4c0f32a05466c670605b473546ee17432b5f67a8fe10abbb2df79"
+  },
+  {
+    "repo": "beetbox/beets",
+    "revision": "5b6dff34a16d1c0a666877e375c7b30c5104187c",
+    "url": "https://codeload.github.com/beetbox/beets/tar.gz/5b6dff34a16d1c0a666877e375c7b30c5104187c",
+    "bytes": 1640436,
+    "sha256": "6276e87b50fb7349492013704a9e4bd5422ec9facd8bb21e6a8017512215de60"
+  },
+  {
+    "repo": "faucetsdn/chewie",
+    "revision": "652649dbd62a5bd4c1b9285c198c6b992c374a0f",
+    "url": "https://codeload.github.com/faucetsdn/chewie/tar.gz/652649dbd62a5bd4c1b9285c198c6b992c374a0f",
+    "bytes": 94493,
+    "sha256": "76652b1a18d3dc7c952c3ec377211f46d1ed9b4481e8ef425557643099b33730"
+  },
+  {
+    "repo": "robotframework/robotframework",
+    "revision": "ac7c7debeb188512aa779b442a5ed40783bde530",
+    "url": "https://codeload.github.com/robotframework/robotframework/tar.gz/ac7c7debeb188512aa779b442a5ed40783bde530",
+    "bytes": 4611185,
+    "sha256": "cc64faa5cf937d0e4c545ea3ecec11d145756b835f8cca23db905379e5d2dcca"
+  },
+  {
+    "repo": "borgbackup/borg",
+    "revision": "5a87b41e370b2f18b7b9d75a3cca98e8a32768d2",
+    "url": "https://codeload.github.com/borgbackup/borg/tar.gz/5a87b41e370b2f18b7b9d75a3cca98e8a32768d2",
+    "bytes": 1512181,
+    "sha256": "0553a11fcbeaf4d8a22ea61279f00e7e36133f6a879d416d0eb6c558a87212a4"
+  },
+  {
+    "repo": "Materials-Consortia/optimade-python-tools",
+    "revision": "e7a8de9822da1edd8a2432e8d562982e27f00255",
+    "url": "https://codeload.github.com/Materials-Consortia/optimade-python-tools/tar.gz/e7a8de9822da1edd8a2432e8d562982e27f00255",
+    "bytes": 306362,
+    "sha256": "5db535f415e8d24da7e691ccce98cfd8178dfa49f5f0766bc11f0a128f54fef9"
+  },
+  {
+    "repo": "qiboteam/qibo",
+    "revision": "dce74ac77755ab0a0b88fd93c91d0b6d604a00e9",
+    "url": "https://codeload.github.com/qiboteam/qibo/tar.gz/dce74ac77755ab0a0b88fd93c91d0b6d604a00e9",
+    "bytes": 4331207,
+    "sha256": "fd4aaca77b89ddb37369c85bfdbf9f6bdd751f21a23bedf3b080ffe4898901d2"
+  },
+  {
+    "repo": "tonioo/sievelib",
+    "revision": "df786d65f3279ee3e28d2565f4b843b0939c304e",
+    "url": "https://codeload.github.com/tonioo/sievelib/tar.gz/df786d65f3279ee3e28d2565f4b843b0939c304e",
+    "bytes": 31262,
+    "sha256": "b47c803953533a1d2c0eb300a49ae400a10d460c062e897a18045d54c4c5f627"
+  },
+  {
+    "repo": "hynek/structlog",
+    "revision": "14cb331a62a38c71e4de19d66f75d3a8d3389c58",
+    "url": "https://codeload.github.com/hynek/structlog/tar.gz/14cb331a62a38c71e4de19d66f75d3a8d3389c58",
+    "bytes": 736481,
+    "sha256": "d81e4a6c19a76721e6faa9130d45b1b469526962685e5ab51750400de2bc3f79"
+  },
+  {
+    "repo": "khornberg/octokit.py",
+    "revision": "1314f1609616f6ed69c2d3636b0c485f5342cd6e",
+    "url": "https://codeload.github.com/khornberg/octokit.py/tar.gz/1314f1609616f6ed69c2d3636b0c485f5342cd6e",
+    "bytes": 22448,
+    "sha256": "a8a5a05343a95b5f9f6c063b08de77ad91e6e1e689d2af9b838a6680e33d04e5"
+  },
+  {
+    "repo": "mit-ll-responsible-ai/hydra-zen",
+    "revision": "2e7e253ba904707dc9b3d67b24a37aa7d9771853",
+    "url": "https://codeload.github.com/mit-ll-responsible-ai/hydra-zen/tar.gz/2e7e253ba904707dc9b3d67b24a37aa7d9771853",
+    "bytes": 1408191,
+    "sha256": "840731761b8a04f666b5e129ed30c439d97b212a5a95fbccb3782d8b286d0bed"
+  },
+  {
+    "repo": "sktime/sktime",
+    "revision": "ff6f059c5d78af345c061209147fd42c1c7d6cdf",
+    "url": "https://codeload.github.com/sktime/sktime/tar.gz/ff6f059c5d78af345c061209147fd42c1c7d6cdf",
+    "bytes": 14414921,
+    "sha256": "c5c5ab8fb544c7d7bc4eaec5aa43bae8c2b1e27c9374ec5b8cc3e5a7752e25d7"
+  },
+  {
+    "repo": "FlorianLudwig/rueckenwind",
+    "revision": "a9856bf3b640562310eda0953c921054b7a050ef",
+    "url": "https://codeload.github.com/FlorianLudwig/rueckenwind/tar.gz/a9856bf3b640562310eda0953c921054b7a050ef",
+    "bytes": 102020,
+    "sha256": "3317f9f213bbf53e6247b91c3eff5828f0f1bec60240951603aabbc844f7245d"
+  },
+  {
+    "repo": "pydicom/pydicom",
+    "revision": "5e70c1dfe09820023fec519dac4c51bebcb7f60d",
+    "url": "https://codeload.github.com/pydicom/pydicom/tar.gz/5e70c1dfe09820023fec519dac4c51bebcb7f60d",
+    "bytes": 2017871,
+    "sha256": "0341ef66c3bc8d2e02dbe6a7ac2fa46c84ead3d8af08cfea1eb90871b906bc1c"
+  },
+  {
+    "repo": "joke2k/faker",
+    "revision": "e0c2d8f62e39ef7b8c4cee8ef0c681722e293b67",
+    "url": "https://codeload.github.com/joke2k/faker/tar.gz/e0c2d8f62e39ef7b8c4cee8ef0c681722e293b67",
+    "bytes": 1624626,
+    "sha256": "c8e0332b0129b0b10058ccfd3a3f27ab33c156099087caf053520fa2dc4cd0e9"
+  },
+  {
+    "repo": "pyvista/pyvista",
+    "revision": "db6ee8dd4a747b8864caae36c5d05883976a3ae5",
+    "url": "https://codeload.github.com/pyvista/pyvista/tar.gz/db6ee8dd4a747b8864caae36c5d05883976a3ae5",
+    "bytes": 107202114,
+    "sha256": "1557b42ffee542b2aabf4920f2c69074fc9a58b7efdfc6e03b417fe344e026b1"
+  },
+  {
+    "repo": "adamchainz/apig-wsgi",
+    "revision": "85860cfb148b9fcda6dfa21f8ead0ebb0e33fea8",
+    "url": "https://codeload.github.com/adamchainz/apig-wsgi/tar.gz/85860cfb148b9fcda6dfa21f8ead0ebb0e33fea8",
+    "bytes": 24316,
+    "sha256": "f127f6ae191a044d90f836ed1e4e7cba3ad5c500130cb80ab940c2aa3bc2dfa9"
+  },
+  {
+    "repo": "XKNX/xknx",
+    "revision": "792864c5c8e6c9cd316af44012f8e261b5df9308",
+    "url": "https://codeload.github.com/XKNX/xknx/tar.gz/792864c5c8e6c9cd316af44012f8e261b5df9308",
+    "bytes": 678318,
+    "sha256": "887122ac0974575849d50e18c67c019ed5245c56f847975a89a72b14c27c9cf8"
+  },
+  {
+    "repo": "numba/numba",
+    "revision": "64fbf2b821f185fd1048eb5cf399c3130d145d5c",
+    "url": "https://codeload.github.com/numba/numba/tar.gz/64fbf2b821f185fd1048eb5cf399c3130d145d5c",
+    "bytes": 2409969,
+    "sha256": "32529c9dc900d3c251ad27f85748f8a143701af6b0238ce7b3f76f9decf1bded"
+  },
+  {
+    "repo": "django/django",
+    "revision": "fa4e963ee7e6876581b5432363603571839ba00c",
+    "url": "https://codeload.github.com/django/django/tar.gz/fa4e963ee7e6876581b5432363603571839ba00c",
+    "bytes": 9557926,
+    "sha256": "b7c639e1d2a5197599a4805d42a8597e36e60e122600986012cd5875cb28dea9"
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "revision": "02dc9ed680e7f53f1b0d410dcdd37341c7958eb1",
+    "url": "https://codeload.github.com/scikit-learn/scikit-learn/tar.gz/02dc9ed680e7f53f1b0d410dcdd37341c7958eb1",
+    "bytes": 6300964,
+    "sha256": "eab5f94ae1f2c13ea2825ab307900e4b45d76bcf8b18ae37d3499f804076ba86"
+  },
+  {
+    "repo": "sympy/sympy",
+    "revision": "a3389a25ec84d36f5cf04a4f2562d820f131db64",
+    "url": "https://codeload.github.com/sympy/sympy/tar.gz/a3389a25ec84d36f5cf04a4f2562d820f131db64",
+    "bytes": 4988246,
+    "sha256": "e5ede4c4687dfdeeda502c6f4f70842406d323dc2d744b80d57df181dd494a87"
+  },
+  {
+    "repo": "django/django",
+    "revision": "bd366ca2aeffa869b7dbc0b0aa01caea75e6dc31",
+    "url": "https://codeload.github.com/django/django/tar.gz/bd366ca2aeffa869b7dbc0b0aa01caea75e6dc31",
+    "bytes": 9999496,
+    "sha256": "1bf65d1ea0c8359942885064475de98ca0f61729e63911e390447900280f149c"
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "revision": "b90661d6a46aa3619d3eec94d5281f5888add501",
+    "url": "https://codeload.github.com/scikit-learn/scikit-learn/tar.gz/b90661d6a46aa3619d3eec94d5281f5888add501",
+    "bytes": 5981287,
+    "sha256": "3fc061ae95f36efada14bdef121d187121d11cfdf553cb1e82efb30fd137775e"
+  },
+  {
+    "repo": "django/django",
+    "revision": "b4817d20b9e55df30be0b1b2ca8c8bb6d61aab07",
+    "url": "https://codeload.github.com/django/django/tar.gz/b4817d20b9e55df30be0b1b2ca8c8bb6d61aab07",
+    "bytes": 10197585,
+    "sha256": "a47e651196a0158e24d28cc458f2f206d6be3a54a66b79bbb5546270895f4f02"
+  },
+  {
+    "repo": "django/django",
+    "revision": "bceadd2788dc2dad53eba0caae172bd8522fd483",
+    "url": "https://codeload.github.com/django/django/tar.gz/bceadd2788dc2dad53eba0caae172bd8522fd483",
+    "bytes": 8901032,
+    "sha256": "d020836a12024a51743d236c5c02676f2b5c19a31c5997fe0dc6f65c2a0fc428"
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "revision": "7eafdd8af3c523c1c77b027d378fb337dd489f18",
+    "url": "https://codeload.github.com/matplotlib/matplotlib/tar.gz/7eafdd8af3c523c1c77b027d378fb337dd489f18",
+    "bytes": 37675194,
+    "sha256": "055165a954d6ff810642d5fbfd10ae47c24e15ad671dcb035ad206e4c585a0b4"
+  },
+  {
+    "repo": "sympy/sympy",
+    "revision": "9da013ad0ddc3cd96fe505f2e47c63e372040916",
+    "url": "https://codeload.github.com/sympy/sympy/tar.gz/9da013ad0ddc3cd96fe505f2e47c63e372040916",
+    "bytes": 6833156,
+    "sha256": "013941682c06c4f9f1b61aab68f003b038e4b82645823a89ed7c2feb55f03764"
+  },
+  {
+    "repo": "sympy/sympy",
+    "revision": "624217179aaf8d094e6ff75b7493ad1ee47599b0",
+    "url": "https://codeload.github.com/sympy/sympy/tar.gz/624217179aaf8d094e6ff75b7493ad1ee47599b0",
+    "bytes": 7185128,
+    "sha256": "8dd40095a308850c5c494f031744135bd368b6ab5cc04c8e6671c955dae386d6"
+  },
+  {
+    "repo": "pytest-dev/pytest",
+    "revision": "450d2646233c670654744d3d24330b69895bb9d2",
+    "url": "https://codeload.github.com/pytest-dev/pytest/tar.gz/450d2646233c670654744d3d24330b69895bb9d2",
+    "bytes": 936357,
+    "sha256": "5675b3a7fcdb847305c070821009cc1cb04bb1ff0a90a0cb7d48b68d505cbfe5"
+  },
+  {
+    "repo": "sympy/sympy",
+    "revision": "74227f900b05009d4eed62e34a166228788a32ca",
+    "url": "https://codeload.github.com/sympy/sympy/tar.gz/74227f900b05009d4eed62e34a166228788a32ca",
+    "bytes": 6892186,
+    "sha256": "b1cba448101be1efc844166e8490187d133b469ba68b510298dc52227970270d"
+  },
+  {
+    "repo": "sphinx-doc/sphinx",
+    "revision": "e4bd3bd3ddd42c6642ff779a4f7381f219655c2c",
+    "url": "https://codeload.github.com/sphinx-doc/sphinx/tar.gz/e4bd3bd3ddd42c6642ff779a4f7381f219655c2c",
+    "bytes": 5987477,
+    "sha256": "d06f503248baac8544fd5db786f12d9675db7dc1f5df13350e83660be3e42c3d"
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "revision": "26f690961a52946dd2f53bf0fdd4264b2ae5be90",
+    "url": "https://codeload.github.com/scikit-learn/scikit-learn/tar.gz/26f690961a52946dd2f53bf0fdd4264b2ae5be90",
+    "bytes": 6487177,
+    "sha256": "2c71bea102782efbcf2ab66d375f43d272bb7acae6250259be7e9a082029fa22"
+  },
+  {
+    "repo": "sphinx-doc/sphinx",
+    "revision": "5d8d6275a54f2c5fb72b82383b5712c22d337634",
+    "url": "https://codeload.github.com/sphinx-doc/sphinx/tar.gz/5d8d6275a54f2c5fb72b82383b5712c22d337634",
+    "bytes": 5982884,
+    "sha256": "6cd4786493366c6254eafe8e15d96f734473e13776458cea095fe22d9ccaf2c7"
+  },
+  {
+    "repo": "pytest-dev/pytest",
+    "revision": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+    "url": "https://codeload.github.com/pytest-dev/pytest/tar.gz/4a2fdce62b73944030cff9b3e52862868ca9584d",
+    "bytes": 935829,
+    "sha256": "fe62c052b26908aef71fa7e2c8f8e6eaeef4a9bcab583079d2c64f54341aaf37"
+  },
+  {
+    "repo": "pytest-dev/pytest",
+    "revision": "69356d20cfee9a81972dcbf93d8caf9eabe113e8",
+    "url": "https://codeload.github.com/pytest-dev/pytest/tar.gz/69356d20cfee9a81972dcbf93d8caf9eabe113e8",
+    "bytes": 1214866,
+    "sha256": "ece662e0d995b18637d4d2a006a344c3a3fdec7d3c7dc2fed46df0c7c86ee7ea"
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "revision": "66f7956984cbfc3647e867c6e5fde889a89c64ef",
+    "url": "https://codeload.github.com/matplotlib/matplotlib/tar.gz/66f7956984cbfc3647e867c6e5fde889a89c64ef",
+    "bytes": 36009916,
+    "sha256": "b9696be634920745e8b536f3ca161cd1271cb4d66b79d753ff20759570341eb9"
+  },
+  {
+    "repo": "sphinx-doc/sphinx",
+    "revision": "7ca279e33aebb60168d35e6be4ed059f4a68f2c1",
+    "url": "https://codeload.github.com/sphinx-doc/sphinx/tar.gz/7ca279e33aebb60168d35e6be4ed059f4a68f2c1",
+    "bytes": 6017123,
+    "sha256": "dbc8887d4ff1fe8452559a9fe144ec127fd4bd8861d8e3715feede0d046b2c3c"
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "revision": "e98d8d085e8f53ec0467422b326f7738a2dd695e",
+    "url": "https://codeload.github.com/matplotlib/matplotlib/tar.gz/e98d8d085e8f53ec0467422b326f7738a2dd695e",
+    "bytes": 35735501,
+    "sha256": "44fa13b97f5743fa4263cddd312048fb2c4424a93b9cad2cddfd35482297e08a"
+  },
+  {
+    "repo": "astropy/astropy",
+    "revision": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+    "url": "https://codeload.github.com/astropy/astropy/tar.gz/7269fa3e33e8d02485a647da91a5a2a60a06af61",
+    "bytes": 7669810,
+    "sha256": "3dff59bf2c5f0b54521cab82d4637b2bb41ea53d492b6bf5e9f0bc3a9fa27860"
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "revision": "430fb1db88843300fb4baae3edc499bbfe073b0c",
+    "url": "https://codeload.github.com/matplotlib/matplotlib/tar.gz/430fb1db88843300fb4baae3edc499bbfe073b0c",
+    "bytes": 37682384,
+    "sha256": "98812dff88ed8cd849a58b452af7ec0304f74061a012cb34a5e2ae7a8c5bdd7d"
+  },
+  {
+    "repo": "sphinx-doc/sphinx",
+    "revision": "3ea1ec84cc610f7a9f4f6b354e264565254923ff",
+    "url": "https://codeload.github.com/sphinx-doc/sphinx/tar.gz/3ea1ec84cc610f7a9f4f6b354e264565254923ff",
+    "bytes": 5983933,
+    "sha256": "93b8bbb3f56448209ed27102aa4058473f0447d37e109006732b6d7ad16f6e05"
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "revision": "df7dd8391148a873d157328a4f0328528a0c4ed9",
+    "url": "https://codeload.github.com/scikit-learn/scikit-learn/tar.gz/df7dd8391148a873d157328a4f0328528a0c4ed9",
+    "bytes": 6424535,
+    "sha256": "ffef55b0d78189758f04aced1324ee2b9b472ba02c092038905a4b8e4251e308"
+  }
+]

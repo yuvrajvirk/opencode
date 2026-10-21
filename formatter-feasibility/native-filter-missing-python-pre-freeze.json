@@ -1,0 +1,17 @@
+{
+  "scope": "Post-prototype process and failure-boundary controls, not held-out quality evidence",
+  "source_sha256": "52a0f92a7e83556c46dd03b3dff1347fd61657aa19af7395b9d1f15c8eb134e9",
+  "correct": 1,
+  "total": 1,
+  "results": [
+    {
+      "name": "missing Python preserves the file",
+      "pattern": ".*",
+      "target": "example.py",
+      "expected": "skip",
+      "actual": "skip",
+      "correct": true,
+      "elapsed_ms": 6.0965660000000526
+    }
+  ]
+}
