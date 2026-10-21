@@ -45,7 +45,8 @@ const layer = Layer.effect(
       }),
     })
 
-    const command = Effect.fnUntraced(function* (formatter: Info) {
+    const command = Effect.fnUntraced(function* (formatter: Info, filepath: string) {
+      if (typeof formatter.enabled === "function") return yield* formatter.enabled(filepath)
       const cached = commands.get(formatter)
       if (cached !== undefined) return cached
       const result = yield* formatter.enabled
@@ -58,7 +59,8 @@ const layer = Layer.effect(
       const matching = state.get().formatters.filter((formatter) => formatter.extensions.includes(extension))
 
       for (const formatter of matching) {
-        const enabled = yield* command(formatter)
+        const enabled = yield* command(formatter, filepath)
+        if (enabled === "skip") return false
         if (enabled === false) continue
         const cmd = enabled.map((argument) => argument.replace("$FILE", filepath))
         yield* Effect.logInfo("formatting file", { file: filepath, command: cmd })
