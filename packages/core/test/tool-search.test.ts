@@ -1,7 +1,7 @@
 import { describe, expect } from "bun:test"
 import fs from "fs/promises"
 import path from "path"
-import { Effect, Layer } from "effect"
+import { Effect, Layer, Schema } from "effect"
 import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
 import { makeLocationNode } from "@opencode/util/effect/app-node"
 import { LayerNode } from "@opencode/util/effect/layer-node"
@@ -67,6 +67,152 @@ const call = (name: "glob" | "grep", input: unknown) => ({
 })
 
 describe("search tools", () => {
+  for (const limit of [2, 3]) {
+    it.live(`grep file output limits files rather than matching lines at ${limit}`, () =>
+      Effect.gen(function* () {
+        const tmp = yield* tmpdirScoped()
+        yield* Effect.promise(() =>
+          Promise.all(
+            ["first.txt", "second.txt", "third.txt"].map((file) =>
+              Bun.write(path.join(tmp.path, file), "needle\n".repeat(150)),
+            ),
+          ),
+        )
+        yield* withTools(tmp.path, (registry) =>
+          Effect.gen(function* () {
+            const result = yield* executeTool(registry, call("grep", { pattern: "needle", outputMode: "files", limit }))
+            expect(result.status).toBe("completed")
+            expect(result.output).toHaveLength(limit)
+            const entries = yield* Schema.decodeUnknownEffect(Schema.Array(FileSystem.Entry))(result.output)
+            expect(["first.txt", "second.txt", "third.txt"].map((file) => ({ path: file, type: "file" }))).toEqual(
+              expect.arrayContaining(entries),
+            )
+            expect(new Set(entries.map((entry) => entry.path)).size).toBe(limit)
+            expect(result.metadata).toEqual({ matches: limit, truncated: limit < 3 })
+            const text = result.content?.[0]?.type === "text" ? result.content[0].text : ""
+            expect(text).not.toContain("Line ")
+            expect(text).not.toContain("needle")
+            expect(text.includes("Results are truncated")).toBe(limit < 3)
+          }),
+        )
+      }),
+    )
+  }
+
+  it.live("preserves default grep output when content mode is explicit", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      yield* Effect.promise(() => Bun.write(path.join(tmp.path, "file.txt"), "needle\nneedle\n"))
+      yield* withTools(tmp.path, (registry) =>
+        Effect.gen(function* () {
+          const input = { pattern: "needle", path: "file.txt" }
+          expect(yield* executeTool(registry, call("grep", { ...input, outputMode: "content" }))).toEqual(
+            yield* executeTool(registry, call("grep", input)),
+          )
+        }),
+      )
+    }),
+  )
+
+  it.live("grep file output preserves matching options and escaped filenames", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      const filenames = [
+        ".hidden/with space.ts",
+        "src/雪.ts",
+        ...(process.platform === "win32" ? [] : ["src/colon:name\nnext.ts", "src/back\\slash.ts"]),
+      ]
+      yield* Effect.promise(() =>
+        Promise.all([
+          ...filenames.map((file) => Bun.write(path.join(tmp.path, file), "a.b\na.b\n")),
+          Bun.write(path.join(tmp.path, "skip.ts"), "axb\n"),
+          Bun.write(path.join(tmp.path, "skip.txt"), "a.b\n"),
+          Bun.write(path.join(tmp.path, ".git/config.ts"), "a.b\n"),
+        ]),
+      )
+      yield* withTools(tmp.path, (registry) =>
+        Effect.gen(function* () {
+          const result = yield* executeTool(
+            registry,
+            call("grep", { pattern: "A.B", literal: true, caseSensitive: false, include: "*.ts", outputMode: "files" }),
+          )
+          expect(result.status).toBe("completed")
+          expect(result.output).toEqual(
+            expect.arrayContaining(filenames.map((file) => ({ path: path.normalize(file), type: "file" }))),
+          )
+          expect(result.metadata).toEqual({ matches: filenames.length, truncated: false })
+          const text = result.content?.[0]?.type === "text" ? result.content[0].text : ""
+          expect(
+            text
+              .split("\n")
+              .slice(1)
+              .map((line) => JSON.parse(line))
+              .sort(),
+          ).toEqual(filenames.map((file) => path.join(tmp.path, file)).sort())
+          const file = yield* executeTool(
+            registry,
+            call("grep", { pattern: "a.b", path: filenames[0], outputMode: "files" }),
+          )
+          expect(file).toMatchObject({
+            status: "completed",
+            output: [{ path: path.normalize(filenames[0]!), type: "file" }],
+            metadata: { matches: 1, truncated: false },
+          })
+        }),
+      )
+    }),
+  )
+
+  it.live("grep file output reports empty results and preserves argument errors", () =>
+    Effect.gen(function* () {
+      const tmp = yield* tmpdirScoped()
+      yield* Effect.promise(() => Bun.write(path.join(tmp.path, "file.txt"), "haystack\n"))
+      yield* withTools(tmp.path, (registry) =>
+        Effect.gen(function* () {
+          expect(yield* executeTool(registry, call("grep", { pattern: "needle", outputMode: "files" }))).toMatchObject({
+            status: "completed",
+            output: [],
+            content: [{ type: "text", text: "No matches found" }],
+            metadata: { matches: 0, truncated: false },
+          })
+          for (const input of [
+            { pattern: "[" },
+            { pattern: "" },
+            { pattern: "needle", path: "missing" },
+            { pattern: "needle", outputMode: "invalid" },
+            { pattern: "needle", limit: 0 },
+          ]) {
+            const result = yield* executeTool(registry, call("grep", { outputMode: "files", ...input }))
+            expect(result.status).toBe("error")
+          }
+        }),
+      )
+    }),
+  )
+
+  it.live("grep file output authorizes external files before searching", () =>
+    Effect.gen(function* () {
+      const active = yield* tmpdirScoped()
+      const outside = yield* tmpdirScoped()
+      const assertions: Permission.AssertInput[] = []
+      yield* Effect.promise(() => Bun.write(path.join(outside.path, "file.txt"), "needle\n"))
+      yield* withTools(
+        active.path,
+        (registry) =>
+          Effect.gen(function* () {
+            const result = yield* executeTool(
+              registry,
+              call("grep", { pattern: "needle", path: path.join(outside.path, "file.txt"), outputMode: "files" }),
+            )
+            expect(result.status).toBe("completed")
+            expect(assertions.map((input) => input.action)).toEqual(["external_directory", "grep"])
+            expect(assertions[1]?.metadata).toMatchObject({ outputMode: "files" })
+          }),
+        assertions,
+      )
+    }),
+  )
+
   for (const hidden of [undefined, false, true]) {
     for (const limit of hidden ? [10] : [1, 10]) {
       it.live(`glob honors hidden=${hidden} before limit=${limit}`, () =>

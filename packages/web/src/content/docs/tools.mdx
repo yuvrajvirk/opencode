@@ -132,6 +132,8 @@ Search file contents using regular expressions.
 
 Fast content search across your codebase. Supports full regex syntax and file pattern filtering.
 
+By default, results include matching lines. When only filenames are needed, the tool's `outputMode: "files"` argument returns each matching file once without line previews. The `limit` then counts files instead of lines, so repeated matches in one file do not crowd out other files.
+
 ---
 
 ### glob
