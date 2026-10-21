@@ -10,7 +10,12 @@ destination = root.parent / "draft-evidence"
 destination.mkdir(exist_ok=True)
 target = destination / "draft-persistence"
 target.mkdir(exist_ok=True)
-excluded = {"development-fixtures.json", "heldout-fixtures.json", "diagnostic-fixtures.json", "next-feature-screen.json", "next-feature-screen.md"}
+excluded = {"development-fixtures.json", "heldout-fixtures.json", "diagnostic-fixtures.json", "next-feature-screen.json", "next-feature-screen.md", "publication-packaging.log"}
+for name in excluded:
+    for suffix in ["", ".gz"]:
+        stale = target / (name + suffix)
+        if stale.is_file():
+            stale.unlink()
 
 
 def publish(source, output):
