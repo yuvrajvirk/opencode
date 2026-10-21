@@ -14,6 +14,7 @@ OpenCode comes with several built-in formatters for popular languages and framew
 | Formatter            | Extensions                                                                                               | Requirements                                                                                          |
 | -------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | air                  | .R                                                                                                       | `air` command available                                                                               |
+| black                | .py, .pyi                                                                                                | `black` command available with explicit project configuration                                         |
 | biome                | .js, .jsx, .ts, .tsx, .html, .css, .md, .json, .yaml, and [more](https://biomejs.dev/)                   | `biome.json(c)` config file                                                                           |
 | cargofmt             | .rs                                                                                                      | `cargo fmt` command available                                                                         |
 | clang-format         | .c, .cpp, .h, .hpp, .ino, and [more](https://clang.llvm.org/docs/ClangFormat.html)                       | `.clang-format` config file                                                                           |
@@ -41,6 +42,10 @@ OpenCode comes with several built-in formatters for popular languages and framew
 | zig                  | .zig, .zon                                                                                               | `zig` command available                                                                               |
 
 When formatters are enabled, OpenCode will use `prettier` for matching files if your project has `prettier` in `package.json`.
+
+Black is selected from an explicit `tool.black` section in `pyproject.toml` or a single supported official Black hook in `.pre-commit-config.yaml`. Ruff lint configuration alone does not override that selection; explicit Ruff formatting configuration takes precedence over a Black TOML section.
+
+Supported Black hook options and file filters are respected without running pre-commit hooks or installing their environments. Path filters require Python 3 next to the Black executable or on `PATH`; if Python is unavailable or filter evaluation fails, the file is left unchanged. Use a custom formatter command for unsupported hook options or other project setup.
 
 ---
 

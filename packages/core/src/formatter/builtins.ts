@@ -10,7 +10,7 @@ export interface Info {
   readonly name: string
   readonly environment?: Record<string, string>
   readonly extensions: readonly string[]
-  readonly enabled: Effect.Effect<string[] | false>
+  readonly enabled: Effect.Effect<string[] | false> | ((filepath: string) => Effect.Effect<string[] | false | "skip">)
 }
 
 export function make(input: {
@@ -153,6 +153,25 @@ export function make(input: {
 
   const ktlint = executable("ktlint", [".kt", ".kts"], ["-F", "$FILE"], findExecutable)
 
+  const black: Info = {
+    name: "black",
+    extensions: [".py", ".pyi"],
+    enabled: (filepath) =>
+      Effect.gen(function* () {
+        const bin = findExecutable("black")
+        if (!bin) return disabled
+        const { BlackFormatter } = yield* Effect.promise(() => import("./black.js"))
+        return yield* BlackFormatter.command({
+          filepath,
+          directory: input.directory,
+          worktree: input.worktree,
+          fs: input.fs,
+          processes: input.processes,
+          bin,
+        })
+      }),
+  }
+
   const ruff: Info = {
     name: "ruff",
     extensions: [".py", ".pyi"],
@@ -247,6 +266,7 @@ export function make(input: {
     zig,
     clang,
     ktlint,
+    black,
     ruff,
     air,
     uv,

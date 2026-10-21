@@ -156,6 +156,46 @@ const layered: { name: string; layers: ConfigInput["formatter"][]; expected: Rec
 ]
 
 describe("Formatter", () => {
+  it.live("resolves each file without caching dynamic commands and honors an explicit skip", () =>
+    withFormatter(false, (formatter, directory) =>
+      Effect.gen(function* () {
+        const called: string[] = []
+        yield* formatter.transform((editor) => {
+          editor.set({
+            name: "dynamic",
+            extensions: [".dynamic"],
+            enabled: (filepath) =>
+              Effect.sync(() => {
+                called.push(path.basename(filepath))
+                return path.basename(filepath) === "skip.dynamic"
+                  ? "skip"
+                  : append(JSON.stringify(path.basename(filepath)))
+              }),
+          })
+          editor.set({ name: "fallback", extensions: [".dynamic"], enabled: Effect.succeed(append("'fallback'")) })
+        })
+        for (const name of ["first.dynamic", "second.dynamic", "skip.dynamic"]) {
+          const file = path.join(directory, name)
+          yield* Effect.promise(() => fs.writeFile(file, ""))
+          expect(yield* formatter.file(file)).toBe(name !== "skip.dynamic")
+          expect(yield* Effect.promise(() => fs.readFile(file, "utf8"))).toBe(name === "skip.dynamic" ? "" : name)
+        }
+        expect(called).toEqual(["first.dynamic", "second.dynamic", "skip.dynamic"])
+      }),
+    ),
+  )
+
+  it.live("explicit Black command overrides replace built-in discovery", () =>
+    withFormatter({ black: { command: append("'override'") } }, (formatter, directory) =>
+      Effect.gen(function* () {
+        const file = path.join(directory, "sample.py")
+        yield* Effect.promise(() => fs.writeFile(file, ""))
+        expect(yield* formatter.file(file)).toBe(true)
+        expect(yield* Effect.promise(() => fs.readFile(file, "utf8"))).toBe("override")
+      }),
+    ),
+  )
+
   layered.forEach((entry) =>
     it.live(entry.name, () =>
       withLayers(entry.layers, (formatter, directory) =>
