@@ -1,0 +1,260 @@
+diff --git a/packages/app/src/runtime/persistence/README.md b/packages/app/src/runtime/persistence/README.md
+index 7660dcf43b..7ac7d9a183 100644
+--- a/packages/app/src/runtime/persistence/README.md
++++ b/packages/app/src/runtime/persistence/README.md
+@@ -114,12 +114,21 @@ not raw ID-only blob documents.
+ ## Large draft content
+ 
+ Draft documents never carry large text inline. Any string of `draftTextThreshold`
+-characters or more is split into `draftTextChunk`-sized content-addressed blobs and
++characters or more is split into bounded content-addressed blobs and
+ stored as `{ blob: { kind: "text", ids: [...] } }`; reads join the chunks again. A
+ content-keyed cache means unchanged chunks are not hashed or sent on later saves, so
+-typing after a large paste uploads one chunk per save rather than the paste. Chunk
+-boundaries never split a surrogate pair, and a failed upload is evicted so the next save
+-retries it.
++typing after a large paste normally uploads only its final chunk rather than the paste.
++A chunk prefers the last newline between half and all of
++`draftTextChunk` characters; text without a newline in that window keeps the full-sized
++boundary. This lets multiline text reuse later chunks after an insertion or deletion,
++without scanning arbitrarily long lines. It does not guarantee reuse for every edit,
++and choosing a different boundary can increase the final chunk's size.
++
++Chunk boundaries never split a surrogate pair. Reads preserve leading U+FEFF as text,
++including when it starts an internal chunk. The upload-ID and decoded-text caches each
++hold at most `64 * draftTextChunk` UTF-16 characters and 128 entries; drafts larger than
++the cache budget may re-upload unchanged text. A failed upload is evicted so the next
++save retries it. Existing fixed-boundary documents remain readable without migration.
+ 
+ Blob collection is made safe by validation on write, not by timing. A strict document write
+ is refused while it references blob ids the store does not hold, so the previous document
+diff --git a/packages/app/src/runtime/persistence/drafts.test.ts b/packages/app/src/runtime/persistence/drafts.test.ts
+index fb07cd900f..4b27ffcfca 100644
+--- a/packages/app/src/runtime/persistence/drafts.test.ts
++++ b/packages/app/src/runtime/persistence/drafts.test.ts
+@@ -5,11 +5,13 @@ function memoryDriver() {
+   const documents = new Map<string, string>()
+   const blobs = new Map<string, Blob>()
+   let puts = 0
++  let bytes = 0
+ 
+   return {
+     documents,
+     blobs,
+     puts: () => puts,
++    bytes: () => bytes,
+     driver: {
+       get: async (key: string) => documents.get(key) ?? null,
+       // Like the real stores: report referenced blobs that are not held; a strict write with any
+@@ -32,7 +34,8 @@ function memoryDriver() {
+       remove: async (key: string) => void documents.delete(key),
+       putBlob: async (blob: Blob) => {
+         puts++
+-        const id = `blob-${await blob.text().then((text) => Bun.hash(text).toString(16))}`
++        bytes += blob.size
++        const id = `blob-${Bun.hash(await blob.arrayBuffer()).toString(16)}`
+         blobs.set(id, blob)
+ 
+         return id
+@@ -46,6 +49,17 @@ const large = "x".repeat(draftTextThreshold)
+ 
+ const paste = Array.from({ length: 3 * draftTextChunk }, (_, i) => String.fromCharCode(97 + (i % 26))).join("")
+ 
++function multiline(size: number) {
++  const lines: string[] = []
++  let length = 0
++  for (let index = 0; length < size; index++) {
++    const line = `${index.toString().padStart(8, "0")}: ${"content".repeat(4 + (index % 17))}\n`
++    lines.push(line)
++    length += line.length
++  }
++  return lines.join("").slice(0, size)
++}
++
+ describe("draft store text externalization", () => {
+   test("large strings become chunk lists and small ones stay inline", async () => {
+     const memory = memoryDriver()
+@@ -92,6 +106,53 @@ describe("draft store text externalization", () => {
+     expect(JSON.parse((await fresh.getItem("doc"))!)).toEqual({ prompt: [{ type: "text", content: paste }] })
+   })
+ 
++  test("reuses unaffected multiline text after a middle edit", async () => {
++    const memory = memoryDriver()
++    const store = createDraftStore(memory.driver)
++    const text = multiline(8 * draftTextChunk)
++    await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
++    const before = memory.bytes()
++    const edited = `${text.slice(0, text.length / 2)}inserted${text.slice(text.length / 2)}`
++    await store.setDocument("doc", { prompt: [{ type: "text", content: edited }] })
++    expect(memory.bytes() - before).toBeLessThan(text.length / 2)
++    const fresh = createDraftStore(memory.driver)
++    expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(edited)
++  })
++
++  test("retains active chunks while repeatedly replacing a large draft's tail", async () => {
++    const memory = memoryDriver()
++    const store = createDraftStore(memory.driver)
++    const text = multiline(64 * draftTextChunk - 1024)
++    await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
++    const before = memory.bytes()
++    for (let step = 1; step <= 10; step++)
++      await store.setDocument("doc", { prompt: [{ type: "text", content: `${text}edit-${step}` }] })
++    expect(memory.bytes() - before).toBeLessThan(text.length)
++    const fresh = createDraftStore(memory.driver)
++    expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(`${text}edit-10`)
++  })
++
++  test("preserves U+FEFF as text at chunk boundaries", async () => {
++    const { Blob } = await import("node:buffer")
++    for (const text of [
++      `\uFEFF${paste}`,
++      `${paste.slice(0, draftTextChunk)}\uFEFF${paste.slice(draftTextChunk)}`,
++      `\uFEFF${"x".repeat(draftTextChunk - 1)}\uFEFF😀`,
++    ]) {
++      const memory = memoryDriver()
++      const store = createDraftStore(memory.driver)
++      await store.setDocument("doc", { prompt: [{ type: "text", content: text }] })
++      const fresh = createDraftStore({
++        ...memory.driver,
++        getBlob: async (id) => {
++          const blob = await memory.driver.getBlob(id)
++          return blob ? new Blob([await blob.arrayBuffer()]) : null
++        },
++      })
++      expect(JSON.parse((await fresh.getItem("doc"))!).prompt[0].content).toBe(text)
++    }
++  })
++
+   test("a missing chunk decodes to empty text instead of failing the document", async () => {
+     const memory = memoryDriver()
+     memory.documents.set(
+diff --git a/packages/app/src/runtime/persistence/drafts.ts b/packages/app/src/runtime/persistence/drafts.ts
+index 727a5b3fcc..8e6d856fdb 100644
+--- a/packages/app/src/runtime/persistence/drafts.ts
++++ b/packages/app/src/runtime/persistence/drafts.ts
+@@ -22,7 +22,7 @@ export type DraftStore = AsyncStorage & {
+   setDocument(key: string, document: unknown): Promise<void>
+ }
+ 
+-// Strings at least this long leave the document as fixed-size content-addressed chunks. Typing
++// Strings at least this long leave the document as bounded content-addressed chunks. Typing
+ // after a large paste changes only the final chunk, so a save uploads one chunk, not the paste.
+ export const draftTextThreshold = 16 * 1024
+ 
+@@ -182,24 +182,13 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+     return { id, url: blobUrl(id, blob, grace) }
+   }
+ 
+-  // Keyed by chunk content so unchanged chunks are never hashed or sent again while the draft is
+-  // edited. Bounded because each entry pins up to draftTextChunk characters. A hit is safe even if
+-  // the store has since collected the blob: the write reports it missing and it is uploaded again.
+-  const chunkIds = new Map<string, Promise<string>>()
+-  const chunks = new Map<string, string>()
+-
+-  const remember = <V>(cache: Map<string, V>, key: string, value: V) => {
+-    cache.set(key, value)
+-
+-    if (cache.size > textCacheLimit) cache.delete(cache.keys().next().value!)
+-
+-    return value
+-  }
++  const chunkIds = createTextCache<Promise<string>>((key) => key.length)
++  const chunks = createTextCache<string>((_key, value) => value.length)
+ 
+   const upload = (chunk: string) => {
+     const id = driver.putBlob(new Blob([chunk])).then(
+       (id) => {
+-        remember(chunks, id, chunk)
++        chunks.set(id, chunk)
+ 
+         return id
+       },
+@@ -210,10 +199,10 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+       },
+     )
+ 
+-    return remember(chunkIds, chunk, id)
++    return chunkIds.set(chunk, id)
+   }
+ 
+-  const externalize = (text: string) => Promise.all(split(text).map((chunk) => chunkIds.get(chunk) ?? upload(chunk)))
++  const externalize = (pieces: string[]) => Promise.all(pieces.map((chunk) => chunkIds.get(chunk) ?? upload(chunk)))
+ 
+   const loadChunk = async (id: string) => {
+     const cached = chunks.get(id)
+@@ -222,7 +211,7 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+     const blob = await driver.getBlob(id)
+ 
+     // A missing chunk loses that text but keeps the rest of the document decodable.
+-    return remember(chunks, id, blob ? await blob.text() : "")
++    return chunks.set(id, blob ? new TextDecoder("utf-8", { ignoreBOM: true }).decode(await blob.arrayBuffer()) : "")
+   }
+ 
+   // `sources` collects, for every blob id the encoded document references, a way to produce its
+@@ -232,7 +221,7 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+   const encode = async (value: unknown, sources: Sources): Promise<unknown> => {
+     if (typeof value === "string" && value.length >= draftTextThreshold) {
+       const pieces = split(value)
+-      const ids = await externalize(value)
++      const ids = await externalize(pieces)
+       ids.forEach((id, index) =>
+         sources.set(id, { blob: async () => new Blob([pieces[index]!]), chunk: pieces[index] }),
+       )
+@@ -329,8 +318,8 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+         renamed.set(id, next)
+ 
+         if (source.chunk !== undefined) {
+-          remember(chunkIds, source.chunk, Promise.resolve(next))
+-          remember(chunks, next, source.chunk)
++          chunkIds.set(source.chunk, Promise.resolve(next))
++          chunks.set(next, source.chunk)
+ 
+           return
+         }
+@@ -423,13 +412,43 @@ export function createDraftStore(driver: Driver, options: { grace?: number } = {
+   }
+ }
+ 
+-// Fixed-size pieces, except that a piece never ends between the two halves of a surrogate pair:
+-// each piece becomes its own Blob, and an unpaired surrogate would be encoded as U+FFFD.
++function createTextCache<Value>(weight: (key: string, value: Value) => number) {
++  const values = new Map<string, Value>()
++  let size = 0
++  const remove = (key: string) => {
++    const value = values.get(key)
++    if (value === undefined) return
++    size -= weight(key, value)
++    values.delete(key)
++  }
++  return {
++    get(key: string) {
++      const value = values.get(key)
++      if (value === undefined) return
++      values.delete(key)
++      values.set(key, value)
++      return value
++    },
++    set(key: string, value: Value) {
++      remove(key)
++      values.set(key, value)
++      size += weight(key, value)
++      while (size > textCacheLimit * draftTextChunk || values.size > textCacheLimit * 2)
++        remove(values.keys().next().value!)
++      return value
++    },
++    delete: remove,
++  }
++}
++
+ function split(text: string) {
+   const pieces: string[] = []
+ 
+   for (let start = 0; start < text.length; ) {
+-    const end = Math.min(start + draftTextChunk, text.length)
++    const limit = Math.min(start + draftTextChunk, text.length)
++    const minimum = start + draftTextChunk / 2
++    const newline = text.slice(minimum - 1, limit).lastIndexOf("\n")
++    const end = newline < 0 ? limit : minimum + newline
+     const code = text.charCodeAt(end - 1)
+     const stop = end < text.length && code >= 0xd800 && code <= 0xdbff ? end + 1 : end
+     pieces.push(text.slice(start, stop))

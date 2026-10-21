@@ -410,5 +410,16 @@
   "draft-persistence/weighted-storage-tests.log.gz": "4044e8e7d6cc46f085d5fba438ad7b8c5ac315bfb07be77632118d192b301304",
   "draft-persistence/weighted-typecheck.log.gz": "c50ef035296d79a821150b7481a06429a8e34893446736defacb6137c0400666",
   "draft-persistence/worker-bun-v1.ts": "db953dd6ab497899b7ee74e9ceb1c30dbc05d6b4c5d98d66129154aeb1a482d7",
-  "draft-persistence/worker.ts": "ca8290749b74d38cfa4acda793b6ca54d328b78777f37dcd144e131c2cd3e25d"
+  "draft-persistence/worker.ts": "ca8290749b74d38cfa4acda793b6ca54d328b78777f37dcd144e131c2cd3e25d",
+  "integration-eleven/REPORT.md": "bfe5917af614b16d604799ada12d3d7c3db1c82fca0e1767319cc9801f848b9e",
+  "integration-eleven/app-tests.log.gz": "3688fbf53d8171dcf5b3f406f825816beb4bd5def408cede6d34bc97f23ac0b6",
+  "integration-eleven/check.log.gz": "926cb698cb9f8d90e27f34ffb831d59b9b39bebc258ee73591a2503c051e7c9d",
+  "integration-eleven/codemode-tests.log.gz": "5817ae2a4e70d97c3b4dfa42e364a65c97fadd5befc7fa1df4aa697dfac797e5",
+  "integration-eleven/combined.patch": "f9fda277d6b54b16c872bf8c218229c4f9884dc37f2015f0d1c2d75a1b5d1dea",
+  "integration-eleven/core-tests.log.gz": "98e710a4863ecfdc4110460bb1cd3a5dd7c73350a56d0ab73ff3de997d645e28",
+  "integration-eleven/draft.patch": "53a451544806bb22584217ae5643ed0fd0cafdad014f63eab0b2f5d08c9e9d4b",
+  "integration-eleven/install.log.gz": "f68ca788b4811efe8cb5d424d362478f0219e3a36534a061a4061c45070d1a15",
+  "integration-eleven/prepare.log.gz": "decda0cd7a91aa775d5c1273b8606332113fc62818a1d8f875890d85d5bc9bee",
+  "integration-eleven/test262-sync.log.gz": "64ae3055cedc07dd16c0f82f038acd89e1c7cafff6090fa2871a3f55322360f0",
+  "integration-eleven/tree.txt": "a81fbdbf270abb6f24d95012b3139c81f3a70dca2478ed4d97bfd95bb0504d55"
 }
